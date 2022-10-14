@@ -24,19 +24,17 @@ public abstract class Communication implements Serializable {
 
     /**
      * Main Construtor
-     * @param id
      * @param isPaid
      * @param cost
      * @param isOngoing
      */
-    public Communication(int id, boolean isPaid, double cost, boolean isOngoing) {
-        this.id++;
+    public Communication(boolean isPaid, double cost, boolean isOngoing) {
         this.isPaid = false;
         this.cost = 0;
         this.isOngoing = true;
     }
 
-    /** @return comm's id */
+
     public int getId() {
         return id;
     }
