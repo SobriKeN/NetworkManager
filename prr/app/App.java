@@ -22,7 +22,7 @@ public class App {
           e.printStackTrace();
         }
       }
-      
+      int i=2;
       (new prr.app.main.Menu(receiver)).open();
     }
   }
