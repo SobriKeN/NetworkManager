@@ -1,4 +1,3 @@
 package prr.core;
 
-public enum ClientLevel {
-}
+public enum ClientLevel {NORMAL, GOLD, PLATINUM}
