@@ -26,6 +26,7 @@ public class CommunicationText extends Communication implements Serializable {
     /** @return the cost of the text message */
     @Override
     protected double computeCost(TariffPlan plan) {
+        return plan.computeCost()
     }
 
     /** @return the length of the message */
