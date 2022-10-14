@@ -60,7 +60,7 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
     if (Objects.equals(_mode, "OFF") || Objects.equals(_mode, "SILENCE") ||
             Objects.equals(_mode, "BUSY")) {
       if (mode.toString().equals("OFF") || mode.toString().equals("SILENCE") ||
-              mode.toString().equal("BUSY")) {
+              mode.toString().equals("BUSY")) {
         this._mode = "ON";
         mode = TerminalMode.ON;   // return boolean se uma destas for cumprida
         return true;
@@ -94,6 +94,18 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
     return false;
   }
 
+  public void makeVoiceCall(Terminal t){
+  }
+
+  protected void acceptVoiceCall(Terminal t){
+  }
+
+  public void makeSMS(Terminal t, String msg){
+  }
+
+  protected void acceptSMS(Terminal t){
+  }
+
   /**
    * Checks if this terminal can end the current interactive communication.
    *
@@ -102,6 +114,7 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
    **/
   public boolean canEndCurrentCommunication() {
     // FIXME add implementation code
+    return true;
   }
   
   /**
@@ -111,5 +124,6 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
    **/
   public boolean canStartCommunication() {
     // FIXME add implementation code
+    return true;
   }
 }
