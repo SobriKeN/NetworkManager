@@ -33,11 +33,10 @@ public class Client implements Serializable {
      * @param key
      * @param name
      * @param tax
-     * @param level
      * @param recieveNotifications
      * @param planoTarifario
      */
-    public Client(String key, String name, int tax, ClientLevel level, boolean recieveNotifications, TariffPlanBasic planoTarifario) {
+    public Client(String key, String name, int tax, boolean recieveNotifications, TariffPlanBasic planoTarifario) {
         this.key = key;
         this.name = name;
         this.tax = tax;
