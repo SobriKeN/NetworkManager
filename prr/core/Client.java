@@ -25,6 +25,9 @@ public class Client implements Serializable {
     /** To check if the client can receive notifications */
     private boolean recieveNotifications;
 
+    /** The client's Tariff plan */
+    private TariffPlan planoTarifario;
+
     /**
      * Main Construtor
      * @param key
@@ -32,13 +35,15 @@ public class Client implements Serializable {
      * @param tax
      * @param level
      * @param recieveNotifications
+     * @param planoTarifario
      */
-    public Client(String key, String name, int tax, ClientLevel level, boolean recieveNotifications) {
+    public Client(String key, String name, int tax, ClientLevel level, boolean recieveNotifications, TariffPlan planoTarifario) {
         this.key = key;
         this.name = name;
         this.tax = tax;
         this.level = level;
         this.recieveNotifications = recieveNotifications;
+        this.planoTarifario = planoTarifario;
     }
 
     /** @return client's key */
