@@ -19,6 +19,10 @@ public abstract class CommunicationInteractive extends Communication implements 
         this.duration = duration;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
     @Override
     protected int getSize() {
         return duration;
