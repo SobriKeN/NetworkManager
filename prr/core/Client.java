@@ -11,22 +11,22 @@ public class Client implements Serializable {
     private static final long serialVersionUID = 2084398098986L;
 
     /** Client's key */
-    private String key;
+    private String _key;
 
     /** Client's name */
-    private String name;
+    private String _name;
 
     /** Client's tax number */
-    private int tax;
+    private int _tax;
 
     /** Client's level */
-    private ClientLevel level;
+    private ClientLevel _level;
 
     /** To check if the client can receive notifications */
-    private boolean recieveNotifications;
+    private boolean _recieveNotifications;
 
     /** The client's Tariff plan */
-    private TariffPlanBasic planoTarifario;
+    private TariffPlanBasic _planoTarifario;
 
     /**
      * Main Construtor
@@ -37,12 +37,12 @@ public class Client implements Serializable {
      * @param planoTarifario
      */
     public Client(String key, String name, int tax, boolean recieveNotifications, TariffPlanBasic planoTarifario) {
-        this.key = key;
-        this.name = name;
-        this.tax = tax;
-        this.level = ClientLevel.NORMAL;
-        this.recieveNotifications = recieveNotifications;
-        this.planoTarifario = planoTarifario;
+        this._key = key;
+        this._name = name;
+        this._tax = tax;
+        this._level = ClientLevel.NORMAL;
+        this._recieveNotifications = recieveNotifications;
+        this._planoTarifario = planoTarifario;
     }
 
     /** @return client's key */

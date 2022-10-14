@@ -24,10 +24,9 @@ public class Network implements Serializable {
   }
 
   public void registerClient(String name, int taxNumber, String key){
-    TariffPlanBasic basic = new TariffPlanBasic(String name);
-    ClientLevel level = ClientLevel.NORMAL;
-    Client client = new Client(key,name, taxNumber, level, true, basic);
-
+    Client client = new Client(key,name, taxNumber,true);
+    // ou tirar o plano do construtor ou idk
+    _clients.add(client);
   }
   
   /**
