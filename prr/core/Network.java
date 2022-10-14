@@ -2,6 +2,9 @@ package prr.core;
 
 import java.io.Serializable;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import prr.core.exception.UnrecognizedEntryException;
 
 // FIXME add more import if needed (cannot import from pt.tecnico or prr.app)
@@ -10,13 +13,22 @@ import prr.core.exception.UnrecognizedEntryException;
  * Class Store implements a store.
  */
 public class Network implements Serializable {
-
   /** Serial number for serialization. */
   private static final long serialVersionUID = 202208091753L;
-  
-  // FIXME define attributes
-  // FIXME define contructor(s)
-  // FIXME define methods
+  private List<Terminal> _terminals;
+  private List<Client> _clients;
+
+  public Network(){
+    _terminals = new ArrayList<>();
+    _clients = new ArrayList<>();
+  }
+
+  public void registerClient(String name, int taxNumber, String key){
+    TariffPlanBasic basic = new TariffPlanBasic(String name);
+    ClientLevel level = ClientLevel.NORMAL;
+    Client client = new Client(key,name, taxNumber, level, true, basic);
+
+  }
   
   /**
    * Read text input file and create corresponding domain entities.
