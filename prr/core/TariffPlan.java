@@ -16,7 +16,7 @@ public abstract class TariffPlan {
     protected double computeCost(Client c, CommunicationText t){
         int custo = 0;
 
-        if (Objects.equals(c.get_level().toString(), "NORMAL") {
+        if (Objects.equals(c.get_level().toString(), "NORMAL")) {
             if (t.getSize() < 50)
                 custo = 10;
             else if (50 <= t.getSize() && t.getSize() < 100)
@@ -24,7 +24,7 @@ public abstract class TariffPlan {
             else
                 custo = 2 * t.getSize();
         }
-        if (Objects.equals(c.get_level().toString(), "GOLD"){
+        if (Objects.equals(c.get_level().toString(), "GOLD")) {
             if (t.getSize() < 50)
                 custo = 10;
             else if (50 <= t.getSize() && t.getSize() < 100)
@@ -32,7 +32,7 @@ public abstract class TariffPlan {
             else
                 custo = 2 * t.getSize();
         }
-        if (Objects.equals(c.get_level().toString(), "PLATINUM"){
+        if (Objects.equals(c.get_level().toString(), "PLATINUM")) {
             if (t.getSize() < 50)
                 custo = 0;
             else if (50 <= t.getSize() && t.getSize() < 100)
