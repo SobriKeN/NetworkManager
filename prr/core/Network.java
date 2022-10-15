@@ -24,10 +24,15 @@ public class Network implements Serializable {
   }
 
   public void registerClient(String name, int taxNumber, String key){
-    TariffPlanBasic basic = new TariffPlanBasic(String name);
-    ClientLevel level = ClientLevel.NORMAL;
-    Client client = new Client(key,name, taxNumber, level, true, basic);
+    final String basic = "DEFAULT";
+    TariffPlanBasic _default = new TariffPlanBasic(basic);
 
+    //ao criar um cliente, e uma tariffPlan novo, cada tarif tem um nome unico no contexto da network,
+    //logo tamos a criar um plano tarifario inicial denomeado de DEFAULT, ps: n consegui pensar em outra solucao
+
+    Client client = new Client(key,name, taxNumber, _default);
+    // ou tirar o plano do construtor ou idk
+    _clients.add(client);
   }
   
   /**
