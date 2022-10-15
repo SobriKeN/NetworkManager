@@ -25,24 +25,18 @@ public class Client implements Serializable {
     /** To check if the client can receive notifications */
     private boolean _recieveNotifications;
 
-    /** The client's Tariff plan */
-    private TariffPlanBasic _planoTarifarioDefault;
-
     /**
      * Main Construtor
      * @param key
      * @param name
      * @param tax
-     //* @param recieveNotifications
-     * @param planoTarifarioDefault
      */
-    public Client(String key, String name, int tax, TariffPlanBasic planoTarifarioDefault) {
+    public Client(String key, String name, int tax) {
         this._key = key;
         this._name = name;
         this._tax = tax;
         this._level = ClientLevel.NORMAL;
-        this._recieveNotifications = true;  // tirei o receiveNotifications do construtor, pq quando e criado, é true
-        this._planoTarifarioDefault = planoTarifarioDefault; // dps ira se poder desativar
+        this._recieveNotifications = true;
     }
 
     /** @return client's key */
