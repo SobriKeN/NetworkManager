@@ -4,7 +4,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 // FIXME add more import if needed (cannot import from pt.tecnico or prr.app)
 
@@ -20,13 +19,13 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
   private String _mode;
   private double _debt;
   private double _payments;
-  private TerminalMode mode;
+  private TerminalMode _terminalmode;
   private List<Terminal> _amigos;
 
-  public Terminal(String id){
+  public Terminal(String id, String mode){
     _id = id;
-    mode = TerminalMode.ON;
-    _mode = "ON";
+    _terminalmode = TerminalMode.ON;
+    _mode = mode;
     _debt = 0;
     _payments = 0;
     _amigos = new ArrayList<>();
@@ -41,7 +40,7 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
   }
 
   public TerminalMode getTerminalModeEnum(){
-    return this.mode;
+    return this._terminalmode;
   }
 
   public double getTerminalDebts(){
@@ -57,39 +56,27 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
   }
 
   public boolean setONIdle() {
-    if (Objects.equals(_mode, "OFF") || Objects.equals(_mode, "SILENCE") ||
-            Objects.equals(_mode, "BUSY")) {
-      if (mode.toString().equals("OFF") || mode.toString().equals("SILENCE") ||
-              mode.toString().equals("BUSY")) {
-        this._mode = "ON";
-        mode = TerminalMode.ON;   // return boolean se uma destas for cumprida
+      if (_terminalmode.toString().equals("OFF") || _terminalmode.toString().equals("SILENCE") ||
+              _terminalmode.toString().equals("ON")) {
+        _terminalmode = TerminalMode.BUSY;   // return boolean se uma destas for cumprida
         return true;
       }
       return false;
     }
-    return false;
-  }
 
   public boolean setOnSilent() {
-    if (Objects.equals(_mode, "ON") || Objects.equals(_mode, "BUSY")) {
-      if (mode.toString().equals("ON") || mode.toString().equals("BUSY")){
-        this._mode = "SILENCE";
-        mode = TerminalMode.SILENCE;   // return boolean se uma destas for cumprida
+      if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("BUSY")){
+        _terminalmode = TerminalMode.SILENCE;   // return boolean se uma destas for cumprida
         return true;
       }
       return false;
     }
-    return false;
-  }
+
 
   public boolean turnOff() {
-    if (Objects.equals(_mode, "ON") || Objects.equals(_mode, "SILENCE")) {
-      if (mode.toString().equals("ON") || mode.toString().equals("SILENCE")){
-        this._mode = "OFF";
-        mode = TerminalMode.OFF;
-        return true;
-      }
-      return false;
+    if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("SILENCE")) {
+      _terminalmode = TerminalMode.OFF;
+      return true;
     }
     return false;
   }
