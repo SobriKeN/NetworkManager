@@ -15,7 +15,14 @@ import prr.core.exception.UnrecognizedEntryException;
 public class Network implements Serializable {
   /** Serial number for serialization. */
   private static final long serialVersionUID = 202208091753L;
+
+  /** The network's balance*/
+  private int _saldo = 0;
+
+  /** The terminals associated with the network */
   private List<Terminal> _terminals;
+
+  /** The clients associated with the network */
   private List<Client> _clients;
 
   public Network(){
@@ -23,13 +30,8 @@ public class Network implements Serializable {
     _clients = new ArrayList<>();
   }
 
-  public void registerClient(String name, int taxNumber, String key){
-
-    //ao criar um cliente, e uma tariffPlan novo, cada tarif tem um nome unico no contexto da network,
-    //logo tamos a criar um plano tarifario inicial denomeado de DEFAULT, ps: n consegui pensar em outra solucao
-
-    Client client = new Client(key,name, taxNumber, _default);
-    // ou tirar o plano do construtor ou idk
+  public void registerClient(String key, String name, int taxNumber){
+    Client client = new Client(key,name, taxNumber);
     _clients.add(client);
   }
   
