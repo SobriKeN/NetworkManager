@@ -11,7 +11,7 @@ public class TariffPlanBasic extends TariffPlan{
     protected double computeCost(Client c, CommunicationText t){
         int custo = 0;
 
-        if (Objects.equals(c.get_level().toString(), "NORMAL")) {
+        if (Objects.equals(c.getLevel().toString(), "NORMAL")) {
             if (t.getSize() < 50)
                 custo = 10;
             else if (50 <= t.getSize() && t.getSize() < 100)
@@ -19,7 +19,7 @@ public class TariffPlanBasic extends TariffPlan{
             else
                 custo = 2 * t.getSize();
         }
-        if (Objects.equals(c.get_level().toString(), "GOLD")) {
+        if (Objects.equals(c.getLevel().toString(), "GOLD")) {
             if (t.getSize() < 50)
                 custo = 10;
             else if (50 <= t.getSize() && t.getSize() < 100)
@@ -27,7 +27,7 @@ public class TariffPlanBasic extends TariffPlan{
             else
                 custo = 2 * t.getSize();
         }
-        if (Objects.equals(c.get_level().toString(), "PLATINUM")) {
+        if (Objects.equals(c.getLevel().toString(), "PLATINUM")) {
             if (t.getSize() < 50)
                 custo = 0;
             else if (50 <= t.getSize() && t.getSize() < 100)
@@ -42,11 +42,11 @@ public class TariffPlanBasic extends TariffPlan{
     protected double computeCost(Client c, CommunicationVoice t){
         int custo = 0;
 
-        if (Objects.equals(c.get_level().toString(), "NORMAL"))
+        if (Objects.equals(c.getLevel().toString(), "NORMAL"))
             custo = 20 * (t.getDuration() / 60);
-        else if (Objects.equals(c.get_level().toString(), "GOLD"))
+        else if (Objects.equals(c.getLevel().toString(), "GOLD"))
             custo = 10 * (t.getDuration() / 60);
-        else if (Objects.equals(c.get_level().toString(), "PLATINUM"))
+        else if (Objects.equals(c.getLevel().toString(), "PLATINUM"))
             custo = 10 * (t.getDuration() / 60);
         return custo;
     }
@@ -55,11 +55,11 @@ public class TariffPlanBasic extends TariffPlan{
     protected double computeCost(Client c, CommunicationVideo t){
         int custo = 0;
 
-        if (Objects.equals(c.get_level().toString(), "NORMAL"))
+        if (Objects.equals(c.getLevel().toString(), "NORMAL"))
             custo = 30 * (t.getDuration() / 60);
-        else if (Objects.equals(c.get_level().toString(), "GOLD"))
+        else if (Objects.equals(c.getLevel().toString(), "GOLD"))
             custo = 20 * (t.getDuration() / 60);
-        else if (Objects.equals(c.get_level().toString(), "PLATINUM"))
+        else if (Objects.equals(c.getLevel().toString(), "PLATINUM"))
             custo = 10 * (t.getDuration() / 60);
         return custo;
     }
