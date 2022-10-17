@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import prr.core.exception.UnrecognizedEntryException;
 
@@ -34,7 +35,15 @@ public class Network implements Serializable {
     Client client = new Client(key,name, taxNumber);
     _clients.add(client);
   }
-  
+
+  public Terminal getTerminal(String key){
+    for (Terminal t : _terminals){
+      if (Objects.equals(t.getTerminalId(), key)){
+        return t;
+      }
+    }
+  }
+
   /**
    * Read text input file and create corresponding domain entities.
    * 
@@ -45,6 +54,7 @@ public class Network implements Serializable {
   void importFile(String filename) throws UnrecognizedEntryException, IOException /* FIXME maybe other exceptions */  {
     //FIXME implement method
   }
+
 
 }
 
