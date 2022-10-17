@@ -16,16 +16,16 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
   private static final long serialVersionUID = 202208091753L;
 
   private final String _id;
-  private String _mode;
+  private String _tipo;
   private double _debt;
   private double _payments;
   private TerminalMode _terminalmode;
   private List<Terminal> _amigos;
 
-  public Terminal(String id, String mode){
+  public Terminal(String id, String tipo){
     _id = id;
     _terminalmode = TerminalMode.ON;
-    _mode = mode;
+    _tipo = tipo;
     _debt = 0;
     _payments = 0;
     _amigos = new ArrayList<>();
@@ -36,7 +36,7 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
   }
 
   public String getTerminalModeString(){
-    return this._mode;
+    return this._tipo;
   }
 
   public TerminalMode getTerminalModeEnum(){
