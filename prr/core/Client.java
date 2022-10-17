@@ -26,7 +26,8 @@ public class Client implements Serializable {
     private boolean _recieveNotifications;
 
     /** The customer's balance*/
-    private int _saldo;
+    private double _pagamentos;
+    private double _debts;
 
     /**
      * Main Construtor
@@ -40,7 +41,8 @@ public class Client implements Serializable {
         this._tax = tax;
         this._level = ClientLevel.NORMAL;
         this._recieveNotifications = true;
-        this._saldo = 0;
+        this._debts = 0;
+        this._pagamentos = 0;
     }
 
     /** @return client's key */
@@ -54,7 +56,8 @@ public class Client implements Serializable {
     }
 
     /** @return client's balance */
-    public int getSaldo() {return _saldo;}
+    public double getDebts() {return _debts; }
+    public double getPagamentos() {return _pagamentos; }
 
     /** @return client's tax number */
     public int getTax() {
