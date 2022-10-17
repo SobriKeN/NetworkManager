@@ -58,6 +58,7 @@ public class Client implements Serializable {
     /** @return client's balance */
     public double getDebts() {return _debts; }
     public double getPagamentos() {return _pagamentos; }
+    public double getSaldo(){return (_pagamentos - _debts); }
 
     /** @return client's tax number */
     public int getTax() {
@@ -77,6 +78,8 @@ public class Client implements Serializable {
     public void upgradeNormalToGold(){this._level = ClientLevel.GOLD;}
 
     public void upgradeGoldToPlatinum(){
-        if(this.getLevel() == ClientLevel.GOLD)
+        if(this.getLevel() == ClientLevel.GOLD){
+
+        }
     }
 }

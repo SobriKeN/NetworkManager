@@ -8,8 +8,8 @@ import java.io.BufferedReader;
 import java.util.Collection;
 import java.util.ArrayList;
 
-import prr.core.exception.UnrecognizedEntryException;
 import prr.core.exception.UnknownIdentifierException;
+import prr.core.exception.UnrecognizedEntryException;
 // import more exception core classes if needed
 
 /*
@@ -54,16 +54,16 @@ public class Parser {
     }
 
     // parse a client with format CLIENT|id|nome|taxId
-    private void parseClient(String[] components, String line) throws UnrecognizedEntryException, UnknownIdentifierException {
+    private void parseClient(String[] components, String line) throws UnrecognizedEntryException {
         checkComponentsLength(components, 4, line);
 
         try {
             int taxNumber = Integer.parseInt(components[3]);
             _network.registerClient(components[1], components[2], taxNumber);
-        } catch (UnknownIdentifierException e) {
-            throw new UnrecognizedEntryException("Invalid specification in line: " + line, e);
         } catch (NumberFormatException nfe) {
             throw new UnrecognizedEntryException("Invalid number in line " + line, nfe);
+        } catch (Exception e) { //Other Exception -> Exception c
+            throw new UnrecognizedEntryException("Invalid specification in line: " + line, e);
         }
     }
 
@@ -81,7 +81,7 @@ public class Parser {
                         throw new UnrecognizedEntryException("Invalid specification in line: " + line);
                 }
             }
-        } catch (UnknownIdentifierException e) {
+        } catch (UnrecognizedEntryException e) { //SomeOtherException -> UnrecognizedEntryException
             throw new UnrecognizedEntryException("Invalid specification: " + line, e);
         }
     }
