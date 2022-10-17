@@ -81,7 +81,7 @@ public class Parser {
                         throw new UnrecognizedEntryException("Invalid specification in line: " + line);
                 }
             }
-        } catch (UnrecognizedEntryException e) { //SomeOtherException -> UnrecognizedEntryException
+        } catch (Exception e) { //SomeOtherException -> Exception
             throw new UnrecognizedEntryException("Invalid specification: " + line, e);
         }
     }
@@ -96,7 +96,7 @@ public class Parser {
 
             for (String friend : friends)
                 _network.addFriend(terminal, friend);
-        } catch (UnknownIdentifierException e) {
+        } catch (Exception e) { // SomeOtherException -> Exception
             throw new UnrecognizedEntryException("Some message error in line:  " + line, e);
         }
     }
