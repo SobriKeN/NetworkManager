@@ -21,6 +21,7 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
   private double _payments;
   private TerminalMode _terminalmode;
   private List<Terminal> _amigos;
+  private Client _clientTerminal;
 
   public Terminal(String id, String tipo){
     _id = id;
@@ -29,6 +30,7 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
     _debt = 0;
     _payments = 0;
     _amigos = new ArrayList<>();
+    _clientTerminal = null;
   }
 
   public String getTerminalId(){
@@ -53,6 +55,14 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
 
   public ArrayList<Terminal> getTerminalAmigos(){
     return (ArrayList<Terminal>) this._amigos;
+  }
+
+  public Client getClient(){
+    return _clientTerminal;
+  }
+
+  public void setClientTerminal(Client _clientTerminal) {
+    this._clientTerminal = _clientTerminal;
   }
 
   public boolean setONIdle() {
