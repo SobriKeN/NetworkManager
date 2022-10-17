@@ -37,7 +37,7 @@ public class Parser {
         }
     }
 
-    private void parseLine(String line) throws UnrecognizedEntryException {
+    private void parseLine(String line) throws UnrecognizedEntryException, UnknownIdentifierException {
         String[] components = line.split("\\|");
 
         switch(components[0]) {
