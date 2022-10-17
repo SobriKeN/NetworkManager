@@ -60,10 +60,10 @@ public class Parser {
         try {
             int taxNumber = Integer.parseInt(components[3]);
             _network.registerClient(components[1], components[2], taxNumber);
+        } catch (UnknownIdentifierException e) {
+            throw new UnrecognizedEntryException("Invalid specification in line: " + line, e);
         } catch (NumberFormatException nfe) {
             throw new UnrecognizedEntryException("Invalid number in line " + line, nfe);
-        } catch (OtherException e) {
-            throw new UnrecognizedEntryException("Invalid specification in line: " + line, e);
         }
     }
 
@@ -81,7 +81,7 @@ public class Parser {
                         throw new UnrecognizedEntryException("Invalid specification in line: " + line);
                 }
             }
-        } catch (SomeOtherException e) {
+        } catch (UnknownIdentifierException e) {
             throw new UnrecognizedEntryException("Invalid specification: " + line, e);
         }
     }
@@ -96,7 +96,7 @@ public class Parser {
 
             for (String friend : friends)
                 _network.addFriend(terminal, friend);
-        } catch (OtherException e) {
+        } catch (UnknownIdentifierException e) {
             throw new UnrecognizedEntryException("Some message error in line:  " + line, e);
         }
     }

@@ -13,6 +13,7 @@ class DoShowClient extends Command<Network> {
 
   DoShowClient(Network receiver) {
     super(Label.SHOW_CLIENT, receiver);
+    addIntegerField("clientKey", Message.key());
     //FIXME add command fields
   }
   

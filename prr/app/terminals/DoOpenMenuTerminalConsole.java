@@ -13,6 +13,7 @@ class DoOpenMenuTerminalConsole extends Command<Network> {
 
   DoOpenMenuTerminalConsole(Network receiver) {
     super(Label.OPEN_MENU_TERMINAL, receiver);
+    addIntegerField("terminalKey", Message.terminalKey());
     //FIXME add command fields
   }
 
@@ -23,3 +24,4 @@ class DoOpenMenuTerminalConsole extends Command<Network> {
     // selected Terminal and open it
   }
 }
+

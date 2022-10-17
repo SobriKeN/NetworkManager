@@ -57,8 +57,8 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
 
   public boolean setONIdle() {
       if (_terminalmode.toString().equals("OFF") || _terminalmode.toString().equals("SILENCE") ||
-              _terminalmode.toString().equals("ON")) {
-        _terminalmode = TerminalMode.BUSY;   // return boolean se uma destas for cumprida
+              _terminalmode.toString().equals("BUSY")) {
+        _terminalmode = TerminalMode.ON;   // return boolean se uma destas for cumprida
         return true;
       }
       return false;

@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * Command to save a file.
- * If the file does not belong into the app, this will ask the file's name.
+ * If the file does not belong into the app, it will ask the file's name.
  * If it does belong, the file will be saved.
  */
 class DoSaveFile extends Command<NetworkManager> {

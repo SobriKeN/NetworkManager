@@ -13,6 +13,7 @@ class DoRegisterClient extends Command<Network> {
 
   DoRegisterClient(Network receiver) {
     super(Label.REGISTER_CLIENT, receiver);
+    addIntegerField("clientKey", Message.key());
     //FIXME add command fields
   }
   
