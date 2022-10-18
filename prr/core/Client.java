@@ -91,29 +91,26 @@ public class Client implements Serializable {
 
     /**
      * Special toString
-     * @param id
      * @return a partner in string format
      */
-    public String clientStringed(String id) {
+    public String clientStringed() {
         String receiveNotisString;
-        int terminalsClient;
 
         if(_recieveNotifications){receiveNotisString = "YES";}
         else{receiveNotisString = "NO";}
-
-        if ()
 
         return String.join(
                 "|",
                 "CLIENT",
                 getKey(),
                 getName(),
-                getTax(),
+                Integer.toString(getTax()),
                 getLevel().toString(),
                 receiveNotisString,
-                String.valueOf(Math.round(getNumeroTerminais()),
-                String.valueOf(Math.round(getPagamentos()),
-                String.valueOf(Math.round(getDebts()));
+                Integer.toString(_numeroTerminaisAssociados),
+                String.valueOf(Math.round(getPagamentos())),
+                String.valueOf(Math.round(getDebts()))
+                );
     }
 
 }
