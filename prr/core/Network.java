@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import prr.core.exception.AlreadyFriendException;
 import prr.core.exception.InvalidClientIDException;
 import prr.core.exception.UnrecognizedEntryException;
 import prr.core.Parser;
@@ -39,17 +38,17 @@ public class Network implements Serializable {
     Terminal terminal;
 
     if (_terminals.containsKey(friend)){
-        if (_terminals.containsKey(idTerminal)){
-          terminal = _terminals.get(idTerminal);
-          terminal.addAmigo(idTerminal);
-          return true;
-        }
-        else
-          return false;
+      if (_terminals.containsKey(idTerminal)){
+        terminal = _terminals.get(idTerminal);
+        terminal.addAmigo(idTerminal);
+        return true;
       }
       else
         return false;
     }
+    else
+      return false;
+  }
 
   public Client registerClient(String key, String name, int taxNumber){
     Client client = new Client(key,name, taxNumber);
@@ -67,7 +66,7 @@ public class Network implements Serializable {
     else
       throw new InvalidClientIDException(idClient);
   }
-
+  
   public Terminal getTerminal(String idTerminal){
     return _terminals.get(idTerminal);
   }

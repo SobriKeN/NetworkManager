@@ -57,7 +57,7 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     return (ArrayList<String>) this._amigos;
   }
 
-  public Client getClient(){
+  public Client getClientTerminal(){
     return _clientTerminal;
   }
 

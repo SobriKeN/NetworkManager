@@ -81,4 +81,34 @@ public class Client implements Serializable {
         if(this.getLevel() == ClientLevel.GOLD){
         }
     }
+
+
+    /**
+     * Special toString
+     * @param id
+     * @return a partner in string format
+     */
+    public String clientStringed(String id) {
+        String receiveNotisString;
+        int terminalsClient;
+
+        if(_recieveNotifications){receiveNotisString = "YES";}
+        else{receiveNotisString = "NO";}
+
+        if ()
+
+        return String.join(
+                "|",
+                "CLIENT",
+                getKey(),
+                getName(),
+                getTax(),
+                getLevel().toString(),
+                receiveNotisString,
+                String.valueOf(Math.round(getNumeroTerminais()),
+                String.valueOf(Math.round(getPagamentos()),
+                String.valueOf(Math.round(getDebts())
+        );
+    }
+
 }
