@@ -20,7 +20,7 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
   private double _debt;
   private double _payments;
   private TerminalMode _terminalmode;
-  private List<Terminal> _amigos;
+  private List<String> _amigos;
   private Client _clientTerminal;
 
   public Terminal(String id, String tipo){
@@ -53,8 +53,8 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     return this._payments;
   }
 
-  public ArrayList<Terminal> getTerminalAmigos(){
-    return (ArrayList<Terminal>) this._amigos;
+  public ArrayList<String> getTerminalAmigos(){
+    return (ArrayList<String>) this._amigos;
   }
 
   public Client getClient(){
@@ -89,6 +89,10 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
       return true;
     }
     return false;
+  }
+
+  public void addAmigo(String idTerminalNewFriend){
+    this._amigos.add(idTerminalNewFriend);
   }
 
   // depende do tipo do terminal
