@@ -32,17 +32,17 @@ public class Network implements Serializable {
     _clients = new TreeMap<>();
   }
 
-  public void
-
-  public void registerClient(String key, String name, int taxNumber){
+  public Client registerClient(String key, String name, int taxNumber){
     Client client = new Client(key,name, taxNumber);
     _clients.put(client.getKey(),client);
+    return client;
   }
 
-  public void registerTerminal(String key, String tipo, String idClient){
-    Terminal terminal = new Terminal(key, tipo) {
+  public Terminal registerTerminal(String key, String tipo, String idClient) {
+    Terminal terminal = new Terminal(key, tipo);
+    _terminals.put(terminal.getTerminalId(), terminal);
+    return terminal;
     }
-  }
   
   /**
    * Read text input file and create corresponding domain entities.

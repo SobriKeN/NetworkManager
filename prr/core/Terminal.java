@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Abstract terminal.
  */
-abstract public class Terminal implements Serializable /* FIXME maybe addd more interfaces */{
+public class Terminal implements Serializable /* FIXME maybe addd more interfaces */{
 
   /** Serial number for serialization. */
   private static final long serialVersionUID = 202208091753L;
@@ -91,6 +91,8 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
     return false;
   }
 
+  // depende do tipo do terminal
+
   public void makeVoiceCall(Terminal t){
   }
 
@@ -101,6 +103,12 @@ abstract public class Terminal implements Serializable /* FIXME maybe addd more 
   }
 
   protected void acceptSMS(Terminal t){
+  }
+
+  public void makeVideoCall(Terminal t){
+  }
+
+  protected void acceptVideoCall(Terminal t){
   }
 
   /**
