@@ -27,7 +27,7 @@ public class Network implements Serializable {
   /** The terminals associated with the network */
   private TreeMap<String,Terminal> _terminals;
 
-  /** The clients associated with the network */
+  /** The clients associated with the network uuuu*/
   private TreeMap<String,Client> _clients;
 
   public Network(){
