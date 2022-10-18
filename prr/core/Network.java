@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import prr.core.exception.UnrecognizedEntryException;
@@ -32,6 +33,15 @@ public class Network implements Serializable {
     _clients = new TreeMap<>();
   }
 
+  public void addFriend(Terminal terminal, String friend){
+      if (_terminals.containsKey(friend)){
+        if (terminal.getTerminalAmigos().contains(friend)){
+
+
+      }
+    }
+  }
+
   public Client registerClient(String key, String name, int taxNumber){
     Client client = new Client(key,name, taxNumber);
     _clients.put(client.getKey(),client);
@@ -40,9 +50,12 @@ public class Network implements Serializable {
 
   public Terminal registerTerminal(String key, String tipo, String idClient) {
     Terminal terminal = new Terminal(key, tipo);
-    _terminals.put(terminal.getTerminalId(), terminal);
-    return terminal;
+    if (_terminals.containsKey(idClient)) {
+      terminal.setClientTerminal(_clients.get(idClient));
+      _terminals.put(terminal.getTerminalId(), terminal);
+      return terminal;
     }
+  }
   
   /**
    * Read text input file and create corresponding domain entities.
