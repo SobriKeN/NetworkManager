@@ -79,7 +79,6 @@ public class Client implements Serializable {
 
     public void upgradeGoldToPlatinum(){
         if(this.getLevel() == ClientLevel.GOLD){
-
         }
     }
 }
