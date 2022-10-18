@@ -24,6 +24,7 @@ public class Client implements Serializable {
 
     /** To check if the client can receive notifications */
     private boolean _recieveNotifications;
+    private int _numeroTerminaisAssociados;
 
     /** The customer's balance*/
     private double _pagamentos;
@@ -43,6 +44,7 @@ public class Client implements Serializable {
         this._recieveNotifications = true;
         this._debts = 0;
         this._pagamentos = 0;
+        this._numeroTerminaisAssociados = 0;
     }
 
     /** @return client's key */
@@ -70,6 +72,10 @@ public class Client implements Serializable {
         return _level;
     }
 
+    public void atualizaNumeroTerminaisAssoc(){
+        this._numeroTerminaisAssociados++;
+
+    }
     /** @return if the client can receive notifications */
     public boolean isRecieveNotifications() {
         return _recieveNotifications;

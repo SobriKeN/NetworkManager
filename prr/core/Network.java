@@ -57,12 +57,13 @@ public class Network implements Serializable {
   }
 
   public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException {
+    int i = 0;
     Terminal terminal = new Terminal(key, tipo);
     if (_terminals.containsKey(idClient)) {
       terminal.setClientTerminal(_clients.get(idClient));
       _terminals.put(terminal.getTerminalId(), terminal);
       Client c = _clients.get(idClient);
-      c.getNumberTerminals() += 1;
+      c.atualizaNumeroTerminaisAssoc(); // incrementa numero de terminais associados ao cliente
       return terminal;
     }
     else
