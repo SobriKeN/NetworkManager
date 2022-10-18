@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.util.Collection;
 import java.util.ArrayList;
 
-import prr.core.exception.UnknownIdentifierException;
 import prr.core.exception.UnrecognizedEntryException;
 // import more exception core classes if needed
 
@@ -37,7 +36,7 @@ public class Parser {
         }
     }
 
-    private void parseLine(String line) throws UnrecognizedEntryException, UnknownIdentifierException {
+    private void parseLine(String line) throws UnrecognizedEntryException {
         String[] components = line.split("\\|");
 
         switch(components[0]) {
