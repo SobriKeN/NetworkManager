@@ -107,8 +107,7 @@ public class Client implements Serializable {
                 receiveNotisString,
                 String.valueOf(Math.round(getNumeroTerminais()),
                 String.valueOf(Math.round(getPagamentos()),
-                String.valueOf(Math.round(getDebts())
-        );
+                String.valueOf(Math.round(getDebts()));
     }
 
 }

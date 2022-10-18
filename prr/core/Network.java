@@ -61,6 +61,8 @@ public class Network implements Serializable {
     if (_terminals.containsKey(idClient)) {
       terminal.setClientTerminal(_clients.get(idClient));
       _terminals.put(terminal.getTerminalId(), terminal);
+      Client c = _clients.get(idClient);
+      c.getNumberTerminals() += 1;
       return terminal;
     }
     else
