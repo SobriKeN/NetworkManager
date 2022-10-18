@@ -68,6 +68,9 @@ public class Network implements Serializable {
       throw new InvalidClientIDException(idClient);
   }
 
+  public Terminal getTerminal(String idTerminal){
+    return _terminals.get(idTerminal);
+  }
   /**
    * Read text input file and create corresponding domain entities.
    * 
