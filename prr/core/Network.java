@@ -32,7 +32,7 @@ public class Network implements Serializable {
     _clients = new TreeMap<>();
   }
 
-  public
+  public void
 
   public void registerClient(String key, String name, int taxNumber){
     Client client = new Client(key,name, taxNumber);
