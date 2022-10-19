@@ -11,8 +11,9 @@ import prr.core.exception.*;
 
 /** Class Network that represents the network of the system**/
 public class Network implements Serializable {
+
   /** Serial number for serialization **/
-  private static final long serialVersionUID = 202208091753L;
+  private static final long serialVersionUID = -488710144069185783L;
 
   /** The network's balance **/
   private int _saldo = 0;

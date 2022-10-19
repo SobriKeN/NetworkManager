@@ -8,8 +8,8 @@ import java.util.LinkedList;
  */
 public class Client implements Serializable {
 
-    /** Serial number for serialization. */
-    private static final long serialVersionUID = 2084398098986L;
+    /** Serial number for serialization **/
+    private static final long serialVersionUID = -5755265040654157806L;
 
     /** Client's key */
     private String _key;

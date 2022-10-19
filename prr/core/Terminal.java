@@ -6,15 +6,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-// FIXME add more import if needed (cannot import from pt.tecnico or prr.app)
 
 /**
  * Abstract terminal.
  */
-public class Terminal implements Serializable /* FIXME maybe addd more interfaces */{
+public class Terminal implements Serializable {
 
-  /** Serial number for serialization. */
-  private static final long serialVersionUID = 202208091753L;
+  /** Serial number **/
+  private static final long serialVersionUID = -8325403726503191669L;
 
   /** Terminal's id **/
   private final String _id;

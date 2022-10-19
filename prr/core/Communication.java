@@ -8,7 +8,7 @@ import java.io.Serializable;
 public abstract class Communication implements Serializable {
 
     /** Serial number for serialization. */
-    private static final long serialVersionUID = 207648227109582L;
+    private static final long serialVersionUID = -809010677570144248L;
 
     /** Communication's id, the first comm starts with 1 */
     private int id = 0;

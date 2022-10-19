@@ -1,11 +1,12 @@
 package prr.core;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class CommunicationText extends Communication implements Serializable {
 
     /** Serial number for serialization. */
-    private static final long serialVersionUID = 2062487349214690L;
+    private static final long serialVersionUID = 4157849120928096413L;
 
     /** The text message */
     private String message;

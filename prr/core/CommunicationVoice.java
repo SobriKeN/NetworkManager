@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class CommunicationVoice extends CommunicationInteractive implements Serializable {
 
     /** Serial number for serialization. */
-    private static final long serialVersionUID = 5756840065019584737L;
+    private static final long serialVersionUID = -5965358224750296684L;
 
     /** The type of comm (in this case is voice)  */
     private String type;

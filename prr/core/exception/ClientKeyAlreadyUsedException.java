@@ -1,6 +1,8 @@
 package prr.core.exception;
 
 public class ClientKeyAlreadyUsedException extends Exception{
+
+    private static final long serialVersionUID = 7480881468928106245L;
     private String _key;
 
     public ClientKeyAlreadyUsedException(String key) {

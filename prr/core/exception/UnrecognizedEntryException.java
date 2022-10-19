@@ -1,12 +1,14 @@
 package prr.core.exception;
 
+import java.io.Serial;
+
 /**
  * Exception for unknown import file entries.
  */
 public class UnrecognizedEntryException extends Exception {
 
   /** Class serial number. */
-  private static final long serialVersionUID = 202208091753L;
+  private static final long serialVersionUID = 3048972048358959797L;
   
   /** Bad bad entry specification. */
   private String _entrySpecification;

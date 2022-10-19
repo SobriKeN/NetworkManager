@@ -2,11 +2,13 @@ package prr.app.exception;
 
 import pt.tecnico.uilib.menus.CommandException;
 
+import java.io.Serial;
+
 /** Exception thrown when a terminal key is duplicated. */
 public class DuplicateTerminalKeyException extends CommandException {
 
 	/** Serial number for serialization. */
-	private static final long serialVersionUID = 202208091753L;
+	private static final long serialVersionUID = -2256322785295427391L;
 
 	/** @param key Duplicate terminal to report. */
 	public DuplicateTerminalKeyException(String key) {

@@ -1,14 +1,15 @@
 package prr.core.exception;
 
+import java.io.Serial;
+
 /**
  * Class for representing an import problem.
  */
 public class ImportFileException extends Exception {
 
-  private static final long serialVersionUID = 202208091753L;
-  
+  private static final long serialVersionUID = -7390711373849857859L;
   private static final String ERROR_MESSAGE = "Erro a processar ficheiro de import: ";
-  
+
   /**
    * @param filename name of the import file
    */

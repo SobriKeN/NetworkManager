@@ -5,7 +5,7 @@ import java.io.Serializable;
 public abstract class CommunicationInteractive extends Communication implements Serializable {
 
     /** Serial number for serialization. */
-    private static final long serialVersionUID = 20782564287297L;
+    private static final long serialVersionUID = 8009448938807110202L;
 
     /** The duration of the call */
     private final int duration;

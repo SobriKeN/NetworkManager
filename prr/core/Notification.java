@@ -7,7 +7,7 @@ public class Notification implements Serializable {
     /**
      * Serial number for serialization.
      */
-    private static final long serialVersionUID = 2037563876583L;
+    private static final long serialVersionUID = 5459416424048243113L;
 
     /**
      * The notification's type

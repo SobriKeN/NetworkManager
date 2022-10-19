@@ -1,8 +1,13 @@
 package prr.core;
 
+import java.io.Serial;
 import java.util.Objects;
 
 public class TariffPlanBasic extends TariffPlan{
+
+    /** Serial number */
+    private static final long serialVersionUID = 5230596851456277672L;
+
     public TariffPlanBasic(String name){
         super(name);
     }
