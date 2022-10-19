@@ -24,6 +24,8 @@ class DoOpenMenuTerminalConsole extends Command<Network> {
     } catch (InvalidTerminalIDException e) {
       throw new UnknownTerminalKeyException(e.getID());
     }
+    // opens a specific Terminal's console with the methods getTerminal with
+    // prr.app.terminal.Menu and tries to catch the InvalidTerminalIDException
   }
 }
 

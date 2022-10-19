@@ -24,11 +24,13 @@ public class Client implements Serializable {
 
     /** To check if the client can receive notifications */
     private boolean _recieveNotifications;
+
+    /** Number of Terminals that are associated with the client **/
     private int _numeroTerminaisAssociados;
 
-    /** The customer's balance*/
-    private double _pagamentos;
-    private double _debts;
+    /** The customer's balance -> Balance = Payments - Debts **/
+    private double _pagamentos;  // the payments
+    private double _debts;  // the debts
 
     /**
      * Main Construtor
@@ -57,9 +59,13 @@ public class Client implements Serializable {
         return _name;
     }
 
-    /** @return client's balance */
+    /** @return client's Debts */
     public double getDebts() {return _debts; }
+
+    /** @return client's Payments */
     public double getPagamentos() {return _pagamentos; }
+
+    /** @return client's balance */
     public double getSaldo(){return (_pagamentos - _debts); }
 
     /** @return client's tax number */
@@ -72,23 +78,30 @@ public class Client implements Serializable {
         return _level;
     }
 
-    public void atualizaNumeroTerminaisAssoc(){
-        this._numeroTerminaisAssociados++;
-
-    }
     /** @return if the client can receive notifications */
     public boolean isRecieveNotifications() {
         return _recieveNotifications;
     }
 
+    /** increments the number of the terminals associated with the client **/
+    public void atualizaNumeroTerminaisAssoc(){
+        this._numeroTerminaisAssociados++;
+    }
+
+    /** void method that turns Off Notifications **/
     public void deactivateNotifications(){
         _recieveNotifications = false;
     }
 
+    /** void method that turns On Notifications **/
     public void activateNotifications(){
         _recieveNotifications = true;
     }
 
+    /**
+     Method that returns true if the requirements to the upgrade from Normal to Gold are met,
+     and upgrades the Client's level
+     **/
     public boolean upgradeNormalToGold(){
         if (this.getLevel() == ClientLevel.NORMAL) {
             if ((_pagamentos - _debts) > 500) { //após realizar um pagamento
@@ -102,7 +115,10 @@ public class Client implements Serializable {
             return false;
     }
 
-
+    /**
+     Method that returns true if the requirements to the upgrade from Gold to Platinum are met,
+     and upgrades the Client's level
+     **/
     public boolean upgradeGoldToPlatinum(){
         if (this.getLevel() == ClientLevel.GOLD){
             if (((_pagamentos - _debts) > 0)) { //&& numeroCommVideoConsecutivas > 6
@@ -116,6 +132,10 @@ public class Client implements Serializable {
             return false;
     }
 
+    /**
+     Method that returns true if the requirements to the downgrade from Platinum to Gold are met,
+     and downgrades the Client's level
+     **/
     public boolean downgradePlatinumToGold(){
         if (this.getLevel() == ClientLevel.PLATINUM){
             if (((_pagamentos - _debts) > 0)) { //&& numeroCommTextoConsecutivas > 3
@@ -129,6 +149,10 @@ public class Client implements Serializable {
             return false;
     }
 
+    /**
+     Method that returns true if the requirements to the downgrade from Gold to Normal are met,
+     and downgrades the Client's level
+     **/
     public boolean downgradeGoldToNormal(){
         if (this.getLevel() == ClientLevel.GOLD){
             if (((_pagamentos - _debts) > 0)) { //dps de realizar uma comm
@@ -144,8 +168,8 @@ public class Client implements Serializable {
 
 
     /**
-     * Special toString
-     * @return a partner in string format
+     * Client toString
+     * @return a client in string format
      */
     public String clientStringed() {
         String receiveNotisString;
