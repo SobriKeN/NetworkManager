@@ -77,7 +77,14 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
           Notification notif = new Notification(NotificationType.O2I, this);
           _notificacoes.addFirst(notif);
         }
-        if (_terminalmode.toString().equal(""))
+        if (_terminalmode.toString().equals("SILENCE")){
+          Notification notif = new Notification(NotificationType.S2I, this);
+          _notificacoes.addFirst(notif);
+        }
+        if (_terminalmode.toString().equals("BUSY")){
+          Notification notif = new Notification(NotificationType.B2I, this);
+          _notificacoes.addFirst(notif);
+        }
         _terminalmode = TerminalMode.ON;   // return boolean se uma destas for cumprida
         return true;
       }
@@ -86,6 +93,9 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
 
   public boolean setOnSilent() {
       if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("BUSY")){
+        if (_terminalmode.toString().equals("OFF")){
+          Notification notif = new Notification(NotificationType.O2S, this);
+        }
         _terminalmode = TerminalMode.SILENCE;   // return boolean se uma destas for cumprida
         return true;
       }
