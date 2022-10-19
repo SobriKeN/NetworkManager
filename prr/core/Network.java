@@ -56,6 +56,20 @@ public class Network implements Serializable {
     return client;
   }
 
+  public Client getClient(String key) throws InvalidClientIDException{
+    for (String clientKey : _clients.keySet()){
+      if(clientKey.equals(key)){
+        return _clients.get(clientKey);
+      }
+    }
+    throw new InvalidClientIDException(key);
+  }
+
+
+  public String getClientString(String key) throws InvalidClientIDException {
+    return getClient(key).clientStringed();
+  }
+
   public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException {
     int i = 0;
     Terminal terminal = new Terminal(key, tipo);

@@ -2,9 +2,15 @@ package prr.core.exception;
 
 public class InvalidClientIDException extends Exception{
 
-    private static final String ERROR_MESSAGE = "O seguinte id de Cliente não existe: ";
+    private static final long serialVersionUID = 202110252107L;
 
-    public InvalidClientIDException(String ClientId){
-        super(ERROR_MESSAGE + ClientId);
+    private String _key;
+
+    public InvalidClientIDException(String key) {
+        _key = key;
+    }
+
+    public String getID() {
+        return _key;
     }
 }
