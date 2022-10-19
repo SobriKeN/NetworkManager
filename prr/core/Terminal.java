@@ -24,6 +24,7 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
   private List<String> _amigos;
   private LinkedList<Notification> _notificacoes;
   private Client _clientTerminal;
+  private boolean _virgem;
 
   public Terminal(String id, String tipo){
     _id = id;
@@ -31,9 +32,10 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     _tipo = tipo;
     _debt = 0;
     _payments = 0;
-    _amigos = new ArrayList<>();
+    _amigos = new ArrayList<String>();
     _notificacoes = new LinkedList<>();
     _clientTerminal = null;
+    _virgem = true;
   }
 
   public String getTerminalId(){
@@ -101,6 +103,37 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
       }
       return false;
     }
+
+  public String terminalStringed() {
+    String virgem;
+
+    if (_virgem) {
+      virgem = "YES";
+    } else {
+      virgem = "NO";
+    }
+
+    if (this._amigos.isEmpty()) {
+      return String.join(
+              "|",
+              getTerminalModeString(),
+              getTerminalId(),
+              getClientTerminal().getKey(),
+              getTerminalModeEnum().toString(),
+              String.valueOf(Math.round(getTerminalPayments())),
+              String.valueOf(Math.round(getTerminalDebts())));
+    } else {
+      return String.join(
+              "|",
+              getTerminalModeString(),
+              getTerminalId(),
+              getClientTerminal().getKey(),
+              getTerminalModeEnum().toString(),
+              String.valueOf(Math.round(getTerminalPayments())),
+              String.valueOf(Math.round(getTerminalDebts()))) +
+              String.join(", ", _amigos);
+    }
+  }
 
 
   public boolean turnOff() {
