@@ -23,15 +23,18 @@ public class CommunicationText extends Communication implements Serializable {
         this.type = "TEXT";
     }
 
-    /** @return the cost of the text message */
-    @Override
-    protected double computeCost(TariffPlan plan) {
-        return 0;
-    }
-
     /** @return the length of the message */
     @Override
     protected int getSize() {
         return message.length();
     }
+
+    /** @return the cost of the text message **/
+    @Override
+    protected double computeCost(TariffPlan plan) {
+        return 0;
+    }
+
+
+
 }

@@ -19,6 +19,7 @@ public class CommunicationVideo extends CommunicationInteractive implements Seri
         this.type = "VIDEO";
     }
 
+    /** @return the cost of the video message **/
     @Override
     protected double computeCost(TariffPlan plan) {
         return 0;

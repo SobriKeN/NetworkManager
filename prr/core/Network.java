@@ -9,61 +9,34 @@ import java.util.TreeMap;
 
 import prr.core.exception.*;
 
-// FIXME add more import if needed (cannot import from pt.tecnico or prr.app)
-
-/**
- * Class Store implements a store.
- */
+/** Class Network that represents the network of the system**/
 public class Network implements Serializable {
-  /**
-   * Serial number for serialization.
-   */
+  /** Serial number for serialization **/
   private static final long serialVersionUID = 202208091753L;
 
-  /**
-   * The network's balance
-   */
+  /** The network's balance **/
   private int _saldo = 0;
 
-  /**
-   * The terminals associated with the network
-   */
+  /** The terminals associated with the network **/
   private TreeMap<String, Terminal> _terminals;
 
-  /**
-   * The clients associated with the network uuuu
-   */
+  /** The clients associated with the network **/
   private TreeMap<String, Client> _clients;
 
+  /**
+   * Main Construtor
+   */
   public Network() {
     _terminals = new TreeMap<>();
     _clients = new TreeMap<>();
   }
 
-  public boolean addFriend(String idTerminal, String friend) {
-    Terminal terminal;
-
-    if (_terminals.containsKey(friend)) {
-      if (_terminals.containsKey(idTerminal)) {
-        terminal = _terminals.get(idTerminal);
-        terminal.addAmigo(idTerminal);
-        return true;
-      } else
-        return false;
-    } else
-      return false;
-  }
-
-  public void registerClient(String key, String name, int taxNumber) throws ClientKeyAlreadyUsedException {
-    String keyLowerCase = key.toLowerCase();
-    for (String mapKey : _clients.keySet()) {
-      if (mapKey.toLowerCase().equals(keyLowerCase)) {
-        throw new ClientKeyAlreadyUsedException(key);
-      }
-      Client client = new Client(key, name, taxNumber);
-      _clients.put(client.getKey(), client);
-    }
-  }
+  /**
+  @return a Client that the user is searching for,
+  with the given argument it will know if there is such client,
+  and if it doesn't exist, an exception is thrown
+  @throws InvalidClientIDException
+  **/
 
   public Client getClient(String key) throws InvalidClientIDException {
     for (String clientKey : _clients.keySet()) {
@@ -74,23 +47,22 @@ public class Network implements Serializable {
     throw new InvalidClientIDException(key);
   }
 
-  public Terminal getTerminal(String key) throws InvalidTerminalIDException {
-    for (String terminalKey : _terminals.keySet()) {
-      if (terminalKey.equals(key)) {
-        return _terminals.get(terminalKey);
-      }
-    }
-    throw new InvalidTerminalIDException(key);
-  }
-
+  /**
+   @return the Client's parameters as a String by searching it with its key and then
+   using the method clientStringed from the Class Client
+   * @param key
+   * @throws InvalidClientIDException
+  **/
   public String getClientString(String key) throws InvalidClientIDException {
     return getClient(key).clientStringed();
   }
 
-  public String getTerminalString(String key) throws InvalidTerminalIDException {
-    return getTerminal(key).terminalStringed();
-  }
-
+  /**
+    @return an ArrayList with all the Clients in the system, if
+    there is an error on the Client's key, the program will try to
+    catch the exception about that error, which is
+    InvalidClientIDException
+   */
   public ArrayList<String> getAllClients() {
     ArrayList<String> stringClients = new ArrayList<>();
 
@@ -105,6 +77,59 @@ public class Network implements Serializable {
     return stringClients;
   }
 
+  /**
+   Void method that regists a Client with the arguments given;
+   if there already exists a Client with the key given by the user,
+   an exception will be thrown; if not it will simply create a Client
+   and add it to the system
+   * @param key
+   * @param name
+   * @param taxNumber
+   * @throws ClientKeyAlreadyUsedException
+   */
+  public void registerClient(String key, String name, int taxNumber) throws ClientKeyAlreadyUsedException {
+    String keyLowerCase = key.toLowerCase();
+    for (String mapKey : _clients.keySet()) {
+      if (mapKey.toLowerCase().equals(keyLowerCase)) {
+        throw new ClientKeyAlreadyUsedException(key);
+      }
+      Client client = new Client(key, name, taxNumber);
+      _clients.put(client.getKey(), client);
+    }
+  }
+
+  /**
+   @return the terminal which is being looked for,
+   if the terminal doesn't exist, an exception is thrown.
+   If not, the program will simply return the desired terminal
+   * @param key
+   * @throws InvalidTerminalIDException
+  **/
+  public Terminal getTerminal(String key) throws InvalidTerminalIDException {
+    for (String terminalKey : _terminals.keySet()) {
+      if (terminalKey.equals(key)) {
+        return _terminals.get(terminalKey);
+      }
+    }
+    throw new InvalidTerminalIDException(key);
+  }
+
+  /**
+   @return the Terminal's parameters by searching it with its key and then
+   using the method terminalStringed from the Class Terminal
+   * @param key
+   * @throws InvalidTerminalIDException
+   */
+  public String getTerminalString(String key) throws InvalidTerminalIDException {
+    return getTerminal(key).terminalStringed();
+  }
+
+  /**
+   @return the ArrayList that contains all the terminals of the system,
+   if there is an error on the Terminal's key, the program will try to
+   catch the exception about that error, which is
+   InvalidTerminalIDException
+   */
   public ArrayList<String> getAllTerminals() {
     ArrayList<String> stringTerminals = new ArrayList<>();
 
@@ -119,6 +144,13 @@ public class Network implements Serializable {
     return stringTerminals;
   }
 
+  /**
+   @return the ArrayList that contains all the terminals of the
+   system that were never used once. if there is an error on the
+   Terminal's key, the program will try to
+   catch the exception about that error, which is
+   InvalidTerminalIDException
+   */
   public ArrayList<String> getAllVirginTerminals() {
     ArrayList<String> stringTerminals = new ArrayList<>();
 
@@ -134,6 +166,18 @@ public class Network implements Serializable {
     return stringTerminals;
   }
 
+  /**
+   @return a terminal that is created and registed with the given arguments,
+   if the terminal's key length is bigger than 6, it has an error;
+   if the terminal's key already exists, it has an error;
+   and if there is no client with the given key, it has an error;
+   * @param key
+   * @param tipo
+   * @param idClient
+   * @throws InvalidClientIDException
+   * @throws AlreadyExistsTerminalException
+   * @throws InvalidTerminalIDException
+   */
   public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException,
           AlreadyExistsTerminalException, InvalidTerminalIDException {
     if (key.length() == 6) {
@@ -150,8 +194,28 @@ public class Network implements Serializable {
     terminal.setClientTerminal(c);
     _terminals.put(terminal.getTerminalId(), terminal);
     c.atualizaNumeroTerminaisAssoc();
-    return terminal;// incrementa numero de terminais associados ao cliente
-    }
+    return terminal; // incrementa numero de terminais associados ao cliente
+  }
+
+  /**
+   Boolean method that verifies and adds a Friend of the type
+   terminal, to the given terminal's friend list.
+   * @param idTerminal
+   * @param friend
+   */
+  public boolean addFriend(String idTerminal, String friend) {
+    Terminal terminal;
+
+    if (_terminals.containsKey(friend)) {
+      if (_terminals.containsKey(idTerminal)) {
+        terminal = _terminals.get(idTerminal);
+        terminal.addAmigo(idTerminal);
+        return true;
+      } else
+        return false;
+    } else
+      return false;
+  }
 
   /**
    * Read text input file and create corresponding domain entities.

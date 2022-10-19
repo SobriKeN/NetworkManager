@@ -62,7 +62,6 @@ public abstract class Communication implements Serializable {
     }
 
     /** @return how much the comm cost*/
-
     protected abstract double computeCost(TariffPlan plan);
 
     /** @return the size of the message*/

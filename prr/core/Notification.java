@@ -13,11 +13,19 @@ public class Notification implements Serializable {
     /** The client associated with the notification */
     private Terminal terminalANotificar;
 
+    /**
+     * Main Constructor
+     * @param tipoNotificacao
+     * @param terminalANotificar
+     */
     public Notification(NotificationType tipoNotificacao, Terminal terminalANotificar){
         this.tipoNotificacao = tipoNotificacao;
         this.terminalANotificar = terminalANotificar;
     }
 
+    /**
+     @return a String that symbolizes the communication
+     */
     @Override
     public String toString() {
         return "Notification{" +
