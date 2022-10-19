@@ -90,11 +90,57 @@ public class Client implements Serializable {
         _recieveNotifications = true;
     }
 
-    public void upgradeNormalToGold(){this._level = ClientLevel.GOLD;}
-
-    public void upgradeGoldToPlatinum(){
-        if(this.getLevel() == ClientLevel.GOLD){
+    public boolean upgradeNormalToGold(){
+        if (this.getLevel() == ClientLevel.NORMAL) {
+            if ((_pagamentos - _debts) > 500) { //após realizar um pagamento
+                this._level = ClientLevel.GOLD;
+                return true;
+            }
+            else
+                return false;
         }
+        else
+            return false;
+    }
+
+
+    public boolean upgradeGoldToPlatinum(){
+        if (this.getLevel() == ClientLevel.GOLD){
+            if (((_pagamentos - _debts) > 0)) { //&& numeroCommVideoConsecutivas > 6
+                this._level = ClientLevel.PLATINUM;
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+
+    public boolean downgradePlatinumToGold(){
+        if (this.getLevel() == ClientLevel.PLATINUM){
+            if (((_pagamentos - _debts) > 0)) { //&& numeroCommTextoConsecutivas > 3
+                this._level = ClientLevel.GOLD;
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+
+    public boolean downgradeGoldToNormal(){
+        if (this.getLevel() == ClientLevel.GOLD){
+            if (((_pagamentos - _debts) > 0)) { //dps de realizar uma comm
+                this._level = ClientLevel.NORMAL;
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
     }
 
 

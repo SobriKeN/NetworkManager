@@ -10,7 +10,7 @@ import prr.core.exception.ClientKeyAlreadyUsedException;
 import prr.core.exception.InvalidClientIDException;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
-//FIXME add more imports if needed
+
 
 /**
  * Register terminal.
