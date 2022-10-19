@@ -218,14 +218,14 @@ public class Network implements Serializable {
       return false;
   }
 
-  public List<Notification> readClientNotifications(String key) throws InvalidClientIDException {
+  public List<String> readClientNotifications(String key) throws InvalidClientIDException {
     Client client = getClient(key);
-    List<Notification> notifications = new ArrayList<Notification>(client.getNotificacoesClient());
-    for(Notification n: notifications){
-      n.notificationStringed();
+    List<String> notificationInString = new ArrayList<>();
+    for(Notification n: client.getNotificacoesClient()){
+      notificationInString.add(n.notificationStringed());
     }
     client.clearNotifications();
-    return notifications;
+    return notificationInString;
   }
 
   /**

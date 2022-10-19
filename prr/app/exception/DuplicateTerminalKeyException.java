@@ -2,8 +2,6 @@ package prr.app.exception;
 
 import pt.tecnico.uilib.menus.CommandException;
 
-import java.io.Serial;
-
 /** Exception thrown when a terminal key is duplicated. */
 public class DuplicateTerminalKeyException extends CommandException {
 
