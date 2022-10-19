@@ -32,10 +32,8 @@ public abstract class Communication implements Serializable {
         this.isOngoing = true;
     }
 
-
-    public int getId() {
-        return id;
-    }
+    /** @return Communication's id **/
+    public int getId() { return id; }
 
     /** @return if the communication has been paid */
     public boolean isPaid() {
