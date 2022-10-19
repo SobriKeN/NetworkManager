@@ -218,6 +218,13 @@ public class Network implements Serializable {
       return false;
   }
 
+  /**
+   @return a list of the notifications in String for later purposes and methods, with
+   the given key, it searches the respective client, "reads" and clears the Client's
+   notifications, and then it saves the notifications that were turned to Strings in an ArrayList
+   * @param key
+   * @throws InvalidClientIDException
+   */
   public List<String> readClientNotifications(String key) throws InvalidClientIDException {
     Client client = getClient(key);
     List<String> notificationInString = new ArrayList<>();
