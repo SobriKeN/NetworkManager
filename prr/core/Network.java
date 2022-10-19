@@ -113,6 +113,21 @@ public class Network implements Serializable {
     return stringTerminals;
   }
 
+  public ArrayList<String> getAllVirginTerminals() {
+    ArrayList<String> stringTerminals = new ArrayList<>();
+
+    for (String terminal : _terminals.keySet()){
+      try{
+        if (getTerminal(terminal).usedOrNot())
+          stringTerminals.add(getTerminal(terminal).terminalStringed());
+      } catch (InvalidTerminalIDException e){
+        //probably is never going to happen
+        e.printStackTrace();
+      }
+    }
+    return stringTerminals;
+  }
+
   public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException, AlreadyExistsTerminalException {
     Terminal terminal = new Terminal(key, tipo);
     if (_terminals.containsKey(idClient)) {

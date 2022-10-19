@@ -58,6 +58,8 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     return this._payments;
   }
 
+  public boolean usedOrNot(){ return this._virgem;}
+
   public ArrayList<String> getTerminalAmigos(){
     return (ArrayList<String>) this._amigos;
   }
