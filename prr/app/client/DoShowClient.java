@@ -29,7 +29,7 @@ class DoShowClient extends Command<Network> {
   protected final void execute() throws CommandException {
     try{
       _display.popup(_receiver.getClientString(stringField("clientKey")));
-
+      _display.popup(_receiver.readClientNotifications(stringField("clientKey")));
     } catch (InvalidClientIDException e) {
       throw new UnknownClientKeyException(e.getID());
     }

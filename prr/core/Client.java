@@ -1,6 +1,7 @@
 package prr.core;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 
 /**
  * Class representing a client in the app
@@ -32,6 +33,9 @@ public class Client implements Serializable {
     private double _pagamentos;  // the payments
     private double _debts;  // the debts
 
+    /** Linked list that contains the client's notifications **/
+    private LinkedList<Notification> _notificacoes;
+
     /**
      * Main Construtor
      * @param key
@@ -39,14 +43,15 @@ public class Client implements Serializable {
      * @param tax
      */
     public Client(String key, String name, int tax) {
-        this._key = key;
-        this._name = name;
-        this._tax = tax;
-        this._level = ClientLevel.NORMAL;
-        this._recieveNotifications = true;
-        this._debts = 0;
-        this._pagamentos = 0;
-        this._numeroTerminaisAssociados = 0;
+        _key = key;
+        _name = name;
+        _tax = tax;
+        _level = ClientLevel.NORMAL;
+        _recieveNotifications = true;
+        _debts = 0;
+        _pagamentos = 0;
+        _numeroTerminaisAssociados = 0;
+        _notificacoes = new LinkedList<>();
     }
 
     /** @return client's key */
@@ -97,6 +102,9 @@ public class Client implements Serializable {
     public void activateNotifications(){
         _recieveNotifications = true;
     }
+
+    /** @return terminal's Notifications LinkedList **/
+    public LinkedList<Notification> getNotificacoesClient(){ return _notificacoes;}
 
     /**
      Method that returns true if the requirements to the upgrade from Normal to Gold are met,
@@ -166,6 +174,10 @@ public class Client implements Serializable {
             return false;
     }
 
+    /** Clear the client's unread notifications array */
+    public void clearNotifications() {
+        _notificacoes.clear();
+    }
 
     /**
      * Client toString

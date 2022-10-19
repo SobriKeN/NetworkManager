@@ -217,6 +217,16 @@ public class Network implements Serializable {
       return false;
   }
 
+  public List<Notification> readClientNotifications(String key) throws InvalidClientIDException {
+    Client client = getClient(key);
+    List<Notification> notifications = new ArrayList<Notification>(client.getNotificacoesClient());
+    for(Notification n: notifications){
+      n.notificationStringed();
+    }
+    client.clearNotifications();
+    return notifications;
+  }
+
   /**
    * Read text input file and create corresponding domain entities.
    * 

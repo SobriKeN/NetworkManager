@@ -34,9 +34,6 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
   /** List that contains the terminal's friends **/
   private List<String> _amigos;
 
-  /** Linked list that contains the terminal's notifications **/
-  private LinkedList<Notification> _notificacoes;
-
   /** Client that is associated with the terminal in question **/
   private Client _clientTerminal;
 
@@ -56,7 +53,6 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     _debt = 0;
     _payments = 0;
     _amigos = new ArrayList<String>();
-    _notificacoes = new LinkedList<>();
     _clientTerminal = null;
     _virgem = true;
   }
@@ -94,9 +90,6 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     return (ArrayList<String>) this._amigos;
   }
 
-  /** @return terminal's Notifications LinkedList **/
-  public LinkedList<Notification> getNotificacoesTerminal(){ return (LinkedList<Notification>) this._notificacoes;}
-
   /** @return terminal's asscociated Client **/
   public Client getClientTerminal(){
     return _clientTerminal;
@@ -120,15 +113,15 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
               _terminalmode.toString().equals("BUSY")) {
         if (_terminalmode.toString().equals("OFF")) {
           Notification notif = new Notification(NotificationType.O2I, this);
-          _notificacoes.addFirst(notif);
+          this._clientTerminal.getNotificacoesClient().addFirst(notif);
         }
         if (_terminalmode.toString().equals("SILENCE")){
           Notification notif = new Notification(NotificationType.S2I, this);
-          _notificacoes.addFirst(notif);
+          this._clientTerminal.getNotificacoesClient().addFirst(notif);
         }
         if (_terminalmode.toString().equals("BUSY")){
           Notification notif = new Notification(NotificationType.B2I, this);
-          _notificacoes.addFirst(notif);
+          this._clientTerminal.getNotificacoesClient().addFirst(notif);
         }
         _terminalmode = TerminalMode.ON;   // return boolean se uma destas for cumprida
         return true;
@@ -145,6 +138,7 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
       if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("BUSY")){
         if (_terminalmode.toString().equals("OFF")){
           Notification notif = new Notification(NotificationType.O2S, this);
+          this._clientTerminal.getNotificacoesClient().addFirst(notif);
         }
         _terminalmode = TerminalMode.SILENCE;   // return boolean se uma destas for cumprida
         return true;
