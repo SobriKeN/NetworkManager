@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 import prr.core.exception.*;
-import prr.core.Parser;
 
 // FIXME add more import if needed (cannot import from pt.tecnico or prr.app)
 
@@ -97,7 +96,7 @@ public class Network implements Serializable {
 
     for (String client : _clients.keySet()) {
       try {
-        stringClients.add(getClient(client).clientStringed());
+        stringClients.add(getClientString(client));
       } catch (InvalidClientIDException e) {
         // probably will never happen
         e.printStackTrace();
@@ -111,7 +110,7 @@ public class Network implements Serializable {
 
     for (String terminal : _terminals.keySet()) {
       try {
-        stringTerminals.add(getTerminal(terminal).terminalStringed());
+        stringTerminals.add(getTerminalString(terminal));
       } catch (InvalidTerminalIDException e) {
         //probably never going to get used
         e.printStackTrace();
@@ -126,7 +125,7 @@ public class Network implements Serializable {
     for (String terminal : _terminals.keySet()){
       try{
         if (getTerminal(terminal).usedOrNot())
-          stringTerminals.add(getTerminal(terminal).terminalStringed());
+          stringTerminals.add(getTerminalString(terminal));
       } catch (InvalidTerminalIDException e){
         //probably is never going to happen
         e.printStackTrace();
@@ -162,8 +161,7 @@ public class Network implements Serializable {
    * @throws UnrecognizedEntryException if some entry is not correct
    * @throws IOException if there is an IO erro while processing the text file
    */
-  void importFile(String filename) throws UnrecognizedEntryException, IOException /* FIXME maybe other exceptions */  {
-    //FIXME implement method
+  void importFile(String filename) throws UnrecognizedEntryException, IOException  {
     Parser parser = new Parser(this);
     parser.parseFile(filename);
   }

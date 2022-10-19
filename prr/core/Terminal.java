@@ -124,8 +124,8 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
               getClientTerminal().getKey(),
               getTerminalModeEnum().toString(),
               String.valueOf(Math.round(getTerminalPayments())),
-              String.valueOf(Math.round(getTerminalDebts()))) +
-              String.join(", ", _amigos);
+              String.valueOf(Math.round(getTerminalDebts())),
+              String.join(", ", _amigos));
     }
   }
 
