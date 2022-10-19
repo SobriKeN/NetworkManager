@@ -82,6 +82,14 @@ public class Client implements Serializable {
         return _recieveNotifications;
     }
 
+    public void deactivateNotifications(){
+        _recieveNotifications = false;
+    }
+
+    public void activateNotifications(){
+        _recieveNotifications = true;
+    }
+
     public void upgradeNormalToGold(){this._level = ClientLevel.GOLD;}
 
     public void upgradeGoldToPlatinum(){

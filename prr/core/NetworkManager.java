@@ -1,11 +1,9 @@
 package prr.core;
 
 import java.io.*;
+import java.util.ArrayList;
 
-import prr.core.exception.ImportFileException;
-import prr.core.exception.MissingFileAssociationException;
-import prr.core.exception.UnavailableFileException;
-import prr.core.exception.UnrecognizedEntryException;
+import prr.core.exception.*;
 
 //FIXME add more import if needed (cannot import from pt.tecnico or prr.app)
 

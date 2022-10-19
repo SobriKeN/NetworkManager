@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TreeMap;
 
+import prr.core.exception.ClientKeyAlreadyUsedException;
 import prr.core.exception.InvalidClientIDException;
 import prr.core.exception.UnrecognizedEntryException;
 import prr.core.Parser;
@@ -50,10 +51,14 @@ public class Network implements Serializable {
       return false;
   }
 
-  public Client registerClient(String key, String name, int taxNumber){
-    Client client = new Client(key,name, taxNumber);
-    _clients.put(client.getKey(),client);
-    return client;
+  public void registerClient(String key, String name, int taxNumber) throws ClientKeyAlreadyUsedException {
+    for (String mapKey : _clients.keySet()) {
+      if (mapKey.equals(key)) {
+        throw new ClientKeyAlreadyUsedException(key);
+      }
+      Client client = new Client(key, name, taxNumber);
+      _clients.put(client.getKey(), client);
+    }
   }
 
   public Client getClient(String key) throws InvalidClientIDException{
@@ -70,8 +75,24 @@ public class Network implements Serializable {
     return getClient(key).clientStringed();
   }
 
+  public ArrayList<String> getAllClients() {
+    ArrayList<String> stringClients = new ArrayList<>();
+
+    for (String client : _clients.keySet()) {
+      try {
+        stringClients.add(getClient(client).clientStringed());
+      } catch (InvalidClientIDException e) {
+        // probably will never happen
+        e.printStackTrace();
+      }
+    }
+    return stringClients;
+  }
+
+  public Terminal getTerminal(String idTerminal){
+    return _terminals.get(idTerminal);
+  }
   public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException {
-    int i = 0;
     Terminal terminal = new Terminal(key, tipo);
     if (_terminals.containsKey(idClient)) {
       terminal.setClientTerminal(_clients.get(idClient));
@@ -83,10 +104,7 @@ public class Network implements Serializable {
     else
       throw new InvalidClientIDException(idClient);
   }
-  
-  public Terminal getTerminal(String idTerminal){
-    return _terminals.get(idTerminal);
-  }
+
   /**
    * Read text input file and create corresponding domain entities.
    * 
