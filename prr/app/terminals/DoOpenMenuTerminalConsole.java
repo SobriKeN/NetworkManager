@@ -2,6 +2,7 @@ package prr.app.terminals;
 
 import prr.core.Network;
 import prr.app.exception.UnknownTerminalKeyException;
+import prr.core.exception.InvalidTerminalIDException;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 //FIXME add mode import if needed
@@ -18,7 +19,7 @@ class DoOpenMenuTerminalConsole extends Command<Network> {
   }
 
   @Override
-  protected final void execute() throws CommandException {
+  protected final void execute() throws CommandException, InvalidTerminalIDException {
     String chave = stringField("terminalKey");
     new prr.app.terminal.Menu(this._receiver,_receiver.getTerminal(chave)).open(); //idfk kill me
     //FIXME implement command

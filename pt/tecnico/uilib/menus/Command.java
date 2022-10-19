@@ -2,6 +2,7 @@ package pt.tecnico.uilib.menus;
 
 import java.util.function.Predicate;
 
+import prr.core.exception.InvalidTerminalIDException;
 import pt.tecnico.uilib.Display;
 import pt.tecnico.uilib.forms.Form;
 
@@ -149,6 +150,6 @@ public abstract class Command<Receiver> {
    * 
    * @throws CommandException if something wrong or unexpected occurs.
    */
-  protected abstract void execute() throws CommandException;
+  protected abstract void execute() throws CommandException, InvalidTerminalIDException;
 
 }

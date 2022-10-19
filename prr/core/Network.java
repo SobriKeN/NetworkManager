@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import prr.core.exception.ClientKeyAlreadyUsedException;
-import prr.core.exception.InvalidClientIDException;
-import prr.core.exception.UnrecognizedEntryException;
+import prr.core.exception.*;
 import prr.core.Parser;
 
 // FIXME add more import if needed (cannot import from pt.tecnico or prr.app)
@@ -71,11 +69,22 @@ public class Network implements Serializable {
     throw new InvalidClientIDException(key);
   }
 
+  public Terminal getTerminal(String key) throws InvalidTerminalIDException {
+    for (String terminalKey : _terminals.keySet()){
+      if(terminalKey.equals(key)){
+        return _terminals.get(terminalKey);
+      }
+    }
+    throw new InvalidTerminalIDException(key);
+  }
 
   public String getClientString(String key) throws InvalidClientIDException {
     return getClient(key).clientStringed();
   }
 
+  public String getTerminalString(String key) throws InvalidTerminalIDException{
+    return getTerminal(key).terminalStringed();
+  }
   public ArrayList<String> getAllClients() {
     ArrayList<String> stringClients = new ArrayList<>();
 
@@ -90,10 +99,21 @@ public class Network implements Serializable {
     return stringClients;
   }
 
-  public Terminal getTerminal(String idTerminal){
-    return _terminals.get(idTerminal);
+  public ArrayList<String> getAllTerminals(){
+    ArrayList<String> stringTerminals = new ArrayList<>();
+
+    for (String terminal : _terminals.keySet()){
+      try {
+        stringTerminals.add(getTerminal(terminal).terminalStringed());
+      } catch (InvalidTerminalIDException e) {
+        //probably never gonna get used
+        e.printStackTrace();
+      }
+    }
+    return stringTerminals;
   }
-  public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException {
+
+  public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException, AlreadyExistsTerminalException {
     Terminal terminal = new Terminal(key, tipo);
     if (_terminals.containsKey(idClient)) {
       terminal.setClientTerminal(_clients.get(idClient));
