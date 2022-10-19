@@ -105,14 +105,6 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     }
 
   public String terminalStringed() {
-    String virgem;
-
-    if (_virgem) {
-      virgem = "YES";
-    } else {
-      virgem = "NO";
-    }
-
     if (this._amigos.isEmpty()) {
       return String.join(
               "|",
