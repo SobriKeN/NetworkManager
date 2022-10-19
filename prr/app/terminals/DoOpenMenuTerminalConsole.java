@@ -19,9 +19,13 @@ class DoOpenMenuTerminalConsole extends Command<Network> {
   }
 
   @Override
-  protected final void execute() throws CommandException, InvalidTerminalIDException {
+  protected final void execute() throws CommandException {
     String chave = stringField("terminalKey");
-    new prr.app.terminal.Menu(this._receiver,_receiver.getTerminal(chave)).open(); //idfk kill me
+    try {
+      new prr.app.terminal.Menu(this._receiver,_receiver.getTerminal(chave)).open(); //idfk kill me
+    } catch (InvalidTerminalIDException e) {
+      throw new UnknownTerminalKeyException(e.getID());
+    }
     //FIXME implement command
     // create an instance of prr.app.terminal.Menu with the
     // selected Terminal and open it
