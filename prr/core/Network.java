@@ -52,8 +52,9 @@ public class Network implements Serializable {
   }
 
   public void registerClient(String key, String name, int taxNumber) throws ClientKeyAlreadyUsedException {
+    String keyLowerCase = key.toLowerCase();
     for (String mapKey : _clients.keySet()) {
-      if (mapKey.equals(key)) {
+      if (mapKey.toLowerCase().equals(keyLowerCase)) {
         throw new ClientKeyAlreadyUsedException(key);
       }
       Client client = new Client(key, name, taxNumber);
