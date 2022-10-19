@@ -3,6 +3,7 @@ package prr.core;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 // FIXME add more import if needed (cannot import from pt.tecnico or prr.app)
@@ -21,6 +22,7 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
   private double _payments;
   private TerminalMode _terminalmode;
   private List<String> _amigos;
+  private LinkedList<Notification> _notificacoes;
   private Client _clientTerminal;
 
   public Terminal(String id, String tipo){
@@ -30,6 +32,7 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     _debt = 0;
     _payments = 0;
     _amigos = new ArrayList<>();
+    _notificacoes = new LinkedList<>();
     _clientTerminal = null;
   }
 
@@ -57,6 +60,8 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
     return (ArrayList<String>) this._amigos;
   }
 
+  public LinkedList<Notification> getNotificacoesTerminal(){ return (LinkedList<Notification>) this._notificacoes;}
+
   public Client getClientTerminal(){
     return _clientTerminal;
   }
@@ -68,6 +73,11 @@ public class Terminal implements Serializable /* FIXME maybe addd more interface
   public boolean setONIdle() {
       if (_terminalmode.toString().equals("OFF") || _terminalmode.toString().equals("SILENCE") ||
               _terminalmode.toString().equals("BUSY")) {
+        if (_terminalmode.toString().equals("OFF")) {
+          Notification notif = new Notification(NotificationType.O2I, this);
+          _notificacoes.addFirst(notif);
+        }
+        if (_terminalmode.toString().equal(""))
         _terminalmode = TerminalMode.ON;   // return boolean se uma destas for cumprida
         return true;
       }
