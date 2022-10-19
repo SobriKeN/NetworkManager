@@ -2,7 +2,6 @@ package pt.tecnico.uilib.menus;
 
 import java.util.function.Predicate;
 
-import prr.core.exception.InvalidTerminalIDException;
 import pt.tecnico.uilib.Display;
 import pt.tecnico.uilib.forms.Form;
 
@@ -119,6 +118,10 @@ public abstract class Command<Receiver> {
     _form.addStringField(key, prompt);
   }
 
+  public void addOptionField(String key, String prompt, String... options) {
+    _form.addOptionField(key, prompt, options);
+  }
+
   public Boolean booleanField(String key) {
     return _form.booleanField(key);
   }
@@ -133,6 +136,10 @@ public abstract class Command<Receiver> {
 
   public String stringField(String key) {
     return _form.stringField(key);
+  }
+
+  public String optionField(String key) {
+    return _form.optionField(key);
   }
 
   /**
@@ -150,6 +157,6 @@ public abstract class Command<Receiver> {
    * 
    * @throws CommandException if something wrong or unexpected occurs.
    */
-  protected abstract void execute() throws CommandException, InvalidTerminalIDException;
+  protected abstract void execute() throws CommandException;
 
 }

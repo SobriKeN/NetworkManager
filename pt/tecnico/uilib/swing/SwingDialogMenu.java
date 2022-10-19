@@ -1,25 +1,27 @@
 package pt.tecnico.uilib.swing;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.GridLayout;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JDialog;
-import javax.swing.JTextArea;
-import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.*;
-import java.awt.event.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-import pt.tecnico.uilib.menus.Menu;
 import pt.tecnico.uilib.menus.CommandException;
+import pt.tecnico.uilib.menus.Menu;
 
 /**
  * This class manages a menu window: it can be used to select an option

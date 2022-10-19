@@ -116,4 +116,5 @@ public class Display {
   public void clear() {
     _text.setLength(0);
   }
+  
 }

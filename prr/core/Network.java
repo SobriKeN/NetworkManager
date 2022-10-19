@@ -16,36 +16,42 @@ import prr.core.Parser;
  * Class Store implements a store.
  */
 public class Network implements Serializable {
-  /** Serial number for serialization. */
+  /**
+   * Serial number for serialization.
+   */
   private static final long serialVersionUID = 202208091753L;
 
-  /** The network's balance*/
+  /**
+   * The network's balance
+   */
   private int _saldo = 0;
 
-  /** The terminals associated with the network */
-  private TreeMap<String,Terminal> _terminals;
+  /**
+   * The terminals associated with the network
+   */
+  private TreeMap<String, Terminal> _terminals;
 
-  /** The clients associated with the network uuuu*/
-  private TreeMap<String,Client> _clients;
+  /**
+   * The clients associated with the network uuuu
+   */
+  private TreeMap<String, Client> _clients;
 
-  public Network(){
+  public Network() {
     _terminals = new TreeMap<>();
     _clients = new TreeMap<>();
   }
 
-  public boolean addFriend(String idTerminal, String friend){
+  public boolean addFriend(String idTerminal, String friend) {
     Terminal terminal;
 
-    if (_terminals.containsKey(friend)){
-      if (_terminals.containsKey(idTerminal)){
+    if (_terminals.containsKey(friend)) {
+      if (_terminals.containsKey(idTerminal)) {
         terminal = _terminals.get(idTerminal);
         terminal.addAmigo(idTerminal);
         return true;
-      }
-      else
+      } else
         return false;
-    }
-    else
+    } else
       return false;
   }
 
@@ -60,9 +66,9 @@ public class Network implements Serializable {
     }
   }
 
-  public Client getClient(String key) throws InvalidClientIDException{
-    for (String clientKey : _clients.keySet()){
-      if(clientKey.equals(key)){
+  public Client getClient(String key) throws InvalidClientIDException {
+    for (String clientKey : _clients.keySet()) {
+      if (clientKey.equals(key)) {
         return _clients.get(clientKey);
       }
     }
@@ -70,8 +76,8 @@ public class Network implements Serializable {
   }
 
   public Terminal getTerminal(String key) throws InvalidTerminalIDException {
-    for (String terminalKey : _terminals.keySet()){
-      if(terminalKey.equals(key)){
+    for (String terminalKey : _terminals.keySet()) {
+      if (terminalKey.equals(key)) {
         return _terminals.get(terminalKey);
       }
     }
@@ -82,9 +88,10 @@ public class Network implements Serializable {
     return getClient(key).clientStringed();
   }
 
-  public String getTerminalString(String key) throws InvalidTerminalIDException{
+  public String getTerminalString(String key) throws InvalidTerminalIDException {
     return getTerminal(key).terminalStringed();
   }
+
   public ArrayList<String> getAllClients() {
     ArrayList<String> stringClients = new ArrayList<>();
 
@@ -99,14 +106,14 @@ public class Network implements Serializable {
     return stringClients;
   }
 
-  public ArrayList<String> getAllTerminals(){
+  public ArrayList<String> getAllTerminals() {
     ArrayList<String> stringTerminals = new ArrayList<>();
 
-    for (String terminal : _terminals.keySet()){
+    for (String terminal : _terminals.keySet()) {
       try {
         stringTerminals.add(getTerminal(terminal).terminalStringed());
       } catch (InvalidTerminalIDException e) {
-        //probably never gonna get used
+        //probably never going to get used
         e.printStackTrace();
       }
     }
@@ -128,19 +135,26 @@ public class Network implements Serializable {
     return stringTerminals;
   }
 
-  public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException, AlreadyExistsTerminalException {
+  public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException,
+          AlreadyExistsTerminalException, InvalidTerminalIDException {
+    if (key.length() == 6) {
+      throw new InvalidTerminalIDException(key);
+    }
+    if (_terminals.containsKey(key)) {
+      throw new AlreadyExistsTerminalException(key);
+    }
+    if (!_clients.containsKey(idClient)) {
+      throw new InvalidClientIDException(idClient);
+    }
     Terminal terminal = new Terminal(key, tipo);
     if (_terminals.containsKey(idClient)) {
       terminal.setClientTerminal(_clients.get(idClient));
       _terminals.put(terminal.getTerminalId(), terminal);
       Client c = _clients.get(idClient);
       c.atualizaNumeroTerminaisAssoc(); // incrementa numero de terminais associados ao cliente
-      return terminal;
     }
-    else
-      throw new InvalidClientIDException(idClient);
+    return terminal;
   }
-
   /**
    * Read text input file and create corresponding domain entities.
    * 

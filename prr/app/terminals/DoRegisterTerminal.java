@@ -5,9 +5,7 @@ import prr.core.Network;
 import prr.app.exception.DuplicateTerminalKeyException;
 import prr.app.exception.InvalidTerminalKeyException;
 import prr.app.exception.UnknownClientKeyException;
-import prr.core.exception.AlreadyExistsTerminalException;
-import prr.core.exception.ClientKeyAlreadyUsedException;
-import prr.core.exception.InvalidClientIDException;
+import prr.core.exception.*;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 
@@ -19,8 +17,9 @@ class DoRegisterTerminal extends Command<Network> {
 
   DoRegisterTerminal(Network receiver) {
     super(Label.REGISTER_TERMINAL, receiver);
+    String[] options = {"BASIC","FANCY"};
     addStringField("terminalKey", Message.terminalKey());
-    addStringField("terminalType", Message.terminalType());
+    addOptionField("terminalType", Message.terminalType(),options);
     addStringField("clientTerminal", Message.clientKey());
   }
 
@@ -35,6 +34,8 @@ class DoRegisterTerminal extends Command<Network> {
       throw new DuplicateTerminalKeyException(e.getKey());
     } catch (InvalidClientIDException y) {
       throw new UnknownClientKeyException(y.getID());
+    } catch(InvalidTerminalIDException t){
+      throw new InvalidTerminalKeyException(t.getID());
     }
   }
 }

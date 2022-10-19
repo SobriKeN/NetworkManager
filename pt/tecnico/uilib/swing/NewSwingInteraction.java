@@ -1,19 +1,17 @@
 package pt.tecnico.uilib.swing;
 
-import javax.swing.JFrame;
-import javax.swing.JDialog;
 import javax.swing.JButton;
-
-import pt.tecnico.uilib.Display;
-import pt.tecnico.uilib.InteractionDriver;
-import pt.tecnico.uilib.forms.Form;
-import pt.tecnico.uilib.menus.CommandException;
-import pt.tecnico.uilib.menus.Menu;
-
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.plaf.metal.MetalLookAndFeel;
+
+import pt.tecnico.uilib.InteractionDriver;
+import pt.tecnico.uilib.forms.Form;
+import pt.tecnico.uilib.menus.Menu;
+
 /**
- * New Swing interaction back-end. Based on JDialog. Each menu is presented on its own JDialog.
+ * New Swing interaction back-end. Based on JDialog. Each menu is presented on
+ * its own JDialog.
  */
 public class NewSwingInteraction extends JFrame implements InteractionDriver {
 
@@ -23,7 +21,7 @@ public class NewSwingInteraction extends JFrame implements InteractionDriver {
   /** Application title (for window titles). */
   private static final String MAIN_TITLE = "Programação com Objectos";
 
-  // current Menu
+  /** Current menu */
   private SwingDialogMenu _currentDialogMenu = null;
 
   /** Constructor. */
@@ -45,14 +43,12 @@ public class NewSwingInteraction extends JFrame implements InteractionDriver {
   /** @see pt.tecnico.uilib.InteractionDriver#open(pt.tecnico.uilib.menus.Menu) */
   @Override
   public void open(Menu menu) {
-    int option;
     JButton selectedButton = _currentDialogMenu != null ? _currentDialogMenu.getSelectedButton() : null;
     SwingDialogMenu dialogMenu = new SwingDialogMenu(menu, this, selectedButton);
     SwingDialogMenu previousMenu = _currentDialogMenu;
     _currentDialogMenu = dialogMenu;
     dialogMenu.pack();
     dialogMenu.setVisible(true);
-    
     _currentDialogMenu = previousMenu;
   }
 
@@ -82,8 +78,8 @@ public class NewSwingInteraction extends JFrame implements InteractionDriver {
    * @param title
    */
   private void message(String title, String msg) {
-    //SwingMessage panel = new SwingMessage(title, msg);
+    // SwingMessage panel = new SwingMessage(title, msg);
     _currentDialogMenu.updateOutput(title, msg);
   }
-  
+
 }

@@ -38,11 +38,11 @@ public class TextInteraction implements InteractionDriver {
   public TextInteraction() {
     String filename;
 
-    filename = System.getProperty(Properties.OUTPUT_CHANNEL);
+    filename = System.getProperty(Property.OUTPUT_CHANNEL);
     if (filename != null) {
       try {
         PrintStream pr = new PrintStream(new FileOutputStream(filename));
-        if (Boolean.getBoolean(Properties.BOTH_CHANNELS)) {
+        if (Boolean.getBoolean(Property.BOTH_CHANNELS)) {
           _out = new CompositePrintStream(pr, System.out);
         } else {
           _out = pr;
@@ -52,7 +52,7 @@ public class TextInteraction implements InteractionDriver {
       }
     }
 
-    filename = System.getProperty(Properties.INPUT_CHANNEL);
+    filename = System.getProperty(Property.INPUT_CHANNEL);
     if (filename != null) {
       try {
         _in = new BufferedReader(new FileReader(filename));
@@ -61,7 +61,7 @@ public class TextInteraction implements InteractionDriver {
       }
     }
 
-    filename = System.getProperty(Properties.LOG_CHANNEL);
+    filename = System.getProperty(Property.LOG_CHANNEL);
     if (filename != null) {
       try {
         _log = new PrintStream(new FileOutputStream(filename));
@@ -70,7 +70,7 @@ public class TextInteraction implements InteractionDriver {
       }
     }
 
-    _writeInput = Boolean.getBoolean(Properties.WRITE_INPUT);
+    _writeInput = Boolean.getBoolean(Property.WRITE_INPUT);
   }
 
   /** @see pt.tecnico.uilib.InteractionDriver#close() */
@@ -80,7 +80,7 @@ public class TextInteraction implements InteractionDriver {
       _out.close();
 
     try {
-      String filename = System.getProperty(Properties.INPUT_CHANNEL);
+      String filename = System.getProperty(Property.INPUT_CHANNEL);
       if (filename != null)
         _in.close();
     } catch (IOException e) {
