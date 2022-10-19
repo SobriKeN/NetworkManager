@@ -11,16 +11,25 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoOpenMenuTerminalConsole extends Command<Network> {
 
+  /**
+   * Constructor
+   * A stringField is created to hold the terminal's key
+   * @param receiver
+   */
   DoOpenMenuTerminalConsole(Network receiver) {
     super(Label.OPEN_MENU_TERMINAL, receiver);
     addStringField("terminalKey", Message.terminalKey());
   }
 
+  /**
+   * new prr.app.terminal.Menu(_receiver, terminal)
+   * @throws CommandException
+   */
   @Override
   protected final void execute() throws CommandException {
     String chave = stringField("terminalKey");
     try {
-      new prr.app.terminal.Menu(this._receiver,_receiver.getTerminal(chave)).open(); //idfk kill me
+      new prr.app.terminal.Menu(this._receiver,_receiver.getTerminal(chave)).open();
     } catch (InvalidTerminalIDException e) {
       throw new UnknownTerminalKeyException(e.getID());
     }

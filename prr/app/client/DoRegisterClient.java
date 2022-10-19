@@ -12,6 +12,12 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoRegisterClient extends Command<Network> {
 
+  /**
+   * addStringField that represents the Client's key
+   * addStringField that represents the Client's name
+   * addIntegerField that represents the Client's tax number
+   **/
+
   DoRegisterClient(Network receiver) {
     super(Label.REGISTER_CLIENT, receiver);
     addStringField("clientKey", Message.key());
@@ -19,6 +25,11 @@ class DoRegisterClient extends Command<Network> {
     addIntegerField("clientTaxNumber", Message.taxId());
   }
 
+  /**
+   * Execute method that uses the previous stringFields and
+   * IntegerField to register a Client in the system
+   * @throws CommandException
+   */
   @Override
   protected final void execute() throws CommandException {
     try {

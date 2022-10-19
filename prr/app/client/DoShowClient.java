@@ -11,11 +11,20 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoShowClient extends Command<Network> {
 
+  /**
+   * Constructor that uses addIntegerField to represent the Client's key
+   * @param receiver
+   */
   DoShowClient(Network receiver) {
     super(Label.SHOW_CLIENT, receiver);
     addIntegerField("clientKey", Message.key());
   }
-  
+
+  /**
+   * Execute method tries to display a Client's parameters in a String, and
+   * if necessary catches an InvalidClientIDException
+   * @throws CommandException
+   */
   @Override
   protected final void execute() throws CommandException {
     try{

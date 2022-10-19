@@ -15,6 +15,11 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoRegisterTerminal extends Command<Network> {
 
+  /**
+   * addStringField that represents the Terminal's key
+   * addOptionField that represents the terminal's type ("BASIC", "FANCY")
+   * addStringField that represents the associated client's key
+   **/
   DoRegisterTerminal(Network receiver) {
     super(Label.REGISTER_TERMINAL, receiver);
     String[] options = {"BASIC","FANCY"};
@@ -23,12 +28,17 @@ class DoRegisterTerminal extends Command<Network> {
     addStringField("clientTerminal", Message.clientKey());
   }
 
+  /**
+   * execute that registers a terminal with the stringFields and optionFields
+   * made previously, and tries to catch exceptions as well if necessary
+   * @throws CommandException
+   */
   @Override
   protected final void execute() throws CommandException {
     try {
       _receiver.registerTerminal(
               stringField("terminalKey"),
-              stringField("terminalType"),
+              optionField("terminalType"),
               stringField("clientTerminal"));
     } catch (AlreadyExistsTerminalException e) {
       throw new DuplicateTerminalKeyException(e.getKey());
