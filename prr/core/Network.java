@@ -146,14 +146,13 @@ public class Network implements Serializable {
       throw new InvalidClientIDException(idClient);
     }
     Terminal terminal = new Terminal(key, tipo);
-    if (_terminals.containsKey(idClient)) {
-      terminal.setClientTerminal(_clients.get(idClient));
-      _terminals.put(terminal.getTerminalId(), terminal);
-      Client c = _clients.get(idClient);
-      c.atualizaNumeroTerminaisAssoc(); // incrementa numero de terminais associados ao cliente
+    Client c = _clients.get(idClient);
+    terminal.setClientTerminal(c);
+    _terminals.put(terminal.getTerminalId(), terminal);
+    c.atualizaNumeroTerminaisAssoc();
+    return terminal;// incrementa numero de terminais associados ao cliente
     }
-    return terminal;
-  }
+
   /**
    * Read text input file and create corresponding domain entities.
    * 

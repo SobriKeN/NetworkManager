@@ -13,9 +13,6 @@ import java.util.List;
  */
 public class Terminal implements Serializable /* FIXME maybe addd more interfaces */{
 
-  /** Serial number for serialization. */
-  private static final long serialVersionUID = 202208091753L;
-
   private final String _id;
   private String _tipo;
   private double _debt;
