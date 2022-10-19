@@ -4,19 +4,13 @@ import java.io.Serializable;
 
 public class Notification implements Serializable {
 
-    /**
-     * Serial number for serialization.
-     */
+    /** Serial number for serialization. **/
     private static final long serialVersionUID = 5459416424048243113L;
 
-    /**
-     * The notification's type
-     */
+    /** The notification's type **/
     private NotificationType tipoNotificacao;
 
-    /**
-     * The client associated with the notification
-     */
+    /** The client associated with the notification **/
     private Terminal terminalANotificar;
 
     /**
@@ -29,18 +23,17 @@ public class Notification implements Serializable {
         this.terminalANotificar = terminalANotificar;
     }
 
-    /**
-     @return a String that symbolizes the communication
-     */
-
+    /** @return a String that symbolizes the communication **/
     public NotificationType getTipoNotificacao() {
         return tipoNotificacao;
     }
 
+    /** @return a Terminal that is going to be notified **/
     public Terminal getTerminalANotificar() {
         return terminalANotificar;
     }
 
+    /** @return a String that represents the notification itself with the parameters necessary **/
     public String notificationStringed() {
         return String.join(
                 "|",
