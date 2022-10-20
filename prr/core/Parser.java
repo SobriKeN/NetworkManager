@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.util.Collection;
 import java.util.ArrayList;
 
-import prr.core.exception.UnrecognizedEntryException;
+import prr.core.exception.*;
 // import more exception core classes if needed
 
 /*
@@ -31,8 +31,9 @@ public class Parser {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
 
-            while ((line = reader.readLine()) != null)
+            while ((line = reader.readLine()) != null){
                 parseLine(line);
+            }
         }
     }
 
@@ -61,7 +62,7 @@ public class Parser {
             _network.registerClient(components[1], components[2], taxNumber);
         } catch (NumberFormatException nfe) {
             throw new UnrecognizedEntryException("Invalid number in line " + line, nfe);
-        } catch (Exception e) { //Other Exception -> Exception c
+        } catch (ClientKeyAlreadyUsedException e) { //Other Exception -> Exception c
             throw new UnrecognizedEntryException("Invalid specification in line: " + line, e);
         }
     }
@@ -80,7 +81,9 @@ public class Parser {
                         throw new UnrecognizedEntryException("Invalid specification in line: " + line);
                 }
             }
-        } catch (Exception e) { //SomeOtherException -> Exception
+        } catch (AlreadyExistsTerminalException e) { //SomeOtherException -> Exception
+            throw new UnrecognizedEntryException("Invalid specification: " + line, e);
+        } catch(InvalidTerminalIDException | InvalidClientIDException e){
             throw new UnrecognizedEntryException("Invalid specification: " + line, e);
         }
     }
@@ -95,7 +98,7 @@ public class Parser {
 
             for (String friend : friends)
                 _network.addFriend(terminal, friend);
-        } catch (Exception e) { // SomeOtherException -> Exception
+        } catch (InvalidTerminalIDException e) { // SomeOtherException -> Exception
             throw new UnrecognizedEntryException("Some message error in line:  " + line, e);
         }
     }
