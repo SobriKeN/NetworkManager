@@ -12,6 +12,12 @@ public class TariffPlanBasic extends TariffPlan{
         super(name);
     }
 
+    /**
+     * @return the Cost of the TariffPlan decided by some conditions and rules set by the
+     * Client's status and balance; this method is only for Text Comms
+     * @param Client c
+     * @param CommunicationText t
+     */
     @Override
     protected double computeCost(Client c, CommunicationText t){
         int custo = 0;
@@ -43,6 +49,12 @@ public class TariffPlanBasic extends TariffPlan{
         return custo;
     }
 
+    /**
+     * @return the Cost of the TariffPlan decided by some conditions and rules set by the
+     * Client's status and balance; this method is only for Voice Comms
+     * @param Client c
+     * @param CommunicationVoice t
+     */
     @Override
     protected double computeCost(Client c, CommunicationVoice t){
         int custo = 0;
@@ -56,6 +68,12 @@ public class TariffPlanBasic extends TariffPlan{
         return custo;
     }
 
+    /**
+     * @return the Cost of the TariffPlan decided by some conditions and rules set by the
+     * Client's status and balance; this method is only for Video Comms
+     * @param Client c
+     * @param CommunicationVideo t
+     */
     @Override
     protected double computeCost(Client c, CommunicationVideo t){
         int custo = 0;

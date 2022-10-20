@@ -11,7 +11,6 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
     private String type;
     /**
      * Main Construtor
-     *
      * @param duration
      */
     public CommunicationVoice(int duration) {

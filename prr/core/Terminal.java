@@ -241,8 +241,7 @@ public class Terminal implements Serializable {
    * @return true if this terminal is neither off neither busy, false otherwise.
   **/
   public boolean canStartCommunication() {
-    // por fazer
-    return true;
+    return !_busy;
   }
 
 }
