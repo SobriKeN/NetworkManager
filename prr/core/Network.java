@@ -94,9 +94,9 @@ public class Network implements Serializable {
       if (mapKey.toLowerCase().equals(keyLowerCase)) {
         throw new ClientKeyAlreadyUsedException(key);
       }
-      Client client = new Client(key, name, taxNumber);
-      _clients.put(client.getKey(), client);
     }
+    Client client = new Client(key, name, taxNumber);
+    _clients.put(client.getKey(), client);
   }
 
   /**
@@ -240,7 +240,7 @@ public class Network implements Serializable {
    * 
    * @param filename name of the text input file
    * @throws UnrecognizedEntryException if some entry is not correct
-   * @throws IOException if there is an IO erro while processing the text file
+   * @throws IOException if there is an IO error while processing the text file
    */
   void importFile(String filename) throws UnrecognizedEntryException, IOException  {
     Parser parser = new Parser(this);
