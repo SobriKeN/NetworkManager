@@ -12,11 +12,11 @@ import pt.tecnico.uilib.menus.CommandException;
  class DoStartInteractiveCommunication extends TerminalCommand {
      DoStartInteractiveCommunication(Network context, Terminal terminal) {
       super(Label.START_INTERACTIVE_COMMUNICATION, context, terminal, receiver -> receiver.canStartCommunication());
-    }
+     }
 
-    @Override
-    protected final void execute() throws CommandException {
-      //FIXME implement command -> por fazer
-    }
-  }
+     @Override
+     protected final void execute() throws CommandException {
+       //FIXME implement command -> por fazer
+     }
+ }
 
