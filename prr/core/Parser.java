@@ -62,7 +62,7 @@ public class Parser {
             _network.registerClient(components[1], components[2], taxNumber);
         } catch (NumberFormatException nfe) {
             throw new UnrecognizedEntryException("Invalid number in line " + line, nfe);
-        } catch (ClientKeyAlreadyUsedException e) { //Other Exception -> Exception c
+        } catch (Exception e) { //Other Exception -> Exception c
             throw new UnrecognizedEntryException("Invalid specification in line: " + line, e);
         }
     }
@@ -81,9 +81,7 @@ public class Parser {
                         throw new UnrecognizedEntryException("Invalid specification in line: " + line);
                 }
             }
-        } catch (AlreadyExistsTerminalException e) { //SomeOtherException -> Exception
-            throw new UnrecognizedEntryException("Invalid specification: " + line, e);
-        } catch(InvalidTerminalIDException | InvalidClientIDException e){
+        } catch(Exception e){
             throw new UnrecognizedEntryException("Invalid specification: " + line, e);
         }
     }
@@ -98,7 +96,7 @@ public class Parser {
 
             for (String friend : friends)
                 _network.addFriend(terminal, friend);
-        } catch (InvalidTerminalIDException e) { // SomeOtherException -> Exception
+        } catch (Exception e) { // SomeOtherException -> Exception
             throw new UnrecognizedEntryException("Some message error in line:  " + line, e);
         }
     }
