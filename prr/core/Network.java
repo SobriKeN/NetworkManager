@@ -179,7 +179,7 @@ public class Network implements Serializable {
    * @throws AlreadyExistsTerminalException
    * @throws InvalidTerminalIDException
    */
-  public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException,
+  public Terminal registerTerminal(String tipo, String key, String idClient) throws InvalidClientIDException,
           AlreadyExistsTerminalException, InvalidTerminalIDException {
     if (key.length() != 6) {
       throw new InvalidTerminalIDException(key);

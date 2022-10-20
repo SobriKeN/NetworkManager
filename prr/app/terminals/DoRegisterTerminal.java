@@ -38,8 +38,8 @@ class DoRegisterTerminal extends Command<Network> {
     String id = String.valueOf(integerField("terminalKey"));
     try {
       _receiver.registerTerminal(
-              id,
               optionField("terminalType"),
+              id,
               stringField("clientTerminal"));
     } catch (AlreadyExistsTerminalException e) {
       throw new DuplicateTerminalKeyException(e.getKey());
