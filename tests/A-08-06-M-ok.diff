@@ -1,12 +1,7 @@
 *** tests/A-08-06-M-ok.out	2022-10-05 21:24:49.000000000 +0100
---- tests/A-08-06-M-ok.outhyp	2022-10-20 11:08:35.389606081 +0100
+--- tests/A-08-06-M-ok.outhyp	2022-10-20 13:46:52.209584944 +0100
 ***************
-*** 11,26 ****
-  2 - Registar terminal
-  3 - Operações de terminal
-  0 - Sair
-! Escolha uma opção: Número do terminal: Tipo de terminal (BASIC ou FANCY): Identificador do cliente: GESTÃO DE TERMINAIS
-  1 - Mostrar todos os terminais
+*** 16,25 ****
   2 - Registar terminal
   3 - Operações de terminal
   0 - Sair
@@ -14,21 +9,14 @@
 ! BASIC|969002|cli002|IDLE|0|0
 ! BASIC|969003|cli003|IDLE|0|0
 ! BASIC|999000|cli001|IDLE|0|0
-! GESTÃO DE TERMINAIS
+  GESTÃO DE TERMINAIS
   1 - Mostrar todos os terminais
   2 - Registar terminal
-  3 - Operações de terminal
---- 11,23 ----
+--- 16,22 ----
   2 - Registar terminal
   3 - Operações de terminal
   0 - Sair
-! Escolha uma opção: Número do terminal: Tipo de terminal (BASIC ou FANCY): Identificador do cliente: Registar terminal: Operação inválida: A chave '999000' não é válida para terminais.
-! GESTÃO DE TERMINAIS
+! Escolha uma opção: BASIC|999000|cli001|ON|0|0
+  GESTÃO DE TERMINAIS
   1 - Mostrar todos os terminais
   2 - Registar terminal
-  3 - Operações de terminal
-  0 - Sair
-! Escolha uma opção: GESTÃO DE TERMINAIS
-  1 - Mostrar todos os terminais
-  2 - Registar terminal
-  3 - Operações de terminal
