@@ -40,11 +40,9 @@ public class Network implements Serializable {
   **/
 
   public Client getClient(String key) throws InvalidClientIDException {
-    for (String clientKey : _clients.keySet()) {
-      if (clientKey.equals(key)) {
-        return _clients.get(clientKey);
+      if (_clients.containsKey(key)) {
+        return _clients.get(key);
       }
-    }
     throw new InvalidClientIDException(key);
   }
 
