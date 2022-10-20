@@ -39,6 +39,9 @@ public class Terminal implements Serializable {
   /** Boolean that says if the terminal had made any type of comm or not **/
   private boolean _virgem;
 
+  /** Boolean that says if the terminal is in a Communication or not **/
+  private boolean _busy;
+
   /**
    * Main Construtor
    * @param id
@@ -54,6 +57,7 @@ public class Terminal implements Serializable {
     _amigos = new ArrayList<String>();
     _clientTerminal = null;
     _virgem = true;
+    _busy = false;
   }
 
   /** @return terminal's id **/
@@ -228,8 +232,7 @@ public class Terminal implements Serializable {
    *          it was the originator of this communication.
   **/
   public boolean canEndCurrentCommunication() {
-    // por fazer
-    return true;
+    return _busy;
   }
 
   /**
