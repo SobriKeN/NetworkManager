@@ -200,9 +200,8 @@ public class Terminal implements Serializable {
     }
   }
 
-  /**
 
-  Funções sobre Comms por fazer:
+  /** Funções sobre Comms por fazer: **/
 
   public void makeVoiceCall(Terminal t){
   }
@@ -222,26 +221,25 @@ public class Terminal implements Serializable {
   protected void acceptVideoCall(Terminal t){
   }
 
-
+  /**
    -> * Checks if this terminal can end the current interactive communication.
    *
    * @return true if this terminal is busy (i.e., it has an active interactive communication) and
    *          it was the originator of this communication.
-
+  **/
   public boolean canEndCurrentCommunication() {
     // por fazer
     return true;
   }
 
-
+  /**
    -> * Checks if this terminal can start a new communication.
    *
    * @return true if this terminal is neither off neither busy, false otherwise.
-
+  **/
   public boolean canStartCommunication() {
     // por fazer
     return true;
   }
 
-  **/
 }
