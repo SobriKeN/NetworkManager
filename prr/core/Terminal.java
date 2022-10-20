@@ -172,13 +172,19 @@ public class Terminal implements Serializable {
    * @return a terminal in string format
    */
   public String terminalStringed() {
+    String terminalModeStringed = getTerminalModeEnum().toString();
+
+    if(getTerminalModeEnum() == TerminalMode.ON){
+      terminalModeStringed = "IDLE";
+    }
+
     if (this._amigos.isEmpty()) {
       return String.join(
               "|",
               getTerminalType(),
               getTerminalId(),
               getClientTerminal().getKey(),
-              getTerminalModeEnum().toString(),
+              terminalModeStringed,
               String.valueOf(Math.round(getTerminalPayments())),
               String.valueOf(Math.round(getTerminalDebts())));
     } else {
@@ -187,7 +193,7 @@ public class Terminal implements Serializable {
               getTerminalType(),
               getTerminalId(),
               getClientTerminal().getKey(),
-              getTerminalModeEnum().toString(),
+              terminalModeStringed,
               String.valueOf(Math.round(getTerminalPayments())),
               String.valueOf(Math.round(getTerminalDebts())),
               String.join(", ", _amigos));
