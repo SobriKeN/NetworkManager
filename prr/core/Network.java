@@ -105,11 +105,9 @@ public class Network implements Serializable {
    * @throws InvalidTerminalIDException
   **/
   public Terminal getTerminal(String key) throws InvalidTerminalIDException {
-    for (String terminalKey : _terminals.keySet()) {
-      if (terminalKey.equals(key)) {
-        return _terminals.get(terminalKey);
+      if (_terminals.containsKey(key)) {
+        return _terminals.get(key);
       }
-    }
     throw new InvalidTerminalIDException(key);
   }
 
