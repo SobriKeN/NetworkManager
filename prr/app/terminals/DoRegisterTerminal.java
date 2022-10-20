@@ -23,7 +23,7 @@ class DoRegisterTerminal extends Command<Network> {
   DoRegisterTerminal(Network receiver) {
     super(Label.REGISTER_TERMINAL, receiver);
     String[] options = {"BASIC","FANCY"};
-    addStringField("terminalKey", Message.terminalKey());
+    addIntegerField("terminalKey", Message.terminalKey());
     addOptionField("terminalType", Message.terminalType(),options);
     addStringField("clientTerminal", Message.clientKey());
   }
@@ -35,9 +35,10 @@ class DoRegisterTerminal extends Command<Network> {
    */
   @Override
   protected final void execute() throws CommandException {
+    String id = String.valueOf(integerField("terminalKey"));
     try {
       _receiver.registerTerminal(
-              stringField("terminalKey"),
+              id,
               optionField("terminalType"),
               stringField("clientTerminal"));
     } catch (AlreadyExistsTerminalException e) {

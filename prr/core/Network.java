@@ -181,7 +181,7 @@ public class Network implements Serializable {
    */
   public Terminal registerTerminal(String key, String tipo, String idClient) throws InvalidClientIDException,
           AlreadyExistsTerminalException, InvalidTerminalIDException {
-    if (key.length() == 6) {
+    if (key.length() != 6) {
       throw new InvalidTerminalIDException(key);
     }
     if (_terminals.containsKey(key)) {

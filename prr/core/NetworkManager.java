@@ -101,6 +101,7 @@ public class NetworkManager {
   public void importFile(String filename) throws ImportFileException {
     try {
       _network.importFile(filename);
+      saveFlag = false;
     } catch (IOException | UnrecognizedEntryException e) {
       throw new ImportFileException(filename, e);
     }
