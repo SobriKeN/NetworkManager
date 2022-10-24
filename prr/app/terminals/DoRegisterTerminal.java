@@ -37,7 +37,7 @@ class DoRegisterTerminal extends Command<Network> {
   @Override
   protected final void execute() throws CommandException {
     String id = String.valueOf(stringField("terminalKey"));
-    if (id.matches(".*[a-z].*")) {
+    if (id.matches(".*[a-z].*") || id.matches(".*[A-Z].*")) {
       throw new InvalidTerminalKeyException(id);
     }
     try {
