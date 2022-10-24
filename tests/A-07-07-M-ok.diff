@@ -1,0 +1,33 @@
+*** tests/A-07-07-M-ok.out	2022-10-10 11:47:13.000000000 +0100
+--- tests/A-07-07-M-ok.outhyp	2022-10-24 13:27:07.160337377 +0100
+***************
+*** 11,33 ****
+  2 - Registar terminal
+  3 - Operações de terminal
+  0 - Sair
+! Escolha uma opção: Número do terminal: Tipo de terminal (BASIC ou FANCY): Identificador do cliente: Registar terminal: Operação inválida: A chave 'abc099' não é válida para terminais.
+! GESTÃO DE TERMINAIS
+! 1 - Mostrar todos os terminais
+! 2 - Registar terminal
+! 3 - Operações de terminal
+! 0 - Sair
+! Escolha uma opção: GESTÃO DE TERMINAIS
+! 1 - Mostrar todos os terminais
+! 2 - Registar terminal
+! 3 - Operações de terminal
+! 0 - Sair
+! Escolha uma opção: MENU PRINCIPAL
+! 1 - Abrir
+! 2 - Guardar
+! 3 - Gestão de clientes
+! 4 - Gestão de terminais
+! 5 - Menu de consultas
+! 6 - Ver saldo global
+! 0 - Sair
+! Escolha uma opção: 
+\ No newline at end of file
+--- 11,14 ----
+  2 - Registar terminal
+  3 - Operações de terminal
+  0 - Sair
+! Escolha uma opção: Número do terminal: Número do terminal: Número do terminal: Número do terminal: Tipo de terminal (BASIC ou FANCY): Tipo de terminal (BASIC ou FANCY): Tipo de terminal (BASIC ou FANCY): Fim de entrada de dados (R-EOF): pt.tecnico.uilib.text.RuntimeEOFException: Fim do fluxo de dados de entrada

@@ -28,8 +28,8 @@ public class Network implements Serializable {
    * Main Construtor
    */
   public Network() {
-    _terminals = new TreeMap<>();
-    _clients = new TreeMap<>();
+    _terminals = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    _clients = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
   }
 
   /**
