@@ -11,19 +11,13 @@ Escolha uma opção: GESTÃO DE TERMINAIS
 2 - Registar terminal
 3 - Operações de terminal
 0 - Sair
-Escolha uma opção: Número do terminal: OPERAÇÕES DO TERMINAL
-1 - Ligar
-2 - Colocar no silêncio
-3 - Desligar
-4 - Adicionar amigo
-5 - Retirar amigo
-6 - Pagamento
-7 - Consultar saldo
-8 - Enviar comunicação de texto
-9 - Iniciar comunicação
-10 - Terminar comunicação activa
+Escolha uma opção: Número do terminal: Tipo de terminal (BASIC ou FANCY): Identificador do cliente: GESTÃO DE TERMINAIS
+1 - Mostrar todos os terminais
+2 - Registar terminal
+3 - Operações de terminal
 0 - Sair
-Escolha uma opção: GESTÃO DE TERMINAIS
+Escolha uma opção: BASIC|000001|cli002|IDLE|0|0
+GESTÃO DE TERMINAIS
 1 - Mostrar todos os terminais
 2 - Registar terminal
 3 - Operações de terminal
