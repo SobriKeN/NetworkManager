@@ -15,9 +15,6 @@ public class NetworkManager {
   /** Name of file corresponding to the Network. */
   private String filename = "";
 
-  /** To see if the program has benn saved since the last save() call */
-  private boolean saveFlag = false;
-
   /** The network itself. */
   private Network _network = new Network();
   
@@ -58,7 +55,7 @@ public class NetworkManager {
    * @throws IOException if there is some error while serializing the state of the network to disk.
    */
   public void save() throws FileNotFoundException, MissingFileAssociationException, IOException {
-    if (saveFlag) {
+    if (_network.getSaveFlag()) {
       return;
     }
 
@@ -66,7 +63,7 @@ public class NetworkManager {
       throw new MissingFileAssociationException();
     }
 
-    saveFlag = true;
+    _network.activateSaveFlag();
     ObjectOutputStream oos =
             new ObjectOutputStream(
                     new BufferedOutputStream(

@@ -18,6 +18,9 @@ public class Network implements Serializable {
   /** The network's balance **/
   private int _saldo = 0;
 
+  /** To see if the program has been saved since the last save() call */
+  private boolean saveFlag = false;
+
   /** The terminals associated with the network **/
   private TreeMap<String, Terminal> _terminals;
 
@@ -30,6 +33,19 @@ public class Network implements Serializable {
   public Network() {
     _terminals = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     _clients = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+  }
+
+  /** @return if the program has had any alterations after the last call */
+  public boolean getSaveFlag(){
+    return saveFlag;
+  }
+
+  public void deactivateSaveFlag(){
+    saveFlag = false;
+  }
+
+  public void activateSaveFlag(){
+    saveFlag = true;
   }
 
   /**
@@ -95,6 +111,7 @@ public class Network implements Serializable {
     }
     Client client = new Client(key, name, taxNumber);
     _clients.put(client.getKey(), client);
+    this.deactivateSaveFlag();
   }
 
   /**
@@ -190,8 +207,9 @@ public class Network implements Serializable {
     Client c = _clients.get(idClient);
     terminal.setClientTerminal(c);
     _terminals.put(terminal.getTerminalId(), terminal);
-    c.atualizaNumeroTerminaisAssoc();
-    return terminal; // incrementa numero de terminais associados ao cliente
+    c.atualizaNumeroTerminaisAssoc(); // incrementa numero de terminais associados ao cliente
+    this.deactivateSaveFlag();
+    return terminal;
   }
 
   /**
