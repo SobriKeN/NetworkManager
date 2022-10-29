@@ -213,7 +213,7 @@ public class Network implements Serializable {
   }
 
   /**
-   Boolean method that verifies and adds a Friend of the type
+   Void method that verifies and adds a Friend of the type
    terminal, to the given terminal's friend list.
    * @param idTerminal
    * @param friend
@@ -231,6 +231,24 @@ public class Network implements Serializable {
       throw new InvalidTerminalIDException(friend);
   }
 
+  /**
+   Void method that verifies and removes a Friend of the type
+   terminal, to the given terminal's friend list.
+   * @param idTerminal
+   * @param friend
+   */
+  public void removeFriend(String idTerminal, String friend) throws InvalidTerminalIDException {
+    Terminal terminal;
+
+    if (_terminals.containsKey(friend)) {
+      if (_terminals.containsKey(idTerminal)) {
+        terminal = _terminals.get(idTerminal);
+        terminal.removeAmigo(friend);
+      } else
+        throw new InvalidTerminalIDException(idTerminal);
+    } else
+      throw new InvalidTerminalIDException(friend);
+  }
   /**
    @return a list of the notifications in String for later purposes and methods, with
    the given key, it searches the respective client, "reads" and clears the Client's
