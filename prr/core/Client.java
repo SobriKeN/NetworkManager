@@ -30,8 +30,8 @@ public class Client implements Serializable {
     private int _numeroTerminaisAssociados;
 
     /** The customer's balance -> Balance = Payments - Debts **/
-    private double _pagamentos;  // the payments
-    private double _debts;  // the debts
+    private long _pagamentos;  // the payments
+    private long _debts;  // the debts
 
     /** Linked list that contains the client's notifications **/
     private LinkedList<Notification> _notificacoes;
@@ -65,10 +65,10 @@ public class Client implements Serializable {
     }
 
     /** @return client's Debts */
-    public double getDebts() {return _debts; }
+    public long getDebts() {return _debts; }
 
     /** @return client's Payments */
-    public double getPagamentos() {return _pagamentos; }
+    public long getPagamentos() {return _pagamentos; }
 
     /** @return client's balance */
     public double getSaldo(){return (_pagamentos - _debts); }
