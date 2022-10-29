@@ -228,6 +228,29 @@ public class Network implements Serializable {
   }
 
   /**
+   @return the ArrayList that contains all the terminals of the
+   system that were never used once. if there is an error on the
+   Terminal's key, the program will try to
+   catch the exception about that error, which is
+   InvalidTerminalIDException
+   */
+  public ArrayList<String> getTerminalsPositiveBalance() {
+    ArrayList<String> stringTerminals = new ArrayList<>();
+
+    for (String terminal : _terminals.keySet()){
+      try{
+        if (getTerminal(terminal).getTerminalPayments() > getTerminal(terminal).getTerminalDebts())
+          stringTerminals.add(getTerminalString(terminal));
+      } catch (InvalidTerminalIDException e){
+        //probably is never going to happen
+        e.printStackTrace();
+      }
+    }
+    return stringTerminals;
+  }
+
+
+  /**
    @return a terminal that is created and registed with the given arguments,
    if the terminal's key length is bigger than 6, it has an error;
    if the terminal's key already exists, it has an error;
