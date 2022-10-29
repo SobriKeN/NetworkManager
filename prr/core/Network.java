@@ -92,6 +92,40 @@ public class Network implements Serializable {
     return stringClients;
   }
 
+  public ArrayList<String> getAllClientsWithNoDebts() {
+    ArrayList<String> stringClients = new ArrayList<>();
+
+    for (String client : _clients.keySet()) {
+      try {
+        if (_clients.get(client).getDebts() == 0)
+          stringClients.add(getClientString(client));
+      } catch (InvalidClientIDException e) {
+        // probably will never happen
+        e.printStackTrace();
+      }
+    }
+    return stringClients;
+  }
+
+  public ArrayList<String> getAllClientsWithDebts() {
+    ArrayList<String> stringClients = new ArrayList<>();
+    TreeMap<Client, Long>  _clientsWithDebts = new TreeMap<Client, Long>(new DebtsDescendingOrder());
+    for (String c: _clients.keySet()) {
+      if (_clients.get(c).getDebts() > 0)
+        _clientsWithDebts.put(_clients.get(c), _clients.get(c).getDebts());
+    }
+
+    for (Client client : _clientsWithDebts.keySet()) {
+      try {
+          stringClients.add(getClientString(client.getKey()));
+      } catch (InvalidClientIDException e) {
+        // probably will never happen
+        e.printStackTrace();
+      }
+    }
+    return stringClients;
+  }
+
   /**
    Void method that regists a Client with the arguments given;
    if there already exists a Client with the key given by the user,
