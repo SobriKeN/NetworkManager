@@ -4,7 +4,7 @@ import prr.core.Network;
 import prr.core.Terminal;
 import prr.core.exception.InvalidTerminalIDException;
 import pt.tecnico.uilib.menus.CommandException;
-//FIXME add more imports if needed
+
 
 /**
  * Remove friend.
