@@ -11,11 +11,18 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoRemoveFriend extends TerminalCommand {
 
+  /**
+   * addStringField that represents the Terminal's key
+   **/
   DoRemoveFriend(Network context, Terminal terminal) {
     super(Label.REMOVE_FRIEND, context, terminal);
     addStringField("terminalFriend", Message.terminalKey());
   }
-  
+
+  /**
+   * execute that removes a friend (of type Terminal) of the terminal's
+   * friend list
+   **/
   @Override
   protected final void execute() throws CommandException {
     try {

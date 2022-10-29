@@ -10,11 +10,18 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoAddFriend extends TerminalCommand {
 
+  /**
+   * addStringField that represents the Terminal's key
+   **/
   DoAddFriend(Network context, Terminal terminal) {
     super(Label.ADD_FRIEND, context, terminal);
     addStringField("terminalFriend", Message.terminalKey());
   }
-  
+
+  /**
+   * execute that adds a friend (of type Terminal) to the terminal's
+   * friend list
+   **/
   @Override
   protected final void execute() throws CommandException {
     try {

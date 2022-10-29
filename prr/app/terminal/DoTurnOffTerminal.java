@@ -14,7 +14,10 @@ class DoTurnOffTerminal extends TerminalCommand {
   DoTurnOffTerminal(Network context, Terminal terminal) {
     super(Label.POWER_OFF, context, terminal);
   }
-  
+
+  /**
+   * execute that turns the terminal OFF, if the terminal's already turned off, message will be sent
+   **/
   @Override
   protected final void execute() throws CommandException {
     if(_receiver.getTerminalModeEnum() == TerminalMode.OFF){
