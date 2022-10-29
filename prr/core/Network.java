@@ -92,6 +92,11 @@ public class Network implements Serializable {
     return stringClients;
   }
 
+  /**
+    @return an Array List with all the clients without any debts in the system,
+    if there is an error on the Client's key, the program will try to
+    catch the exception about that error, which is InvalidClientIDException
+   */
   public ArrayList<String> getAllClientsWithNoDebts() {
     ArrayList<String> stringClients = new ArrayList<>();
 
@@ -107,9 +112,17 @@ public class Network implements Serializable {
     return stringClients;
   }
 
+  /**
+    @return an Array List with all the clients with debts in the system
+    in descending order from the highest debt to the lowest,
+    its created a new TreeMap that will store and sort by debt the clients
+    in it, if there is an error on the Client's key, the program will try to
+    catch the exception about that error, which is InvalidClientIDException
+   */
   public ArrayList<String> getAllClientsWithDebts() {
     ArrayList<String> stringClients = new ArrayList<>();
     TreeMap<Client, Long>  _clientsWithDebts = new TreeMap<Client, Long>(new DebtsDescendingOrder());
+
     for (String c: _clients.keySet()) {
       if (_clients.get(c).getDebts() > 0)
         _clientsWithDebts.put(_clients.get(c), _clients.get(c).getDebts());
