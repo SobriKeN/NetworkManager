@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeSet;
 
 
 /**
@@ -31,7 +32,7 @@ public class Terminal implements Serializable {
   private TerminalMode _terminalmode;
 
   /** List that contains the terminal's friends **/
-  private List<String> _amigos;
+  private TreeSet<String> _amigos;
 
   /** Client that is associated with the terminal in question **/
   private Client _clientTerminal;
@@ -54,7 +55,7 @@ public class Terminal implements Serializable {
     _tipo = tipo;
     _debt = 0;
     _payments = 0;
-    _amigos = new ArrayList<String>();
+    _amigos = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
     _clientTerminal = null;
     _virgem = true;
     _busy = false;
@@ -89,9 +90,7 @@ public class Terminal implements Serializable {
   public boolean usedOrNot(){ return this._virgem;}
 
   /** @return terminal's Friends ArrayList **/
-  public ArrayList<String> getTerminalAmigos(){
-    return (ArrayList<String>) this._amigos;
-  }
+  public TreeSet<String> getTerminalAmigos(){return (TreeSet<String>) this._amigos;}
 
   /** @return terminal's asscociated Client **/
   public Client getClientTerminal(){

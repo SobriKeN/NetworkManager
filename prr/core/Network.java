@@ -218,14 +218,13 @@ public class Network implements Serializable {
    * @param idTerminal
    * @param friend
    */
-  public boolean addFriend(String idTerminal, String friend) throws InvalidTerminalIDException {
+  public void addFriend(String idTerminal, String friend) throws InvalidTerminalIDException {
     Terminal terminal;
 
     if (_terminals.containsKey(friend)) {
       if (_terminals.containsKey(idTerminal)) {
         terminal = _terminals.get(idTerminal);
-        terminal.addAmigo(idTerminal);
-        return true;
+        terminal.addAmigo(friend);
       } else
         throw new InvalidTerminalIDException(idTerminal);
     } else
