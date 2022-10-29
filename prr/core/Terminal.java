@@ -171,6 +171,14 @@ public class Terminal implements Serializable {
   }
 
   /**
+   * Void method that adds the Terminal's ID to the Friends List
+   * @param idTerminalOldFriend
+   **/
+  public void removeAmigo(String idTerminalOldFriend){
+    this._amigos.remove(idTerminalOldFriend);
+  }
+
+  /**
    * Terminal toString
    * @return a terminal in string format
    */
