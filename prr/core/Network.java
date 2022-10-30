@@ -229,8 +229,8 @@ public class Network implements Serializable {
 
   /**
    @return the ArrayList that contains all the terminals of the
-   system that were never used once. if there is an error on the
-   Terminal's key, the program will try to
+   system that have a positive balance (payments > debts). If there
+   is an error on the Terminal's key, the program will try to
    catch the exception about that error, which is
    InvalidTerminalIDException
    */

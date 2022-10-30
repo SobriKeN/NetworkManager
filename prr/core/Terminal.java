@@ -23,10 +23,10 @@ public class Terminal implements Serializable {
   private String _tipo;
 
   /** Terminal's debt **/
-  private double _debt;
+  private long _debt;
 
   /** Terminal's payments **/
-  private double _payments;
+  private long _payments;
 
   /** Enum that contains the terminal's mode **/
   private TerminalMode _terminalmode;
@@ -77,12 +77,12 @@ public class Terminal implements Serializable {
   }
 
   /** @return terminal's debt **/
-  public double getTerminalDebts(){
+  public long getTerminalDebts(){
     return this._debt;
   }
 
   /** @return terminal's payments **/
-  public double getTerminalPayments(){
+  public long getTerminalPayments(){
     return this._payments;
   }
 

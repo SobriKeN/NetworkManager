@@ -26,9 +26,7 @@ class DoRemoveFriend extends TerminalCommand {
   @Override
   protected final void execute() throws CommandException {
     try {
-      if(_network.getTerminal(_receiver.getTerminalId())
-          .getTerminalAmigos()
-            .contains(stringField("terminalFriend"))) {
+      if(_receiver.getTerminalAmigos().contains(stringField("terminalFriend"))) {
         _network.removeFriend(_receiver.getTerminalId(), stringField("terminalFriend"));
       }
     } catch (InvalidTerminalIDException e) {
