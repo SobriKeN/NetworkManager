@@ -31,9 +31,15 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
     @Override
     protected String toCommString(){
         String status;
-        if (isOngoing()){ status = "ONGOING"; }
-        else
+        int caracteres;
+        if (isOngoing()) {
+            status = "ONGOING";
+            caracteres = 0;
+        }
+        else {
             status = "FINISHED";
+            caracteres = this.getSize();
+        }
 
         return String.join(
                 "|",
@@ -41,7 +47,7 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
                 String.valueOf(getId()),
                 getIdSender(),
                 getIdReceiver(),
-                String.valueOf(getDuration()),
+                String.valueOf(caracteres),
                 String.valueOf(Math.round(getCost())),
                 status);
 

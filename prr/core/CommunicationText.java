@@ -70,8 +70,8 @@ public class CommunicationText extends Communication implements Serializable {
                 String.valueOf(getId()),
                 getIdSender(),
                 getIdReceiver(),
-                String.valueOf(caracteres),
+                String.valueOf(getSize()),
                 String.valueOf(Math.round(getCost())),
-                status);
+                "FINISHED");
     }
 }

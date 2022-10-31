@@ -22,11 +22,6 @@ public abstract class CommunicationInteractive extends Communication implements 
     /** @return the detais of the communication*/
     protected abstract String toCommString();
 
-    /** @return Communication's duration **/
-    public int getDuration() {
-        return _duration;
-    }
-
     /** @return Communication's Size??? **/
     @Override
     protected int getSize() {
