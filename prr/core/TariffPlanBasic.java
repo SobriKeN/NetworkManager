@@ -1,5 +1,6 @@
 package prr.core;
 
+import java.io.Serial;
 import java.util.Objects;
 
 public class TariffPlanBasic extends TariffPlan{
@@ -59,11 +60,11 @@ public class TariffPlanBasic extends TariffPlan{
         int custo = 0;
 
         if (Objects.equals(c.getLevel().toString(), "NORMAL"))
-            custo = 20 * t.getSize();
+            custo = 20 * (t.getSize() / 60);
         else if (Objects.equals(c.getLevel().toString(), "GOLD"))
-            custo = 10 * t.getSize();
+            custo = 10 * (t.getSize()/ 60);
         else if (Objects.equals(c.getLevel().toString(), "PLATINUM"))
-            custo = 10 * t.getSize();
+            custo = 10 * (t.getSize() / 60);
         return custo;
     }
 
@@ -78,11 +79,11 @@ public class TariffPlanBasic extends TariffPlan{
         int custo = 0;
 
         if (Objects.equals(c.getLevel().toString(), "NORMAL"))
-            custo = 30 * t.getSize();
+            custo = 30 * (t.getSize() / 60);
         else if (Objects.equals(c.getLevel().toString(), "GOLD"))
-            custo = 20 * t.getSize();
+            custo = 20 * (t.getSize() / 60);
         else if (Objects.equals(c.getLevel().toString(), "PLATINUM"))
-            custo = 10 * t.getSize();
+            custo = 10 * (t.getSize() / 60);
         return custo;
     }
 
