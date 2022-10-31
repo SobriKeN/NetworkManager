@@ -8,25 +8,28 @@ public abstract class CommunicationInteractive extends Communication implements 
     private static final long serialVersionUID = 8009448938807110202L;
 
     /** The duration of the call */
-    private final int duration;
+    private final int _duration;
 
     /**
      * Main Construtor
      * @param duration
      */
-    public CommunicationInteractive(int duration){
-        super();
-        this.duration = duration;
+    public CommunicationInteractive(int duration, String sender, String receiver){
+        super(sender, receiver);
+        this._duration = duration;
     }
+
+    /** @return the detais of the communication*/
+    protected abstract String toCommString();
 
     /** @return Communication's duration **/
     public int getDuration() {
-        return duration;
+        return _duration;
     }
 
     /** @return Communication's Size??? **/
     @Override
     protected int getSize() {
-        return duration;
+        return _duration;
     }
 }

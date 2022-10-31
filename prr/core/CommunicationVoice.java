@@ -8,19 +8,42 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
     private static final long serialVersionUID = -5965358224750296684L;
 
     /** The type of comm (in this case is voice)  */
-    private String type;
+    private String _type;
     /**
      * Main Construtor
      * @param duration
      */
-    public CommunicationVoice(int duration) {
-        super(duration);
-        this.type = "VOICE";
+    public CommunicationVoice(int duration, String sender, String receiver) {
+        super(duration, sender, receiver);
+        this._type = "VOICE";
+    }
+
+    private String getType(){
+        return _type;
     }
 
     /** @return the cost of the voice message **/
     @Override
     protected double computeCost(TariffPlan plan) {
         return 0;
+    }
+
+    @Override
+    protected String toCommString(){
+        String status;
+        if (isOngoing()){ status = "ONGOING"; }
+        else
+            status = "FINISHED";
+
+        return String.join(
+                "|",
+                getType(),
+                String.valueOf(getId()),
+                getIdSender(),
+                getIdReceiver(),
+                String.valueOf(getDuration()),
+                String.valueOf(Math.round(getCost())),
+                status);
+
     }
 }
