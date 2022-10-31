@@ -15,9 +15,6 @@ public class Network implements Serializable {
   /** Serial number for serialization **/
   private static final long serialVersionUID = -488710144069185783L;
 
-  /** The network's balance **/
-  private int _saldo = 0;
-
   /** To see if the program has been saved since the last save() call */
   private boolean saveFlag = false;
 
@@ -46,6 +43,25 @@ public class Network implements Serializable {
 
   public void activateSaveFlag(){
     saveFlag = true;
+  }
+
+  public long getGlobalClientPayments(){
+    long clientPayments = 0;
+
+    for (String id : _clients.keySet()){
+      clientPayments += _clients.get(id).getPagamentos();
+    }
+    return Math.round(clientPayments);
+  }
+
+  public long getGlobalClientDebts(){
+
+    long clientDebts = 0;
+
+    for (String id : _clients.keySet()){
+      clientDebts += _clients.get(id).getDebts();
+    }
+    return Math.round(clientDebts);
   }
 
   /**

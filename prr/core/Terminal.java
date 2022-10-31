@@ -106,11 +106,11 @@ public class Terminal implements Serializable {
   }
 
    /**
-   Boolean method that returns true if the requirements necessary
+   Void method that returns true if the requirements necessary
    to set the terminal's mode on ON/Idle are correct,
    and then it sets the mode to ON/Idle while creating the right notification
    **/
-   public boolean setONIdle() {
+   public void setONIdle() {
       if (_terminalmode.toString().equals("OFF") || _terminalmode.toString().equals("SILENCE") ||
               _terminalmode.toString().equals("BUSY")) {
         if (_terminalmode.toString().equals("OFF")) {
@@ -125,41 +125,35 @@ public class Terminal implements Serializable {
           Notification notif = new Notification(NotificationType.B2I, this);
           this._clientTerminal.getNotificacoesClient().addFirst(notif);
         }
-        _terminalmode = TerminalMode.ON;   // return boolean se uma destas for cumprida
-        return true;
+        _terminalmode = TerminalMode.ON;
       }
-      return false;
     }
 
   /**
-   Boolean method that returns true if the requirements necessary
+   Void method that returns true if the requirements necessary
    to set the terminal's mode on SILENCE are correct,
    and then it sets the mode to SILENCE while creating the right notification
    **/
-  public boolean setOnSilent() {
+  public void setOnSilent() {
       if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("BUSY")){
         if (_terminalmode.toString().equals("OFF")){
           Notification notif = new Notification(NotificationType.O2S, this);
           this._clientTerminal.getNotificacoesClient().addFirst(notif);
         }
-        _terminalmode = TerminalMode.SILENCE;   // return boolean se uma destas for cumprida
-        return true;
+        _terminalmode = TerminalMode.SILENCE;
       }
-      return false;
     }
 
   /**
-   Boolean method that returns true if the requirements
+   Void method that returns true if the requirements
    necessary to set the terminal's mode on OFF are correct,
    and then it sets the mode to OFF
    **/
 
-  public boolean turnOff() {
+  public void turnOff() {
     if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("SILENCE")) {
       _terminalmode = TerminalMode.OFF;
-      return true;
     }
-    return false;
   }
 
   /**
