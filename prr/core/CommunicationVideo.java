@@ -13,7 +13,7 @@ public class CommunicationVideo extends CommunicationInteractive implements Seri
      * Main Construtor
      * @param duration
      */
-    public CommunicationVideo(int duration, String sender, String receiver) {
+    public CommunicationVideo(int duration, Terminal sender, Terminal receiver) {
         super(duration, sender, receiver);
         this._type = "VIDEO";
     }
@@ -25,7 +25,7 @@ public class CommunicationVideo extends CommunicationInteractive implements Seri
     /** @return the cost of the video message **/
     @Override
     protected double computeCost(TariffPlan plan) {
-        return 0;
+        return plan.computeCost(this.getSender().getClientTerminal(),this);
     }
 
     @Override

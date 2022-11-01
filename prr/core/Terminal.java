@@ -1,12 +1,7 @@
 package prr.core;
 
-import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.TreeSet;
-
 
 /**
  * Abstract terminal.
@@ -43,6 +38,9 @@ public class Terminal implements Serializable {
   /** Boolean that says if the terminal is in a Communication or not **/
   private boolean _busy;
 
+  /** Current communication in the terminal */
+  private Communication _currentComm;
+
   /**
    * Main Construtor
    * @param id
@@ -59,6 +57,7 @@ public class Terminal implements Serializable {
     _clientTerminal = null;
     _virgem = true;
     _busy = false;
+    _currentComm = null;
   }
 
   /** @return terminal's id **/
@@ -97,12 +96,25 @@ public class Terminal implements Serializable {
     return _clientTerminal;
   }
 
+  /** @return terminal's asscociated Client **/
+  public Communication getCurrentComm(){
+    return _currentComm;
+  }
+
   /**
    * Void method that sets the Client's association with the terminal
    * @param _clientTerminal
    **/
   public void setClientTerminal(Client _clientTerminal) {
     this._clientTerminal = _clientTerminal;
+  }
+
+  /**
+   * Void method that sets the communication that is going to be made
+   * @param _currentComm
+   **/
+   public void setComm(Communication _currentComm) {
+    this._currentComm = _currentComm;
   }
 
    /**

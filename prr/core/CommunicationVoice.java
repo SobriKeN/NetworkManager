@@ -13,7 +13,7 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
      * Main Construtor
      * @param duration
      */
-    public CommunicationVoice(int duration, String sender, String receiver) {
+    public CommunicationVoice(int duration, Terminal sender, Terminal receiver) {
         super(duration, sender, receiver);
         this._type = "VOICE";
     }
@@ -25,7 +25,7 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
     /** @return the cost of the voice message **/
     @Override
     protected double computeCost(TariffPlan plan) {
-        return 0;
+        return plan.computeCost(this.getSender().getClientTerminal(), this);
     }
 
     @Override
@@ -50,6 +50,5 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
                 String.valueOf(caracteres),
                 String.valueOf(Math.round(getCost())),
                 status);
-
     }
 }

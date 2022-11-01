@@ -1,6 +1,5 @@
 package prr.core;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 public class CommunicationText extends Communication implements Serializable {
@@ -25,7 +24,7 @@ public class CommunicationText extends Communication implements Serializable {
      *
      * @param message
      */
-    public CommunicationText(String message, String sender, String receiver) {
+    public CommunicationText(String message, Terminal sender, Terminal receiver) {
         super(sender, receiver);
         this._message = message;
         this._type = "TEXT";
@@ -48,22 +47,11 @@ public class CommunicationText extends Communication implements Serializable {
      **/
     @Override
     protected double computeCost(TariffPlan plan) {
-        return 0;
+        return plan.computeCost(this.getSender().getClientTerminal(),this);
     }
 
     @Override
     protected String toCommString() {
-        String status;
-        int caracteres;
-        if (isOngoing()) {
-            status = "ONGOING";
-            caracteres = 0;
-        }
-        else {
-            status = "FINISHED";
-            caracteres = this.getSize();
-        }
-
         return String.join(
                 "|",
                 getType(),

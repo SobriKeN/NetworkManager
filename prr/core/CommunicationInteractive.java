@@ -14,7 +14,7 @@ public abstract class CommunicationInteractive extends Communication implements 
      * Main Construtor
      * @param duration
      */
-    public CommunicationInteractive(int duration, String sender, String receiver){
+    public CommunicationInteractive(int duration, Terminal sender, Terminal receiver){
         super(sender, receiver);
         this._duration = duration;
     }
