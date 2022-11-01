@@ -9,12 +9,16 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoShowTerminalsWithPositiveBalance extends Command<Network> {
 
+  /**
+   * Constructor that just uses the super() with the receiver parameter
+   * @param receiver
+   */
   DoShowTerminalsWithPositiveBalance(Network receiver) {
     super(Label.SHOW_TERMINALS_WITH_POSITIVE_BALANCE, receiver);
   }
 
   /**
-   * execute that shows the terminals that have a positive balance
+   * Execute that shows the terminals that have a positive balance
    * @throws CommandException
    */
   @Override

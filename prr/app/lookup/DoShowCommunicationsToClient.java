@@ -11,11 +11,21 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoShowCommunicationsToClient extends Command<Network> {
 
+  /**
+   * Constructor that just uses the super() with the receiver parameter
+   * and creates a StringField that will hold the client key
+   * @param receiver
+   */
   DoShowCommunicationsToClient(Network receiver) {
     super(Label.SHOW_COMMUNICATIONS_TO_CLIENT, receiver);
-    //FIXME add command fields
+    addStringField("clientKey", Message.clientKey());
   }
 
+  /**
+   * Execute method that displays all the communications received by the given client
+   * using the stringField with the client's key
+   * @throws CommandException
+   */
   @Override
   protected final void execute() throws CommandException {
     try {
