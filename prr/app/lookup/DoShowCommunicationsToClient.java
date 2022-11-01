@@ -1,6 +1,8 @@
 package prr.app.lookup;
 
+import prr.app.exception.UnknownClientKeyException;
 import prr.core.Network;
+import prr.core.exception.InvalidClientIDException;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 //FIXME add more imports if needed
@@ -17,6 +19,10 @@ class DoShowCommunicationsToClient extends Command<Network> {
 
   @Override
   protected final void execute() throws CommandException {
-    //FIXME implement command
+    try {
+      _display.popup(_receiver.getCommsReceivedByClient(stringField("clientKey")));
+    } catch (InvalidClientIDException e) {
+      throw new UnknownClientKeyException(e.getID());
+    }
   }
 }

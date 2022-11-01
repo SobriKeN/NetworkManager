@@ -1,7 +1,5 @@
 package prr.core.exception;
 
-import java.io.Serial;
-
 public class InvalidClientIDException extends Exception{
 
     private static final long serialVersionUID = 7502542724080056944L;

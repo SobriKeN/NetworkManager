@@ -115,6 +115,58 @@ public class Network implements Serializable {
   }
 
   /**
+   @return an ArrayList with all the Communications made by a certain client,
+   if there is an error on the Communication's key, the program will try to
+   catch the exception about that error, which is
+   InvalidCommIDException
+   */
+  public ArrayList<String> getCommsMadeByClient(String clientID) throws InvalidClientIDException {
+    ArrayList<String> stringComms = new ArrayList<>();
+
+    if(!_clients.containsKey(clientID)){
+      throw new InvalidClientIDException(clientID);
+    }
+
+    for (int key : _allComms.keySet()) {
+      if (_allComms.get(key).getSender().getClientTerminal().equals(clientID)) {
+        try {
+          stringComms.add(getCommStringed(key));
+        } catch (InvalidCommIDException e) {
+          // probably will never happen
+          e.printStackTrace();
+        }
+      }
+    }
+    return stringComms;
+  }
+
+  /**
+   @return an ArrayList with all the Communications made by a certain client,
+   if there is an error on the Communication's key, the program will try to
+   catch the exception about that error, which is
+   InvalidCommIDException
+   */
+  public ArrayList<String> getCommsReceivedByClient(String clientID) throws InvalidClientIDException{
+    ArrayList<String> stringComms = new ArrayList<>();
+
+    if(!_clients.containsKey(clientID)){
+      throw new InvalidClientIDException(clientID);
+    }
+
+    for (int key : _allComms.keySet()) {
+      if (_allComms.get(key).getReceiver().getClientTerminal().equals(clientID)) {
+        try {
+          stringComms.add(getCommStringed(key));
+        } catch (InvalidCommIDException e) {
+          // probably will never happen
+          e.printStackTrace();
+        }
+      }
+    }
+    return stringComms;
+  }
+
+  /**
   @return a Client that the user is searching for,
   with the given argument it will know if there is such client,
   and if it doesn't exist, an exception is thrown
@@ -361,6 +413,7 @@ public class Network implements Serializable {
       if (_terminals.containsKey(idTerminal)) {
         terminal = _terminals.get(idTerminal);
         terminal.addAmigo(friend);
+        this.deactivateSaveFlag();
       } else
         throw new InvalidTerminalIDException(idTerminal);
     } else
@@ -380,6 +433,7 @@ public class Network implements Serializable {
       if (_terminals.containsKey(idTerminal)) {
         terminal = _terminals.get(idTerminal);
         terminal.removeAmigo(friend);
+        this.deactivateSaveFlag();
       } else
         throw new InvalidTerminalIDException(idTerminal);
     } else
