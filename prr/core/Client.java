@@ -1,6 +1,7 @@
 package prr.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -34,7 +35,7 @@ public class Client implements Serializable {
     private long _debts;  // the debts
 
     /** Linked list that contains the client's notifications **/
-    private LinkedList<Notification> _notificacoes;
+    private ArrayList<Notification> _notificacoes;
 
     /**
      * Main Construtor
@@ -51,7 +52,7 @@ public class Client implements Serializable {
         _debts = 0;
         _pagamentos = 0;
         _numeroTerminaisAssociados = 0;
-        _notificacoes = new LinkedList<>();
+        _notificacoes = new ArrayList<Notification>();
     }
 
     /** @return client's key */
@@ -104,7 +105,7 @@ public class Client implements Serializable {
     }
 
     /** @return terminal's Notifications LinkedList **/
-    public LinkedList<Notification> getNotificacoesClient(){ return _notificacoes;}
+    public ArrayList<Notification> getNotificacoesClient(){ return _notificacoes;}
 
     /**
      Method that returns true if the requirements to the upgrade from Normal to Gold are met,

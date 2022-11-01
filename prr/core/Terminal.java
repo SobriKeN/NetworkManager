@@ -127,15 +127,15 @@ public class Terminal implements Serializable {
               _terminalmode.toString().equals("BUSY")) {
         if (_terminalmode.toString().equals("OFF")) {
           Notification notif = new Notification(NotificationType.O2I, this);
-          this._clientTerminal.getNotificacoesClient().addFirst(notif);
+          this._clientTerminal.getNotificacoesClient().add(notif);
         }
         if (_terminalmode.toString().equals("SILENCE")){
           Notification notif = new Notification(NotificationType.S2I, this);
-          this._clientTerminal.getNotificacoesClient().addFirst(notif);
+          this._clientTerminal.getNotificacoesClient().add(notif);
         }
         if (_terminalmode.toString().equals("BUSY")){
           Notification notif = new Notification(NotificationType.B2I, this);
-          this._clientTerminal.getNotificacoesClient().addFirst(notif);
+          this._clientTerminal.getNotificacoesClient().add(notif);
         }
         _terminalmode = TerminalMode.ON;
       }
@@ -150,7 +150,7 @@ public class Terminal implements Serializable {
       if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("BUSY")){
         if (_terminalmode.toString().equals("OFF")){
           Notification notif = new Notification(NotificationType.O2S, this);
-          this._clientTerminal.getNotificacoesClient().addFirst(notif);
+          this._clientTerminal.getNotificacoesClient().add(notif);
         }
         _terminalmode = TerminalMode.SILENCE;
       }
