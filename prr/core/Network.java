@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.TreeMap;
 
 import prr.core.exception.*;
@@ -17,6 +16,9 @@ public class Network implements Serializable {
 
   /** To see if the program has been saved since the last save() call */
   private boolean saveFlag = false;
+
+  /** The tariff plan related to this network*/
+  private TariffPlan _plano;
 
   /** The terminals associated with the network **/
   private TreeMap<String, Terminal> _terminals;
@@ -34,6 +36,7 @@ public class Network implements Serializable {
     _terminals = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     _clients = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     _allComms = new TreeMap<>();
+    _plano = new TariffPlan("Plano");
   }
 
   /** @return if the program has had any alterations after the last call */
@@ -62,7 +65,6 @@ public class Network implements Serializable {
 
   /** @return the global client's debts **/
   public long getGlobalClientDebts(){
-
     long clientDebts = 0;
 
     for (String id : _clients.keySet()){
@@ -141,7 +143,7 @@ public class Network implements Serializable {
   }
 
   /**
-   @return an ArrayList with all the Communications made by a certain client,
+   @return an ArrayList with all the Communications received by a certain client,
    if there is an error on the Communication's key, the program will try to
    catch the exception about that error, which is
    InvalidCommIDException
