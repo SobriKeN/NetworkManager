@@ -11,21 +11,14 @@ public class CommunicationVideo extends CommunicationInteractive implements Seri
     private String _type;
     /**
      * Main Construtor
-     * @param duration
      */
-    public CommunicationVideo(int duration, Terminal sender, Terminal receiver) {
-        super(duration, sender, receiver);
+    public CommunicationVideo(Terminal sender, Terminal receiver) {
+        super(sender, receiver);
         this._type = "VIDEO";
     }
 
     public String getType(){
         return this._type;
-    }
-
-    /** @return the cost of the video message **/
-    @Override
-    protected double computeCost(TariffPlan plan) {
-        return plan.computeCost(this.getSender().getClientTerminal(),this);
     }
 
     @Override

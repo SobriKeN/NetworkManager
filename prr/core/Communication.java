@@ -16,11 +16,6 @@ public abstract class Communication implements Serializable {
     /** To check if the communication has been paid */
     private boolean _isPaid;
 
-    /** The terminal that will receive the comm */
-    private Terminal _receiver;
-
-    /** The terminal that will send the comm */
-    private Terminal _sender;
 
     /** The id of the terminal that will receive the comm */
     private String _idReceiver;
@@ -42,22 +37,12 @@ public abstract class Communication implements Serializable {
         this._isPaid = false;
         this._cost = 0;
         this._isOngoing = true;
-        this._receiver = receiver;
-        this._sender = sender;
         this._idReceiver = receiver.getTerminalId();
         this._idSender = sender.getTerminalId();
     }
 
     /** @return Communication's id **/
     public int getId() { return _id; }
-
-    public Terminal getRreceiver() {
-        return _receiver;
-    }
-
-    public Terminal getSender() {
-        return _sender;
-    }
 
     public String getIdReceiver(){
         return _idReceiver;
@@ -84,9 +69,6 @@ public abstract class Communication implements Serializable {
 
     /** @return the detais of the communication*/
     public abstract String toCommString();
-
-    /** @return how much the comm cost*/
-    protected abstract double computeCost(TariffPlan plan);
 
     /** @return the size of the message*/
     protected abstract int getSize();

@@ -9,23 +9,17 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
 
     /** The type of comm (in this case is voice)  */
     private String _type;
+
     /**
      * Main Construtor
-     * @param duration
      */
-    public CommunicationVoice(int duration, Terminal sender, Terminal receiver) {
-        super(duration, sender, receiver);
+    public CommunicationVoice(Terminal sender, Terminal receiver) {
+        super(sender, receiver);
         this._type = "VOICE";
     }
 
     private String getType(){
         return _type;
-    }
-
-    /** @return the cost of the voice message **/
-    @Override
-    protected double computeCost(TariffPlan plan) {
-        return plan.computeCost(this.getSender().getClientTerminal(), this);
     }
 
     @Override

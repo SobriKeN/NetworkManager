@@ -42,14 +42,6 @@ public class CommunicationText extends Communication implements Serializable {
         return _message.length();
     }
 
-    /**
-     * @return the cost of the text message
-     **/
-    @Override
-    protected double computeCost(TariffPlan plan) {
-        return plan.computeCost(this.getSender().getClientTerminal(),this);
-    }
-
     @Override
     public String toCommString() {
         return String.join(
