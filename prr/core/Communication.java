@@ -83,7 +83,7 @@ public abstract class Communication implements Serializable {
     }
 
     /** @return the detais of the communication*/
-    protected abstract String toCommString();
+    public abstract String toCommString();
 
     /** @return how much the comm cost*/
     protected abstract double computeCost(TariffPlan plan);

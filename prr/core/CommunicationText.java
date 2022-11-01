@@ -51,7 +51,7 @@ public class CommunicationText extends Communication implements Serializable {
     }
 
     @Override
-    protected String toCommString() {
+    public String toCommString() {
         return String.join(
                 "|",
                 getType(),

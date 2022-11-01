@@ -3,7 +3,6 @@ package prr.app.terminal;
 import prr.core.Network;
 import prr.core.Terminal;
 import pt.tecnico.uilib.menus.CommandException;
-//FIXME add more imports if needed
 
 /**
  * Command for showing the ongoing communication.
@@ -16,6 +15,9 @@ class DoShowOngoingCommunication extends TerminalCommand {
   
   @Override
   protected final void execute() throws CommandException {
-    //FIXME implement command
+    if(_receiver.getCurrentComm() == null){
+      _display.popup(Message.noOngoingCommunication());
+    }
+    _display.popup(_receiver.getCurrentComm().toCommString());
   }
 }

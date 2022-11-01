@@ -29,7 +29,7 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
     }
 
     @Override
-    protected String toCommString(){
+    public String toCommString(){
         String status;
         int caracteres;
         if (isOngoing()) {
