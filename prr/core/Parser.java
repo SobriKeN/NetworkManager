@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.ArrayList;
 
 import prr.core.exception.*;
-// import more exception core classes if needed
 
 /*
  * A concretização desta classe depende da funcionalidade suportada pelas entidades do core:

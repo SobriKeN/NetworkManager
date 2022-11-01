@@ -1,7 +1,5 @@
 package prr.core.exception;
 
-
-
 public class AlreadyExistsTerminalException extends Exception {
 
     private static final long serialVersionUID = -8508696160170486614L;

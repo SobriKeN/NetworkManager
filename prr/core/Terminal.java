@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.TreeSet;
 
 /**
- * Abstract terminal.
+ * Class that represents the terminal.
  */
 public class Terminal implements Serializable {
 

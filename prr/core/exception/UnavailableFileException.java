@@ -3,7 +3,7 @@ package prr.core.exception;
 import java.io.Serial;
 
 /**
- * 
+ *  Exception for unavailable files.
  */
 public class UnavailableFileException extends Exception {
 

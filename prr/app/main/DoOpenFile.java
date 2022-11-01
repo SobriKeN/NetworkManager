@@ -5,7 +5,6 @@ import prr.app.exception.FileOpenFailedException;
 import prr.core.exception.UnavailableFileException;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
-//Add more imports if needed
 
 /**
  * Command to open a file.
