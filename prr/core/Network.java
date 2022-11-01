@@ -24,12 +24,16 @@ public class Network implements Serializable {
   /** The clients associated with the network **/
   private TreeMap<String, Client> _clients;
 
+  /** The communications registed in the system **/
+  private TreeMap<Integer, Communication> _allComms;
+
   /**
    * Main Construtor
    */
   public Network() {
     _terminals = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     _clients = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    _allComms = new TreeMap<>();
   }
 
   /** @return if the program has had any alterations after the last call */
@@ -45,6 +49,8 @@ public class Network implements Serializable {
     saveFlag = true;
   }
 
+
+  /** @return the global client's payments **/
   public long getGlobalClientPayments(){
     long clientPayments = 0;
 
@@ -54,6 +60,7 @@ public class Network implements Serializable {
     return Math.round(clientPayments);
   }
 
+  /** @return the global client's debts **/
   public long getGlobalClientDebts(){
 
     long clientDebts = 0;
@@ -62,6 +69,49 @@ public class Network implements Serializable {
       clientDebts += _clients.get(id).getDebts();
     }
     return Math.round(clientDebts);
+  }
+
+  /**
+   @return a Comm that the user is searching for,
+   with the given argument it will know if there is such communication,
+   and if it doesn't exist, an exception is thrown
+   @throws InvalidCommIDException
+   **/
+  public Communication getComm(int key) throws InvalidCommIDException {
+    if (_allComms.containsKey(key)) {
+      return _allComms.get(key);
+    }
+    throw new InvalidCommIDException(key);
+  }
+
+  /**
+   @return the Comms's parameters as a String by searching it with its key and then
+   using the method toCommString from the Class Communication
+    * @param key
+   * @throws InvalidCommIDException
+   **/
+  public String getCommStringed(int key) throws InvalidCommIDException {
+    return getComm(key).toCommString();
+  }
+
+  /**
+   @return an ArrayList with all the Communications in the system, if
+   there is an error on the Communication's key, the program will try to
+   catch the exception about that error, which is
+   InvalidCommIDException
+   */
+  public ArrayList<String> getAllComms() {
+    ArrayList<String> stringComms = new ArrayList<>();
+
+    for (int key : _allComms.keySet()) {
+      try {
+        stringComms.add(getCommStringed(key));
+      } catch (InvalidCommIDException e) {
+        // probably will never happen
+        e.printStackTrace();
+      }
+    }
+    return stringComms;
   }
 
   /**
