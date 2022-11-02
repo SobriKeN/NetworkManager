@@ -42,6 +42,10 @@ public class CommunicationText extends Communication implements Serializable {
         return _message.length();
     }
 
+    /** Never going to be used **/
+    @Override
+    protected void setSizeDuration(int duration){}
+
     @Override
     public String toCommString() {
         return String.join(

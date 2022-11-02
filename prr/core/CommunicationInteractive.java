@@ -10,6 +10,9 @@ public abstract class CommunicationInteractive extends Communication implements 
     /** The duration of the call */
     private int _duration;
 
+    /** To check if the communication is still ocurring */
+    private boolean _isOnGoing;
+
     /**
      * Main Construtor
      * Same parameters as communication
@@ -17,6 +20,7 @@ public abstract class CommunicationInteractive extends Communication implements 
     public CommunicationInteractive(Terminal sender, Terminal receiver){
         super(sender, receiver);
         this._duration = 0;
+        this._isOnGoing = true;
     }
 
     /** @return the detais of the communication*/
@@ -28,7 +32,10 @@ public abstract class CommunicationInteractive extends Communication implements 
         return _duration;
     }
 
-    public int setDuration(int _duration) {
-        return this._duration = _duration;
-    }
+    @Override
+    protected void setSizeDuration(int size){ this._duration = size; }
+
+    public boolean isOnGoing(){ return _isOnGoing; }
+
+    public void setOnGoing(boolean b){ this._isOnGoing = b; }
 }

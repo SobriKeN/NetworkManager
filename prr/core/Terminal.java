@@ -118,6 +118,9 @@ public class Terminal implements Serializable {
     this._payments += cost;
   }
 
+  public void setCommToNull(){
+    this._currentComm = null;
+  }
   /**
    * Void method that sets the Client's association with the terminal
    * @param _clientTerminal

@@ -25,8 +25,6 @@ public abstract class Communication implements Serializable {
     /** Communication's cost*/
     private long _cost;
 
-    /** To check if the communication is still ocurring */
-    private boolean _isOngoing;
 
     /**
      * Main Construtor
@@ -35,7 +33,6 @@ public abstract class Communication implements Serializable {
         this._id++;
         this._isPaid = false;
         this._cost = 0;
-        this._isOngoing = true;
         this._receiver = receiver;
         this._sender = sender;
     }
@@ -71,15 +68,13 @@ public abstract class Communication implements Serializable {
 
     public void setCost(long _cost) {this._cost = _cost;}
 
-    /** @return if the comm is still ongoing */
-    public boolean isOngoing() {
-        return _isOngoing;
-    }
+    protected abstract void setSizeDuration(int duration);
 
     /** @return the detais of the communication*/
     public abstract String toCommString();
 
     /** @return the size of the message*/
     protected abstract int getSize();
+
 }
 

@@ -26,7 +26,7 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
     public String toCommString(){
         String status;
         int caracteres;
-        if (isOngoing()) {
+        if (isOnGoing()) {
             status = "ONGOING";
             caracteres = 0;
         }

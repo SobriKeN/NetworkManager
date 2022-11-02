@@ -13,22 +13,34 @@ import prr.core.exception.*;
 /** Class Network that represents the network of the system**/
 public class Network implements Serializable {
 
-  /** Serial number for serialization **/
+  /**
+   * Serial number for serialization
+   **/
   private static final long serialVersionUID = -488710144069185783L;
 
-  /** To see if the program has been saved since the last save() call */
+  /**
+   * To see if the program has been saved since the last save() call
+   */
   private boolean saveFlag = false;
 
-  /** The tariff plan related to this network*/
+  /**
+   * The tariff plan related to this network
+   */
   private TariffPlan _plano;
 
-  /** The terminals associated with the network **/
+  /**
+   * The terminals associated with the network
+   **/
   private TreeMap<String, Terminal> _terminals;
 
-  /** The clients associated with the network **/
+  /**
+   * The clients associated with the network
+   **/
   private TreeMap<String, Client> _clients;
 
-  /** The communications registed in the system **/
+  /**
+   * The communications registed in the system
+   **/
   private TreeMap<Integer, Communication> _allComms;
 
   /**
@@ -41,31 +53,69 @@ public class Network implements Serializable {
     _plano = new TariffPlan("Plano");
   }
 
-  /** @return if the program has had any alterations after the last call */
-  public boolean getSaveFlag(){
+  /**
+   * @return if the program has had any alterations after the last call
+   */
+  public boolean getSaveFlag() {
     return saveFlag;
   }
 
-  public void deactivateSaveFlag(){
+  public void deactivateSaveFlag() {
     saveFlag = false;
   }
 
-  public void activateSaveFlag(){
+  public void activateSaveFlag() {
     saveFlag = true;
   }
 
   public TreeMap<Integer, Communication> getComms() {
     return _allComms;
   }
-
-  public void makeVoiceCall(Terminal sender, Terminal receiver){
+  public void makeVoiceCall(Terminal sender, Terminal receiver) {
     if (_terminals.containsKey(sender.getTerminalId()) &&
-            _terminals.containsKey(receiver.getTerminalId())){
-      CommunicationVoice commVoice = new CommunicationVoice(sender, receiver);
-      receiver.setComm(commVoice);
+            _terminals.containsKey(receiver.getTerminalId())) {
+      CommunicationVoice comm = new CommunicationVoice(sender, receiver);
+      receiver.setComm(comm);
       receiver.setBusy(true);
       receiver.setUsed();
-      receiver.
+      sender.setComm(comm);
+      sender.setBusy(true);
+      sender.setUsed();
+      _allComms.put(comm.getId(), comm);
+    }
+  }
+
+  public void makeVideoCall(Terminal sender, Terminal receiver){
+    if (_terminals.containsKey(sender.getTerminalId()) &&
+               _terminals.containsKey(receiver.getTerminalId())){
+      CommunicationVideo comm = new CommunicationVideo(sender, receiver);
+      receiver.setComm(comm);
+      receiver.setBusy(true);
+      receiver.setUsed();
+      sender.setComm(comm);
+      sender.setBusy(true);
+      sender.setUsed();
+      _allComms.put(comm.getId(), comm);
+    }
+  }
+
+  public void stopVoiceCall(CommunicationVoice comm, int duracao){
+    Terminal sender = comm.getSender();
+    if (_terminals.containsKey(sender.getTerminalId())){
+      comm.setOnGoing(false);
+      comm.setSizeDuration(duracao);
+      comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
+      sender.setCommToNull();
+    }
+  }
+
+  public void stopVideoCall(CommunicationVideo comm, int duracao){
+    Terminal sender = comm.getSender();
+    if (_terminals.containsKey(sender.getTerminalId())){
+      comm.setOnGoing(false);
+      comm.setSizeDuration(duracao);
+      comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
+      sender.setCommToNull();
     }
   }
 
