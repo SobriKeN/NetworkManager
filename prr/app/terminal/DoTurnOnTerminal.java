@@ -1,8 +1,6 @@
 package prr.app.terminal;
 
-import prr.core.Network;
-import prr.core.Terminal;
-import prr.core.TerminalMode;
+import prr.core.*;
 import pt.tecnico.uilib.menus.CommandException;
 
 /**
@@ -19,10 +17,11 @@ class DoTurnOnTerminal extends TerminalCommand {
    **/
   @Override
   protected final void execute() throws CommandException {
-    if(_receiver.getTerminalModeEnum() == TerminalMode.ON){
+    if (_receiver.getTerminalModeEnum() == TerminalMode.ON) {
       _display.popup(Message.alreadyOn());
     }
-    else
+    else {
       _receiver.setONIdle();
+    }
   }
 }

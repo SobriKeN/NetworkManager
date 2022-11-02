@@ -2,7 +2,6 @@ package prr.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * Class representing a client in the app

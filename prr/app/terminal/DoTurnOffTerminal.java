@@ -1,8 +1,6 @@
 package prr.app.terminal;
 
-import prr.core.Network;
-import prr.core.Terminal;
-import prr.core.TerminalMode;
+import prr.core.*;
 import pt.tecnico.uilib.menus.CommandException;
 
 /**
@@ -24,6 +22,7 @@ class DoTurnOffTerminal extends TerminalCommand {
     }
     else
       _receiver.turnOff();
+      }
   }
-}
+
 

@@ -26,24 +26,34 @@ import java.util.Objects;
          String terminalDestino = stringField("terminalKey");
          String commType = optionField("commType");
          try {
+             Terminal t = _network.getTerminal(terminalDestino);
              if (Objects.equals(_receiver.getTerminalType(), "BASIC"))
                  _display.popup(Message.unsupportedAtOrigin(_receiver.getTerminalId(), "BASIC"));
-             else if (Objects.equals(_network.getTerminal(terminalDestino).getTerminalType(), "BASIC"))
+             else if (Objects.equals(t.getTerminalType(), "BASIC"))
                  _display.popup(Message.unsupportedAtDestination(_receiver.getTerminalId(), "BASIC"));
-             else if (_network.getTerminal(terminalDestino).getTerminalModeEnum() == TerminalMode.OFF)
+             else if (t.getTerminalModeEnum() == TerminalMode.OFF) {
                  _display.popup(Message.destinationIsOff(terminalDestino));
-             else if (_network.getTerminal(terminalDestino).getTerminalModeEnum() == TerminalMode.SILENCE)
+                 if (_receiver.getClientTerminal().isRecieveNotifications()
+                     && !t.getTentaramNotificar().contains(_receiver)) {
+                     t.getTentaramNotificar().add(_receiver);
+                 }
+             }
+             else if (_network.getTerminal(terminalDestino).getTerminalModeEnum() == TerminalMode.SILENCE){
                  _display.popup(Message.destinationIsSilent(terminalDestino));
+                 if (_receiver.getClientTerminal().isRecieveNotifications()
+                     && !t.getTentaramNotificar().contains(_receiver)) {
+                     t.getTentaramNotificar().add(_receiver);
+                 }
+             }
              else if (!_network.getTerminal(terminalDestino).canStartCommunication())
-                 _display.popup(Message.destinationIsBusy(terminalDestino));
+                     _display.popup(Message.destinationIsBusy(terminalDestino));
 
              else {
                  if (Objects.equals(commType, "VIDEO"))
                      _network.makeVideoCall(_network.getTerminal(terminalDestino), _receiver);
                  else
                      _network.makeVoiceCall(_network.getTerminal(terminalDestino), _receiver);
-             }
-
+                 }
          } catch (InvalidTerminalIDException e){
              throw new UnknownTerminalKeyException(e.getID());
          }

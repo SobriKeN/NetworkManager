@@ -1,6 +1,8 @@
 package prr.app.terminal;
 
 import prr.core.Network;
+import prr.core.Notification;
+import prr.core.NotificationType;
 import prr.core.Terminal;
 import prr.app.exception.UnknownTerminalKeyException;
 import prr.core.exception.InvalidTerminalIDException;
@@ -24,6 +26,10 @@ import pt.tecnico.uilib.menus.CommandException;
           Terminal t = _network.getTerminal(stringField("terminalReceiver"));
           if (t.getTerminalModeEnum().toString().equals("OFF")){
               _display.popup(Message.destinationIsOff(stringField("terminalReceiver")));
+              if(_receiver.getClientTerminal().isRecieveNotifications()
+                      && !t.getTentaramNotificar().contains(_receiver)) {
+                  t.getTentaramNotificar().add(_receiver);
+              }
           }
           else {
               _network.DoSendTextCommunication(

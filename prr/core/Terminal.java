@@ -1,6 +1,8 @@
 package prr.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -41,6 +43,11 @@ public class Terminal implements Serializable {
   /** Current communication in the terminal */
   private Communication _currentComm;
 
+  /** Boolean that says if the client needs to be notified */
+  private boolean _aNotificar;
+
+  private ArrayList<Terminal> _tentaramNotificar;
+
   /**
    * Main Construtor
    * @param id
@@ -58,6 +65,8 @@ public class Terminal implements Serializable {
     _virgem = true;
     _busy = false;
     _currentComm = null;
+    _aNotificar = false;
+    _tentaramNotificar = new ArrayList<>();
   }
 
   /** @return terminal's id **/
@@ -137,27 +146,40 @@ public class Terminal implements Serializable {
     this._currentComm = _currentComm;
   }
 
-   /**
+  public boolean isNotificar() {
+    return _aNotificar;
+  }
+
+  public void setNotificar(boolean _aNotificar) {
+    this._aNotificar = _aNotificar;
+  }
+
+  public ArrayList<Terminal> getTentaramNotificar() {
+    return _tentaramNotificar;
+  }
+
+  /**
    Void method that returns true if the requirements necessary
    to set the terminal's mode on ON/Idle are correct,
    and then it sets the mode to ON/Idle while creating the right notification
    **/
    public void setONIdle() {
-      if (_terminalmode.toString().equals("OFF") || _terminalmode.toString().equals("SILENCE") ||
-              _terminalmode.toString().equals("BUSY")) {
-        if (_terminalmode.toString().equals("OFF")) {
-          Notification notif = new Notification(NotificationType.O2I, this);
-          this._clientTerminal.getNotificacoesClient().add(notif);
+      if (_terminalmode.toString().equals("OFF") || _terminalmode.toString().equals("SILENCE")) {
+        if (_terminalmode.toString().equals("OFF") && !this.getTentaramNotificar().isEmpty()) {
+          for (Terminal t : this.getTentaramNotificar()) {
+            Notification n = new Notification(NotificationType.O2I, t);
+            t.getClientTerminal().getNotificacoesClient().add(n);
+          this.getTentaramNotificar().clear();
+          }
         }
-        if (_terminalmode.toString().equals("SILENCE")){
-          Notification notif = new Notification(NotificationType.S2I, this);
-          this._clientTerminal.getNotificacoesClient().add(notif);
+        if (_terminalmode.toString().equals("SILENCE") && !this.getTentaramNotificar().isEmpty()) {
+          for (Terminal t : this.getTentaramNotificar()) {
+            Notification n = new Notification(NotificationType.S2I, t);
+            t.getClientTerminal().getNotificacoesClient().add(n);
+          this.getTentaramNotificar().clear();
+          }
         }
-        if (_terminalmode.toString().equals("BUSY")){
-          Notification notif = new Notification(NotificationType.B2I, this);
-          this._clientTerminal.getNotificacoesClient().add(notif);
-        }
-        _terminalmode = TerminalMode.ON;
+        this._terminalmode = TerminalMode.ON;
       }
     }
 
@@ -167,10 +189,13 @@ public class Terminal implements Serializable {
    and then it sets the mode to SILENCE while creating the right notification
    **/
   public void setOnSilent() {
-      if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("BUSY")){
-        if (_terminalmode.toString().equals("OFF")){
-          Notification notif = new Notification(NotificationType.O2S, this);
-          this._clientTerminal.getNotificacoesClient().add(notif);
+      if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("OFF") ){
+        if (_terminalmode.toString().equals("OFF") && !this.getTentaramNotificar().isEmpty()) {
+          for (Terminal t : this.getTentaramNotificar()) {
+            Notification n = new Notification(NotificationType.O2S, t);
+            t.getClientTerminal().getNotificacoesClient().add(n);
+          this.getTentaramNotificar().clear();
+          }
         }
         _terminalmode = TerminalMode.SILENCE;
       }
