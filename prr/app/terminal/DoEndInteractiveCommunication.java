@@ -21,7 +21,7 @@ import pt.tecnico.uilib.menus.CommandException;
 
      @Override
      protected final void execute() throws CommandException {
-       //FIXME implement command
+
      }
  }
 

@@ -35,8 +35,8 @@ public class TariffPlan implements Serializable {
     /**
      * @return the Cost of the TariffPlan decided by some conditions and rules set by the
      * Client's status and balance; this method is only for Text Comms
-     * @param Client c
-     * @param CommunicationText t
+     * @param c
+     * @param t
      */
     public long computeCost(Client c, CommunicationText t){
         int custo = 0;
@@ -65,14 +65,16 @@ public class TariffPlan implements Serializable {
             else
                 custo = 4;
         }
+        c.adicionaDebts(custo);
+        t.getSender().adicionaDebts(custo);
         return custo;
     }
 
     /**
      * @return the Cost of the TariffPlan decided by some conditions and rules set by the
      * Client's status and balance; this method is only for Voice Comms
-     * @param Client c
-     * @param CommunicationVoice t
+     * @param c
+     * @param t
      */
     public long computeCost(Client c, CommunicationVoice t){
         int custo = 0;
@@ -83,14 +85,16 @@ public class TariffPlan implements Serializable {
             custo = 10 * (t.getSize()/ 60);
         else if (Objects.equals(c.getLevel().toString(), "PLATINUM"))
             custo = 10 * (t.getSize() / 60);
+        c.adicionaDebts(custo);
+        t.getSender().adicionaDebts(custo);
         return custo;
     }
 
     /**
      * @return the Cost of the TariffPlan decided by some conditions and rules set by the
      * Client's status and balance; this method is only for Video Comms
-     * @param Client c
-     * @param CommunicationVideo t
+     * @param c
+     * @param t
      */
     public long computeCost(Client c, CommunicationVideo t){
         int custo = 0;
@@ -101,6 +105,8 @@ public class TariffPlan implements Serializable {
             custo = 20 * (t.getSize() / 60);
         else if (Objects.equals(c.getLevel().toString(), "PLATINUM"))
             custo = 10 * (t.getSize() / 60);
+        c.adicionaDebts(custo);
+        t.getSender().adicionaDebts(custo);
         return custo;
     }
 
