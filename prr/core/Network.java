@@ -71,7 +71,7 @@ public class Network implements Serializable {
   public TreeMap<Integer, Communication> getComms() {
     return _allComms;
   }
-  public void makeVoiceCall(Terminal sender, Terminal receiver) {
+  public void makeVoiceCall(Terminal sender, Terminal receiver) throws InvalidTerminalIDException {
     if (_terminals.containsKey(sender.getTerminalId()) &&
             _terminals.containsKey(receiver.getTerminalId())) {
       CommunicationVoice comm = new CommunicationVoice(sender, receiver);
@@ -83,9 +83,11 @@ public class Network implements Serializable {
       sender.setUsed();
       _allComms.put(comm.getId(), comm);
     }
+    else
+      throw new InvalidTerminalIDException(receiver.getTerminalId());
   }
 
-  public void makeVideoCall(Terminal sender, Terminal receiver){
+  public void makeVideoCall(Terminal sender, Terminal receiver) throws InvalidTerminalIDException {
     if (_terminals.containsKey(sender.getTerminalId()) &&
                _terminals.containsKey(receiver.getTerminalId())){
       CommunicationVideo comm = new CommunicationVideo(sender, receiver);
@@ -97,25 +99,31 @@ public class Network implements Serializable {
       sender.setUsed();
       _allComms.put(comm.getId(), comm);
     }
+    else
+      throw new InvalidTerminalIDException(receiver.getTerminalId());
   }
 
   public void stopVoiceCall(CommunicationVoice comm, int duracao){
     Terminal sender = comm.getSender();
+    Terminal receiver = comm.getReceiver();
     if (_terminals.containsKey(sender.getTerminalId())){
       comm.setOnGoing(false);
       comm.setSizeDuration(duracao);
       comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
       sender.setCommToNull();
+      receiver.setCommToNull();
     }
   }
 
   public void stopVideoCall(CommunicationVideo comm, int duracao){
     Terminal sender = comm.getSender();
+    Terminal receiver = comm.getReceiver();
     if (_terminals.containsKey(sender.getTerminalId())){
       comm.setOnGoing(false);
       comm.setSizeDuration(duracao);
       comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
       sender.setCommToNull();
+      receiver.setCommToNull();
     }
   }
 
