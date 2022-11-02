@@ -22,12 +22,6 @@ public abstract class Communication implements Serializable {
     /** The terminal that will send the comm */
     private Terminal _sender;
 
-    /** The id of the terminal that will receive the comm */
-    private String _idReceiver;
-
-    /** The id of the terminal that will send the comm */
-    private String _idSender;
-
     /** Communication's cost*/
     private double _cost;
 
@@ -44,8 +38,6 @@ public abstract class Communication implements Serializable {
         this._isOngoing = true;
         this._receiver = receiver;
         this._sender = sender;
-        this._idReceiver = receiver.getTerminalId();
-        this._idSender = sender.getTerminalId();
     }
 
     /** @return Communication's id **/
@@ -60,11 +52,11 @@ public abstract class Communication implements Serializable {
     }
 
     public String getIdReceiver(){
-        return _idReceiver;
+        return _receiver.getTerminalId();
     }
 
     public String getIdSender(){
-        return _idSender;
+        return _receiver.getTerminalId();
     }
 
     /** @return if the communication has been paid */
