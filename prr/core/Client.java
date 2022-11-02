@@ -70,6 +70,11 @@ public class Client implements Serializable {
 
     public void adicionaDebts(long cost){this._debts += cost;}
 
+    public void paga(long cost){
+        this._debts -= cost;
+        this._pagamentos += cost;
+    }
+
     /** @return client's Payments */
     public long getPagamentos() {return _pagamentos; }
 

@@ -23,7 +23,7 @@ public abstract class Communication implements Serializable {
     private Terminal _sender;
 
     /** Communication's cost*/
-    private double _cost;
+    private long _cost;
 
     /** To check if the communication is still ocurring */
     private boolean _isOngoing;
@@ -65,7 +65,7 @@ public abstract class Communication implements Serializable {
     }
 
     /** @return comm's cost */
-    public double getCost() {
+    public long getCost() {
         return _cost;
     }
 

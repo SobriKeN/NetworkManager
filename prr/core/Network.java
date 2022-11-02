@@ -54,6 +54,9 @@ public class Network implements Serializable {
     saveFlag = true;
   }
 
+  public TreeMap<Integer, Communication> getComms() {
+    return _allComms;
+  }
 
   public void makeVoiceCall(Terminal sender, Terminal receiver){
     if (_terminals.containsKey(sender.getTerminalId()) &&
@@ -480,6 +483,12 @@ public class Network implements Serializable {
     t1.adicionaDebts(l);
     t1.getClientTerminal().adicionaDebts(l);
     _allComms.put(c.getId(),c);
+    }
+
+    public void performPayment(int id){
+      Communication c = _allComms.get(id);
+      c.getSender().paga(c.getCost());
+      c.getSender().getClientTerminal().paga(c.getCost());
     }
 
   /**

@@ -113,6 +113,11 @@ public class Terminal implements Serializable {
     this._debt += cost;
   }
 
+  public void paga(long cost){
+    this._debt -= cost;
+    this._payments += cost;
+  }
+
   /**
    * Void method that sets the Client's association with the terminal
    * @param _clientTerminal
