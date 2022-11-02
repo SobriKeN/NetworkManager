@@ -142,17 +142,17 @@ public class Network implements Serializable {
       c.downgradePlatinumToNormal();
     }
     if ((c.getLevel()) == ClientLevel.GOLD){
-      c.upgradeGoldToPlatinum(getVideoCommsByClient(c.getKey()));
+      c.upgradeGoldToPlatinum(getCommsByClientId(c.getKey()));
     }
     return comm.getCost();
   }
 
-  public ArrayList<Communication> getVideoCommsByClient(String clientID){
+  public ArrayList<Communication> getCommsByClientId(String clientID){
     ArrayList<Communication> commClient = new ArrayList<>();
 
     for (int key : _allComms.keySet()) {
       if (_allComms.get(key).getSender().getClientTerminal().getKey().equals(clientID))
-          commClient.add( _allComms.get(key));
+          commClient.add(_allComms.get(key));
     }
     return commClient;
   }
@@ -571,11 +571,14 @@ public class Network implements Serializable {
     c.setCost(l);
     _allComms.put(c.getId(),c);
 
-    if ((cliente.getLevel() == ClientLevel.GOLD)){
-      cliente.downgradeGoldToNormal();
+    if ((cliente.getLevel() == ClientLevel.GOLD)){ // downgrade de Gold para Normal após
+      cliente.downgradeGoldToNormal();             // realizar uma comm e se tem saldo negativo
+    }
+    if ((cliente.getLevel() == ClientLevel.PLATINUM)){ //
+      cliente.downgradePlatinumToNormal();
     }
     if ((cliente.getLevel() == ClientLevel.PLATINUM)){
-      cliente.downgradePlatinumToNormal();
+      cliente.downgradePlatinumToGold(getCommsByClientId(cliente.getKey()));
     }
     this.deactivateSaveFlag();
     }

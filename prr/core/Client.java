@@ -129,25 +129,39 @@ public class Client implements Serializable {
      and upgrades the Client's level
      **/
     public void upgradeGoldToPlatinum(ArrayList<Communication> commsClient){
-        if (((_pagamentos - _debts) > 0))  //&& numeroCommVideoConsecutivas > 6
-            this._level = ClientLevel.PLATINUM;
+        int numeroCommVideoConsecutivas = 0;
+
+        for (Communication comm : commsClient){
+            if (comm instanceof CommunicationVideo)
+                numeroCommVideoConsecutivas++;
+            else
+                numeroCommVideoConsecutivas = 0;
+
+            if (((this._pagamentos - this._debts) > 0)  && (numeroCommVideoConsecutivas > 6)) {
+                this._level = ClientLevel.PLATINUM;
+                break;
+            }
+        }
     }
 
     /**
      Method that returns true if the requirements to the downgrade from Platinum to Gold are met,
      and downgrades the Client's level
      **/
-    public boolean downgradePlatinumToGold(){
-        if (this.getLevel() == ClientLevel.PLATINUM){
-            if (((_pagamentos - _debts) > 0)) { //&& numeroCommTextoConsecutivas > 3
-                this._level = ClientLevel.GOLD;
-                return true;
-            }
+    public void downgradePlatinumToGold(ArrayList<Communication> commsClient){
+        int numeroCommTextoConsecutivas = 0;
+
+        for (Communication comm : commsClient) {
+            if (comm instanceof CommunicationVideo)
+                numeroCommTextoConsecutivas++;
             else
-                return false;
+                numeroCommTextoConsecutivas = 0;
+
+            if ((_pagamentos - _debts) > 0 && (numeroCommTextoConsecutivas > 3)) {
+                this._level = ClientLevel.GOLD;
+                break;
+            }
         }
-        else
-            return false;
     }
 
     /**
