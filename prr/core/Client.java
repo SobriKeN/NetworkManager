@@ -137,7 +137,7 @@ public class Client implements Serializable {
             else
                 numeroCommVideoConsecutivas = 0;
 
-            if (((this._pagamentos - this._debts) > 0)  && (numeroCommVideoConsecutivas >= 5)) {
+            if (((this._pagamentos - this._debts) >= 0)  && (numeroCommVideoConsecutivas >= 5)) {
                 this._level = ClientLevel.PLATINUM;
                 break;
             }
