@@ -48,14 +48,6 @@ public abstract class Communication implements Serializable {
         return _sender;
     }
 
-    public String getIdReceiver(){
-        return _receiver.getTerminalId();
-    }
-
-    public String getIdSender(){
-        return _receiver.getTerminalId();
-    }
-
     /** @return if the communication has been paid */
     public boolean isPaid() {
         return _isPaid;

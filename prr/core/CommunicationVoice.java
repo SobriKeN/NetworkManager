@@ -39,8 +39,8 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
                 "|",
                 getType(),
                 String.valueOf(getId()),
-                getIdSender(),
-                getIdReceiver(),
+                getSender().getTerminalId(),
+                getReceiver().getTerminalId(),
                 String.valueOf(caracteres),
                 String.valueOf(Math.round(getCost())),
                 status);

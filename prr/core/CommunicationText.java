@@ -52,8 +52,8 @@ public class CommunicationText extends Communication implements Serializable {
                 "|",
                 getType(),
                 String.valueOf(getId()),
-                getIdSender(),
-                getIdReceiver(),
+                getSender().getTerminalId(),
+                getReceiver().getTerminalId(),
                 String.valueOf(getSize()),
                 String.valueOf(Math.round(getCost())),
                 "FINISHED");
