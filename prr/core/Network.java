@@ -105,27 +105,56 @@ public class Network implements Serializable {
   public long stopVoiceCall(CommunicationVoice comm, int duracao){
     Terminal sender = comm.getSender();
     Terminal receiver = comm.getReceiver();
+    Client c = sender.getClientTerminal();
     comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
-    comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
+    comm.setCost(_plano.computeCost(c, comm));
     sender.setCommToNull();
     sender.setBusy(false);
     receiver.setCommToNull();
     receiver.setBusy(false);
+
+    if ((c.getLevel() == ClientLevel.GOLD)){
+      c.downgradeGoldToNormal();
+    }
+    if ((c.getLevel() == ClientLevel.PLATINUM)){
+      c.downgradePlatinumToNormal();
+    }
     return comm.getCost();
   }
 
   public long stopVideoCall(CommunicationVideo comm, int duracao){
     Terminal sender = comm.getSender();
     Terminal receiver = comm.getReceiver();
+    Client c = sender.getClientTerminal();
     comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
-    comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
+    comm.setCost(_plano.computeCost(c, comm));
     sender.setCommToNull();
     sender.setBusy(false);
     receiver.setCommToNull();
     receiver.setBusy(false);
+
+    if ((c.getLevel() == ClientLevel.GOLD)){
+      c.downgradeGoldToNormal();
+    }
+    if ((c.getLevel() == ClientLevel.PLATINUM)){
+      c.downgradePlatinumToNormal();
+    }
+    if ((c.getLevel()) == ClientLevel.GOLD){
+      c.upgradeGoldToPlatinum(getVideoCommsByClient(c.getKey()));
+    }
     return comm.getCost();
+  }
+
+  public ArrayList<Communication> getVideoCommsByClient(String clientID){
+    ArrayList<Communication> commClient = new ArrayList<>();
+
+    for (int key : _allComms.keySet()) {
+      if (_allComms.get(key).getSender().getClientTerminal().getKey().equals(clientID))
+          commClient.add( _allComms.get(key));
+    }
+    return commClient;
   }
 
   /** @return the global network payments **/
@@ -205,7 +234,7 @@ public class Network implements Serializable {
     }
 
     for (int key : _allComms.keySet()) {
-      if (_allComms.get(key).getSender().getClientTerminal().equals(clientID)) {
+      if (_allComms.get(key).getSender().getClientTerminal().getKey().equals(clientID)) {
         try {
           stringComms.add(getCommStringed(key));
         } catch (InvalidCommIDException e) {
@@ -231,7 +260,7 @@ public class Network implements Serializable {
     }
 
     for (int key : _allComms.keySet()) {
-      if (_allComms.get(key).getReceiver().getClientTerminal().equals(clientID)) {
+      if (_allComms.get(key).getReceiver().getClientTerminal().getKey().equals(clientID)) {
         try {
           stringComms.add(getCommStringed(key));
         } catch (InvalidCommIDException e) {
@@ -536,21 +565,32 @@ public class Network implements Serializable {
   public void DoSendTextCommunication(String idSender, String idReceiver, String msg){
     Terminal t1 = _terminals.get(idSender);
     Terminal t2 = _terminals.get(idReceiver);
+    Client cliente = t1.getClientTerminal();
     CommunicationText c = new CommunicationText(msg, t1, t2);
-    long l = _plano.computeCost(t1.getClientTerminal(),c);
+    long l = _plano.computeCost(cliente,c);
     c.setCost(l);
     _allComms.put(c.getId(),c);
+
+    if ((cliente.getLevel() == ClientLevel.GOLD)){
+      cliente.downgradeGoldToNormal();
+    }
+    if ((cliente.getLevel() == ClientLevel.PLATINUM)){
+      cliente.downgradePlatinumToNormal();
+    }
     this.deactivateSaveFlag();
     }
 
     public void performPayment(int id){
       Communication c = _allComms.get(id);
+      Terminal t = c.getSender();
       if(c.isPaid()){
         return;
       }
-      c.getSender().paga(c.getCost());
-      c.getSender().getClientTerminal().paga(c.getCost());
+      t.paga(c.getCost());
+      t.getClientTerminal().paga(c.getCost());
       c.pagarComm();
+      if (t.getClientTerminal().getLevel() == ClientLevel.NORMAL)   //upgrade após fzr um pagamento para Gold
+        t.getClientTerminal().upgradeNormalToGold();
       this.deactivateSaveFlag();
     }
 

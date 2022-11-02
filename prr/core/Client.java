@@ -115,37 +115,22 @@ public class Client implements Serializable {
     public ArrayList<Notification> getNotificacoesClient(){ return _notificacoes;}
 
     /**
-     Method that returns true if the requirements to the upgrade from Normal to Gold are met,
+     Method that changes the client's level if the requirements to the upgrade from Normal to Gold are met,
      and upgrades the Client's level
      **/
-    public boolean upgradeNormalToGold(){
-        if (this.getLevel() == ClientLevel.NORMAL) {
-            if ((_pagamentos - _debts) > 500) { //após realizar um pagamento
-                this._level = ClientLevel.GOLD;
-                return true;
-            }
-            else
-                return false;
+    public void upgradeNormalToGold(){
+        if ((this._pagamentos - this._debts) > 500) { //após realizar um pagamento
+            this._level = ClientLevel.GOLD;
         }
-        else
-            return false;
     }
 
     /**
      Method that returns true if the requirements to the upgrade from Gold to Platinum are met,
      and upgrades the Client's level
      **/
-    public boolean upgradeGoldToPlatinum(){
-        if (this.getLevel() == ClientLevel.GOLD){
-            if (((_pagamentos - _debts) > 0)) { //&& numeroCommVideoConsecutivas > 6
-                this._level = ClientLevel.PLATINUM;
-                return true;
-            }
-            else
-                return false;
-        }
-        else
-            return false;
+    public void upgradeGoldToPlatinum(ArrayList<Communication> commsClient){
+        if (((_pagamentos - _debts) > 0))  //&& numeroCommVideoConsecutivas > 6
+            this._level = ClientLevel.PLATINUM;
     }
 
     /**
@@ -166,20 +151,24 @@ public class Client implements Serializable {
     }
 
     /**
-     Method that returns true if the requirements to the downgrade from Gold to Normal are met,
+     Method that changes the client's level if the requirements to the downgrade from Platinum to Normal are met,
      and downgrades the Client's level
      **/
-    public boolean downgradeGoldToNormal(){
-        if (this.getLevel() == ClientLevel.GOLD){
-            if (((_pagamentos - _debts) > 0)) { //dps de realizar uma comm
-                this._level = ClientLevel.NORMAL;
-                return true;
-            }
-            else
-                return false;
+
+     public void downgradePlatinumToNormal(){
+         if (((_pagamentos - _debts) < 0)) { //dps de realizar uma comm
+             this._level = ClientLevel.NORMAL;
+         }
+     }
+
+    /**
+     Method that changes the client's level if the requirements to the downgrade from Gold to Normal are met,
+     and downgrades the Client's level
+     **/
+    public void downgradeGoldToNormal(){
+        if (((_pagamentos - _debts) < 0)) { //dps de realizar uma comm
+            this._level = ClientLevel.NORMAL;
         }
-        else
-            return false;
     }
 
     /** Clear the client's unread notifications array */
