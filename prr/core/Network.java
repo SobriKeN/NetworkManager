@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.TreeMap;
 
 import com.sun.jdi.ObjectReference;
@@ -540,15 +539,19 @@ public class Network implements Serializable {
     CommunicationText c = new CommunicationText(msg, t1, t2);
     long l = _plano.computeCost(t1.getClientTerminal(),c);
     c.setCost(l);
-    t1.adicionaDebts(l);
-    t1.getClientTerminal().adicionaDebts(l);
     _allComms.put(c.getId(),c);
+    this.deactivateSaveFlag();
     }
 
     public void performPayment(int id){
       Communication c = _allComms.get(id);
+      if(c.isPaid()){
+        return;
+      }
       c.getSender().paga(c.getCost());
       c.getSender().getClientTerminal().paga(c.getCost());
+      c.pagarComm();
+      this.deactivateSaveFlag();
     }
 
   /**

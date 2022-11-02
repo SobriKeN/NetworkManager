@@ -61,6 +61,8 @@ public abstract class Communication implements Serializable {
         return _isPaid;
     }
 
+    public void pagarComm(){this._isPaid = true;}
+
     /** @return comm's cost */
     public long getCost() {
         return _cost;
