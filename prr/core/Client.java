@@ -137,7 +137,7 @@ public class Client implements Serializable {
             else
                 numeroCommVideoConsecutivas = 0;
 
-            if (((this._pagamentos - this._debts) > 0)  && (numeroCommVideoConsecutivas > 6)) {
+            if (((this._pagamentos - this._debts) > 0)  && (numeroCommVideoConsecutivas >= 5)) {
                 this._level = ClientLevel.PLATINUM;
                 break;
             }
@@ -152,12 +152,12 @@ public class Client implements Serializable {
         int numeroCommTextoConsecutivas = 0;
 
         for (Communication comm : commsClient) {
-            if (comm instanceof CommunicationVideo)
+            if (comm instanceof CommunicationText)
                 numeroCommTextoConsecutivas++;
             else
                 numeroCommTextoConsecutivas = 0;
 
-            if ((_pagamentos - _debts) > 0 && (numeroCommTextoConsecutivas > 3)) {
+            if ((_pagamentos - _debts) > 0 && (numeroCommTextoConsecutivas >= 2)) {
                 this._level = ClientLevel.GOLD;
                 break;
             }

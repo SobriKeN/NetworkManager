@@ -574,10 +574,10 @@ public class Network implements Serializable {
     if ((cliente.getLevel() == ClientLevel.GOLD)){ // downgrade de Gold para Normal após
       cliente.downgradeGoldToNormal();             // realizar uma comm e se tem saldo negativo
     }
-    if ((cliente.getLevel() == ClientLevel.PLATINUM)){ //
-      cliente.downgradePlatinumToNormal();
+    if ((cliente.getLevel() == ClientLevel.PLATINUM)){ // downgrade de Platinum para Normal após
+      cliente.downgradePlatinumToNormal();             // 2 comms de texto seguidas e nao ter saldo negativo
     }
-    if ((cliente.getLevel() == ClientLevel.PLATINUM)){
+    if ((cliente.getLevel() == ClientLevel.PLATINUM)){      // downgrade de Platinum para Normal após
       cliente.downgradePlatinumToGold(getCommsByClientId(cliente.getKey()));
     }
     this.deactivateSaveFlag();
