@@ -69,6 +69,8 @@ public abstract class Communication implements Serializable {
         return _cost;
     }
 
+    public void setCost(long _cost) {this._cost = _cost;}
+
     /** @return if the comm is still ongoing */
     public boolean isOngoing() {
         return _isOngoing;

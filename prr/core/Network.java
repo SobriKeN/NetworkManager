@@ -66,8 +66,7 @@ public class Network implements Serializable {
     }
   }
 
-
-  /** @return the global client's payments **/
+  /** @return the global network payments **/
   public long getGlobalClientPayments(){
     long clientPayments = 0;
 
@@ -77,7 +76,7 @@ public class Network implements Serializable {
     return Math.round(clientPayments);
   }
 
-  /** @return the global client's debts **/
+  /** @return the global network debts **/
   public long getGlobalClientDebts(){
     long clientDebts = 0;
 
@@ -471,6 +470,17 @@ public class Network implements Serializable {
     client.clearNotifications();
     return notificationInString;
   }
+
+  public void DoSendTextCommunication(String idSender, String idReceiver, String msg){
+    Terminal t1 = _terminals.get(idSender);
+    Terminal t2 = _terminals.get(idReceiver);
+    CommunicationText c = new CommunicationText(msg, t1, t2);
+    long l = _plano.computeCost(t1.getClientTerminal(),c);
+    c.setCost(l);
+    t1.adicionaDebts(l);
+    t1.getClientTerminal().adicionaDebts(l);
+    _allComms.put(c.getId(),c);
+    }
 
   /**
    * Read text input file and create corresponding domain entities.
