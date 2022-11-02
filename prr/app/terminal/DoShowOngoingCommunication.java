@@ -18,6 +18,7 @@ class DoShowOngoingCommunication extends TerminalCommand {
     if(_receiver.getCurrentComm() == null){
       _display.popup(Message.noOngoingCommunication());
     }
-    _display.popup(_receiver.getCurrentComm().toCommString());
+    else
+      _display.popup(_receiver.getCurrentComm().toCommString());
   }
 }

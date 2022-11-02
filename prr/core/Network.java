@@ -103,28 +103,30 @@ public class Network implements Serializable {
       throw new InvalidTerminalIDException(receiver.getTerminalId());
   }
 
-  public void stopVoiceCall(CommunicationVoice comm, int duracao){
+  public long stopVoiceCall(CommunicationVoice comm, int duracao){
     Terminal sender = comm.getSender();
     Terminal receiver = comm.getReceiver();
-    if (_terminals.containsKey(sender.getTerminalId())){
-      comm.setOnGoing(false);
-      comm.setSizeDuration(duracao);
-      comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
-      sender.setCommToNull();
-      receiver.setCommToNull();
-    }
+    comm.setOnGoing(false);
+    comm.setSizeDuration(duracao);
+    comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
+    sender.setCommToNull();
+    sender.setBusy(false);
+    receiver.setCommToNull();
+    receiver.setBusy(false);
+    return comm.getCost();
   }
 
-  public void stopVideoCall(CommunicationVideo comm, int duracao){
+  public long stopVideoCall(CommunicationVideo comm, int duracao){
     Terminal sender = comm.getSender();
     Terminal receiver = comm.getReceiver();
-    if (_terminals.containsKey(sender.getTerminalId())){
-      comm.setOnGoing(false);
-      comm.setSizeDuration(duracao);
-      comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
-      sender.setCommToNull();
-      receiver.setCommToNull();
-    }
+    comm.setOnGoing(false);
+    comm.setSizeDuration(duracao);
+    comm.setCost(_plano.computeCost(sender.getClientTerminal(), comm));
+    sender.setCommToNull();
+    sender.setBusy(false);
+    receiver.setCommToNull();
+    receiver.setBusy(false);
+    return comm.getCost();
   }
 
   /** @return the global network payments **/

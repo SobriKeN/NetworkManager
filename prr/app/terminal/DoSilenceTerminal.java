@@ -22,7 +22,8 @@ class DoSilenceTerminal extends TerminalCommand {
     if(_receiver.getTerminalModeEnum() == TerminalMode.SILENCE){
       _display.popup(Message.alreadySilent());
     }
-    _receiver.setOnSilent();
+    else
+      _receiver.setOnSilent();
   }
 }
 

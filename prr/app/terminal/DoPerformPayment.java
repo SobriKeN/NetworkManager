@@ -19,9 +19,9 @@ class DoPerformPayment extends TerminalCommand {
   @Override
   protected final void execute() throws CommandException {
     if (!_network.getComms().containsKey(integerField("commKey")) ||
-            !_network.getComms().get(integerField("commKey")).getIdSender().equals(_receiver.getTerminalId())){
+            !_network.getComms().get(integerField("commKey")).getIdSender().equals(_receiver.getTerminalId()))
       _display.popup(Message.invalidCommunication());
-    }
-    _network.performPayment(integerField("commKey"));
+    else
+      _network.performPayment(integerField("commKey"));
   }
 }

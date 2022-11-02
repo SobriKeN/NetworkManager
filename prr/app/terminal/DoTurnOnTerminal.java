@@ -22,6 +22,7 @@ class DoTurnOnTerminal extends TerminalCommand {
     if(_receiver.getTerminalModeEnum() == TerminalMode.ON){
       _display.popup(Message.alreadyOn());
     }
-    _receiver.setONIdle();
+    else
+      _receiver.setONIdle();
   }
 }

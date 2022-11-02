@@ -22,7 +22,8 @@ class DoTurnOffTerminal extends TerminalCommand {
     if(_receiver.getTerminalModeEnum() == TerminalMode.OFF){
       _display.popup(Message.alreadyOff());
     }
-    _receiver.turnOff();
+    else
+      _receiver.turnOff();
   }
 }
 

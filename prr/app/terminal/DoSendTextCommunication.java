@@ -22,14 +22,16 @@ import pt.tecnico.uilib.menus.CommandException;
     protected final void execute() throws CommandException {
       try{
           Terminal t = _network.getTerminal(stringField("terminalReceiver"));
-          if(t.getTerminalModeEnum().toString().equals("OFF")){
+          if (t.getTerminalModeEnum().toString().equals("OFF")){
               _display.popup(Message.destinationIsOff(stringField("terminalReceiver")));
           }
-          _network.DoSendTextCommunication(
-                  _receiver.getTerminalId(),
-                  stringField("terminalReceiver"),
-                  stringField("message")
-          );
+          else {
+              _network.DoSendTextCommunication(
+                      _receiver.getTerminalId(),
+                      stringField("terminalReceiver"),
+                      stringField("message")
+              );
+          }
       } catch (InvalidTerminalIDException e){
           throw new UnknownTerminalKeyException(e.getID());
       }

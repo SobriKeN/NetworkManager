@@ -28,22 +28,26 @@ import java.util.Objects;
          try {
              if (Objects.equals(_receiver.getTerminalType(), "BASIC"))
                  _display.popup(Message.unsupportedAtOrigin(_receiver.getTerminalId(), "BASIC"));
-             if (Objects.equals(_network.getTerminal(terminalDestino).getTerminalType(), "BASIC"))
+             else if (Objects.equals(_network.getTerminal(terminalDestino).getTerminalType(), "BASIC"))
                  _display.popup(Message.unsupportedAtDestination(_receiver.getTerminalId(), "BASIC"));
-             if (_network.getTerminal(terminalDestino).getTerminalModeEnum() == TerminalMode.OFF)
+             else if (_network.getTerminal(terminalDestino).getTerminalModeEnum() == TerminalMode.OFF)
                  _display.popup(Message.destinationIsOff(terminalDestino));
-             if (_network.getTerminal(terminalDestino).getTerminalModeEnum() == TerminalMode.SILENCE)
+             else if (_network.getTerminal(terminalDestino).getTerminalModeEnum() == TerminalMode.SILENCE)
                  _display.popup(Message.destinationIsSilent(terminalDestino));
-             if (!_network.getTerminal(terminalDestino).canStartCommunication())
+             else if (!_network.getTerminal(terminalDestino).canStartCommunication())
                  _display.popup(Message.destinationIsBusy(terminalDestino));
 
-             if (Objects.equals(commType, "VIDEO")) {
-                 _network.makeVideoCall(_network.getTerminal(terminalDestino), _receiver);
-             } else
-                 _network.makeVoiceCall(_network.getTerminal(terminalDestino), _receiver);
+             else {
+                 if (Objects.equals(commType, "VIDEO"))
+                     _network.makeVideoCall(_network.getTerminal(terminalDestino), _receiver);
+                 else
+                     _network.makeVoiceCall(_network.getTerminal(terminalDestino), _receiver);
+             }
+
          } catch (InvalidTerminalIDException e){
              throw new UnknownTerminalKeyException(e.getID());
          }
+
      }
  }
 
