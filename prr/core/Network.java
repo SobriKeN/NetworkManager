@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.TreeMap;
 
+import com.sun.jdi.ObjectReference;
 import prr.core.exception.*;
 
 /** Class Network that represents the network of the system**/
@@ -50,6 +52,18 @@ public class Network implements Serializable {
 
   public void activateSaveFlag(){
     saveFlag = true;
+  }
+
+
+  public void makeVoiceCall(Terminal sender, Terminal receiver){
+    if (_terminals.containsKey(sender.getTerminalId()) &&
+            _terminals.containsKey(receiver.getTerminalId())){
+      CommunicationVoice commVoice = new CommunicationVoice(sender, receiver);
+      receiver.setComm(commVoice);
+      receiver.setBusy(true);
+      receiver.setUsed();
+      receiver.
+    }
   }
 
 

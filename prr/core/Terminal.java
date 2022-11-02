@@ -101,6 +101,18 @@ public class Terminal implements Serializable {
     return _currentComm;
   }
 
+  public void setUsed(){
+    this._virgem = false;
+  }
+
+  public void setBusy(boolean b){
+    this._busy = b;
+  }
+
+  public void adicionaDebts(long cost){
+    this._debt += cost;
+  }
+
   /**
    * Void method that sets the Client's association with the terminal
    * @param _clientTerminal

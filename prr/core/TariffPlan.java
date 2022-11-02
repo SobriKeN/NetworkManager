@@ -38,7 +38,7 @@ public class TariffPlan implements Serializable {
      * @param Client c
      * @param CommunicationText t
      */
-    public double computeCost(Client c, CommunicationText t){
+    public long computeCost(Client c, CommunicationText t){
         int custo = 0;
 
         if (Objects.equals(c.getLevel().toString(), "NORMAL")) {
@@ -74,7 +74,7 @@ public class TariffPlan implements Serializable {
      * @param Client c
      * @param CommunicationVoice t
      */
-    public double computeCost(Client c, CommunicationVoice t){
+    public long computeCost(Client c, CommunicationVoice t){
         int custo = 0;
 
         if (Objects.equals(c.getLevel().toString(), "NORMAL"))
@@ -92,7 +92,7 @@ public class TariffPlan implements Serializable {
      * @param Client c
      * @param CommunicationVideo t
      */
-    public double computeCost(Client c, CommunicationVideo t){
+    public long computeCost(Client c, CommunicationVideo t){
         int custo = 0;
 
         if (Objects.equals(c.getLevel().toString(), "NORMAL"))
