@@ -157,7 +157,7 @@ public class Client implements Serializable {
             else
                 numeroCommTextoConsecutivas = 0;
 
-            if ((_pagamentos - _debts) > 0 && (numeroCommTextoConsecutivas >= 2)) {
+            if ((this._pagamentos - this._debts) > 0 && (numeroCommTextoConsecutivas >= 2)) {
                 this._level = ClientLevel.GOLD;
                 break;
             }
