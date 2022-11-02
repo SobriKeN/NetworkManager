@@ -103,12 +103,19 @@ public class Network implements Serializable {
   }
 
   public long stopVoiceCall(CommunicationVoice comm, int duracao){
+    long custo;
     Terminal sender = comm.getSender();
     Terminal receiver = comm.getReceiver();
     Client c = sender.getClientTerminal();
     comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
-    comm.setCost(_plano.computeCost(c, comm));
+
+    if (sender.getTerminalAmigos().contains(receiver.getTerminalId()))
+      custo = (_plano.computeCost(c,comm)/2);
+    else
+      custo = _plano.computeCost(c,comm);
+
+    comm.setCost(custo);
     sender.setCommToNull();
     sender.setBusy(false);
     receiver.setCommToNull();
@@ -124,12 +131,19 @@ public class Network implements Serializable {
   }
 
   public long stopVideoCall(CommunicationVideo comm, int duracao){
+    long custo;
     Terminal sender = comm.getSender();
     Terminal receiver = comm.getReceiver();
     Client c = sender.getClientTerminal();
     comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
-    comm.setCost(_plano.computeCost(c, comm));
+
+    if (sender.getTerminalAmigos().contains(receiver.getTerminalId()))
+      custo = (_plano.computeCost(c,comm)/2);
+    else
+      custo = _plano.computeCost(c,comm);
+
+    comm.setCost(custo);
     sender.setCommToNull();
     sender.setBusy(false);
     receiver.setCommToNull();
@@ -563,11 +577,15 @@ public class Network implements Serializable {
   }
 
   public void DoSendTextCommunication(String idSender, String idReceiver, String msg){
+    long l;
     Terminal t1 = _terminals.get(idSender);
     Terminal t2 = _terminals.get(idReceiver);
     Client cliente = t1.getClientTerminal();
     CommunicationText c = new CommunicationText(msg, t1, t2);
-    long l = _plano.computeCost(cliente,c);
+    if (t1.getTerminalAmigos().contains(t2.getTerminalId()))
+      l = (_plano.computeCost(cliente,c)/2);
+    else
+      l = _plano.computeCost(cliente,c);
     c.setCost(l);
     _allComms.put(c.getId(),c);
 
