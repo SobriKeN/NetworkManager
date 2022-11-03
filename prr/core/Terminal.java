@@ -309,6 +309,8 @@ public class Terminal implements Serializable {
    *          it was the originator of this communication.
   **/
   public boolean canEndCurrentCommunication() {
+    if (this.getTerminalModeEnum() != TerminalMode.BUSY)
+      return !_busy;
     return _busy;
   }
 
