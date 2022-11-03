@@ -185,15 +185,15 @@ public class Terminal implements Serializable {
           for (Terminal t : this.getTentaramNotificar()) {
             Notification n = new Notification(NotificationType.O2I, t);
             t.getClientTerminal().getNotificacoesClient().add(n);
-          this.getTentaramNotificar().clear();
           }
+          this.getTentaramNotificar().clear();
         }
         if (_terminalmode.toString().equals("SILENCE") && !this.getTentaramNotificar().isEmpty()) {
           for (Terminal t : this.getTentaramNotificar()) {
             Notification n = new Notification(NotificationType.S2I, t);
             t.getClientTerminal().getNotificacoesClient().add(n);
-          this.getTentaramNotificar().clear();
           }
+          this.getTentaramNotificar().clear();
         }
         this._terminalmode = TerminalMode.ON;
       }
@@ -210,8 +210,8 @@ public class Terminal implements Serializable {
           for (Terminal t : this.getTentaramNotificar()) {
             Notification n = new Notification(NotificationType.O2S, t);
             t.getClientTerminal().getNotificacoesClient().add(n);
-          this.getTentaramNotificar().clear();
           }
+          this.getTentaramNotificar().clear();
         }
         _terminalmode = TerminalMode.SILENCE;
       }
