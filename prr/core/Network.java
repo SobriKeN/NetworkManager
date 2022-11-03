@@ -124,20 +124,34 @@ public class Network implements Serializable {
     receiver.setCommToNull();
     receiver.setBusy(false);
 
-    if (!receiver.getTentaramNotificar().isEmpty()) {
-      for (Terminal t : receiver.getTentaramNotificar()) {
-        Notification n = new Notification(NotificationType.B2I, t);
-        t.getClientTerminal().getNotificacoesClient().add(n);
+    if(sender.getTerminalModeEnum().equals(TerminalMode.ON)){
+      if (!sender.getTentaramNotificar().isEmpty()) {
+        for (Terminal t : sender.getTentaramNotificar()) {
+          Notification n = new Notification(NotificationType.B2I, t);
+          t.getClientTerminal().getNotificacoesClient().add(n);
+        }
+        sender.getTentaramNotificar().clear();
       }
-      receiver.getTentaramNotificar().clear();
     }
 
-    if (!sender.getTentaramNotificar().isEmpty()) {
-      for (Terminal t : sender.getTentaramNotificar()) {
-        Notification n = new Notification(NotificationType.B2I, t);
-        t.getClientTerminal().getNotificacoesClient().add(n);
+    if(receiver.getTerminalModeEnum().equals(TerminalMode.ON)){
+      if (!receiver.getTentaramNotificar().isEmpty()) {
+        for (Terminal t : receiver.getTentaramNotificar()) {
+          Notification n = new Notification(NotificationType.B2I, t);
+          t.getClientTerminal().getNotificacoesClient().add(n);
+        }
+        receiver.getTentaramNotificar().clear();
       }
-      sender.getTentaramNotificar().clear();
+    }
+
+    if(sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)){
+      if (!sender.getTentaramNotificar().isEmpty()) {
+        for (Terminal t : sender.getTentaramNotificar()) {
+          Notification n = new Notification(NotificationType.B2S, t);
+          t.getClientTerminal().getNotificacoesClient().add(n);
+        }
+        sender.getTentaramNotificar().clear();
+      }
     }
 
     if ((c.getLevel() == ClientLevel.GOLD)){
@@ -170,20 +184,34 @@ public class Network implements Serializable {
     receiver.setCommToNull();
     receiver.setBusy(false);
 
-    if (!receiver.getTentaramNotificar().isEmpty()) {
-      for (Terminal t : receiver.getTentaramNotificar()) {
-        Notification n = new Notification(NotificationType.B2I, t);
-        t.getClientTerminal().getNotificacoesClient().add(n);
+    if(sender.getTerminalModeEnum().equals(TerminalMode.ON)){
+      if (!sender.getTentaramNotificar().isEmpty()) {
+        for (Terminal t : sender.getTentaramNotificar()) {
+          Notification n = new Notification(NotificationType.B2I, t);
+          t.getClientTerminal().getNotificacoesClient().add(n);
+        }
+        sender.getTentaramNotificar().clear();
       }
-      receiver.getTentaramNotificar().clear();
     }
 
-    if (!sender.getTentaramNotificar().isEmpty()) {
-      for (Terminal t : sender.getTentaramNotificar()) {
-        Notification n = new Notification(NotificationType.B2I, t);
-        t.getClientTerminal().getNotificacoesClient().add(n);
+    if(receiver.getTerminalModeEnum().equals(TerminalMode.ON)){
+      if (!receiver.getTentaramNotificar().isEmpty()) {
+        for (Terminal t : receiver.getTentaramNotificar()) {
+          Notification n = new Notification(NotificationType.B2I, t);
+          t.getClientTerminal().getNotificacoesClient().add(n);
+        }
+        receiver.getTentaramNotificar().clear();
       }
-      sender.getTentaramNotificar().clear();
+    }
+
+    if(sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)){
+      if (!sender.getTentaramNotificar().isEmpty()) {
+        for (Terminal t : sender.getTentaramNotificar()) {
+          Notification n = new Notification(NotificationType.B2S, t);
+          t.getClientTerminal().getNotificacoesClient().add(n);
+        }
+        sender.getTentaramNotificar().clear();
+      }
     }
 
     if ((c.getLevel() == ClientLevel.GOLD)){

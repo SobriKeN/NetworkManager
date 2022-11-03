@@ -2,7 +2,6 @@ package prr.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -27,6 +26,9 @@ public class Terminal implements Serializable {
 
   /** Enum that contains the terminal's mode **/
   private TerminalMode _terminalmode;
+
+  /** Enum that contains the terminal's mode **/
+  private TerminalMode _beforeState;
 
   /** List that contains the terminal's friends **/
   private TreeSet<String> _amigos;
@@ -57,6 +59,7 @@ public class Terminal implements Serializable {
   public Terminal(String id, String tipo){
     _id = id;
     _terminalmode = TerminalMode.ON;
+    _beforeState = null;
     _tipo = tipo;
     _debt = 0;
     _payments = 0;
@@ -83,6 +86,9 @@ public class Terminal implements Serializable {
   public TerminalMode getTerminalModeEnum(){
     return this._terminalmode;
   }
+
+  /** @return previous state **/
+  public TerminalMode getBeforeState() {return _beforeState;}
 
   /** @return terminal's debt **/
   public long getTerminalDebts(){
@@ -115,12 +121,15 @@ public class Terminal implements Serializable {
   }
 
   public void setBusy(boolean b) {
-    this._busy = b;
-    if (b) {
-      this._terminalmode = TerminalMode.ON;
-    }
-    else {
+    if(b){
+      this._beforeState = this._terminalmode;
+      this._busy = b;
       this._terminalmode = TerminalMode.BUSY;
+    }
+    else{
+      this._terminalmode = this._beforeState;
+      this._beforeState = null;
+      this._busy = b;
     }
   }
 
