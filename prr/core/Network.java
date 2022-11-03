@@ -602,6 +602,9 @@ public class Network implements Serializable {
 
     if (_terminals.containsKey(friend)) {
       if (_terminals.containsKey(idTerminal)) {
+        if(idTerminal.equals(friend)){
+          return;
+        }
         terminal = _terminals.get(idTerminal);
         terminal.addAmigo(friend);
         this.deactivateSaveFlag();
