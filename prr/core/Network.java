@@ -25,7 +25,7 @@ public class Network implements Serializable {
   /**
    * The next communication's key
    */
-  private int commId = 1;
+  private int commId = 0;
 
   /**
    * The tariff plan related to this network
@@ -78,7 +78,7 @@ public class Network implements Serializable {
   public void makeVoiceCall(Terminal sender, Terminal receiver) throws InvalidTerminalIDException {
     if (_terminals.containsKey(sender.getTerminalId()) &&
             _terminals.containsKey(receiver.getTerminalId())) {
-      CommunicationVoice comm = new CommunicationVoice(sender, receiver, commId++);
+      CommunicationVoice comm = new CommunicationVoice(sender, receiver, ++commId);
       receiver.setComm(comm);
       receiver.setBusy(true);
       receiver.setUsed();
@@ -95,7 +95,7 @@ public class Network implements Serializable {
   public void makeVideoCall(Terminal sender, Terminal receiver) throws InvalidTerminalIDException {
     if (_terminals.containsKey(sender.getTerminalId()) &&
                _terminals.containsKey(receiver.getTerminalId())){
-      CommunicationVideo comm = new CommunicationVideo(sender, receiver, commId++);
+      CommunicationVideo comm = new CommunicationVideo(sender, receiver, ++commId);
       receiver.setComm(comm);
       receiver.setBusy(true);
       receiver.setUsed();
@@ -652,7 +652,7 @@ public class Network implements Serializable {
     Terminal t1 = _terminals.get(idSender);
     Terminal t2 = _terminals.get(idReceiver);
     Client cliente = t1.getClientTerminal();
-    CommunicationText c = new CommunicationText(msg, t1, t2, commId++);
+    CommunicationText c = new CommunicationText(msg, t1, t2, ++commId);
     if (t1.getTerminalAmigos().contains(t2.getTerminalId()))
       l = (_plano.computeCost(cliente,c)/2);
     else
