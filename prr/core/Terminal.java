@@ -309,7 +309,8 @@ public class Terminal implements Serializable {
    * @return true if this terminal is neither off neither busy, false otherwise.
   **/
   public boolean canStartCommunication() {
+    if (this.getTerminalModeEnum() == TerminalMode.OFF)
+      return _busy;
     return !_busy;
   }
-
 }

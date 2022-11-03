@@ -1,13 +1,10 @@
-*** testsBoth/A-18-12-M-ok.out	2022-10-30 22:57:57.000000000 +0000
---- testsBoth/A-18-12-M-ok.outhyp	2022-11-03 13:44:11.355149241 +0000
+*** testsBoth/A-18-12-M-ok.out	2022-11-03 11:42:49.957159519 +0000
+--- testsBoth/A-18-12-M-ok.outhyp	2022-11-03 13:55:12.472684025 +0000
 ***************
-*** 110,196 ****
-  5 - Retirar amigo
-  6 - Pagamento
-  7 - Consultar saldo
-- 11 - Mostrar comunicação em curso
-- 0 - Sair
-- Escolha uma opção: 1
+*** 113,196 ****
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 1
 - OPERAÇÕES DO TERMINAL
 - 1 - Ligar
 - 2 - Colocar no silêncio
@@ -16,10 +13,10 @@
 - 5 - Retirar amigo
 - 6 - Pagamento
 - 7 - Consultar saldo
-  8 - Enviar comunicação de texto
-  9 - Iniciar comunicação
-  11 - Mostrar comunicação em curso
-  0 - Sair
+- 8 - Enviar comunicação de texto
+- 9 - Iniciar comunicação
+- 11 - Mostrar comunicação em curso
+- 0 - Sair
 - Escolha uma opção: 0
 - GESTÃO DE TERMINAIS
 - 1 - Mostrar todos os terminais
@@ -55,7 +52,7 @@
 - 5 - Desactivar notificações
 - 6 - Mostrar saldo de cliente
 - 0 - Sair
-  Escolha uma opção: 1
+- Escolha uma opção: 1
 - Identificador do cliente: cli002
 - CLIENT|cli002|Pedro Pinheiro|103447|NORMAL|YES|2|0|0
 - O2I|969013
@@ -89,4 +86,4 @@
 - 6 - Ver saldo global
 - 0 - Sair
 - Escolha uma opção: 0
---- 110,117 ----
+--- 113,115 ----
