@@ -27,7 +27,7 @@ import pt.tecnico.uilib.menus.CommandException;
           if (t.getTerminalModeEnum().toString().equals("OFF")){
               _display.popup(Message.destinationIsOff(stringField("terminalReceiver")));
               if(_receiver.getClientTerminal().isRecieveNotifications()
-                      && !t.getTentaramNotificar().contains(_receiver)) {
+                      && !t.verificaTerminalNotificar(_receiver)) {
                   t.getTentaramNotificar().add(_receiver);
               }
           }

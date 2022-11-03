@@ -113,6 +113,7 @@ public class Client implements Serializable {
     /** @return terminal's Notifications LinkedList **/
     public ArrayList<Notification> getNotificacoesClient(){ return _notificacoes;}
 
+
     /**
      Method that changes the client's level if the requirements to the upgrade from Normal to Gold are met,
      and upgrades the Client's level

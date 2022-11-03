@@ -174,6 +174,25 @@ public class Terminal implements Serializable {
     return _tentaramNotificar;
   }
 
+  public boolean verificaTerminalNotificar(Terminal t1){
+     ArrayList<String> getTentaramNotificarString = new ArrayList<String>();
+
+     for(Terminal t2 : this._tentaramNotificar){
+       getTentaramNotificarString.add(t2.getTerminalId());
+     }
+
+    return getTentaramNotificarString.contains(t1.getTerminalId());
+  }
+
+  public boolean verificarClienteIDExistente(Client c){
+    ArrayList<String> clientIDs = new ArrayList<String>();
+
+    for(Terminal t : this._tentaramNotificar){
+      clientIDs.add(t.getClientTerminal().getKey());
+    }
+
+    return clientIDs.contains(c.getKey());
+  }
   /**
    Void method that returns true if the requirements necessary
    to set the terminal's mode on ON/Idle are correct,
