@@ -1,5 +1,6 @@
 package prr.app.terminal;
 
+import prr.app.exception.UnknownTerminalKeyException;
 import prr.core.Network;
 import prr.core.Terminal;
 import prr.core.exception.InvalidTerminalIDException;
@@ -29,7 +30,7 @@ class DoAddFriend extends TerminalCommand {
         _network.addFriend(_receiver.getTerminalId(), stringField("terminalFriend"));
       }
     } catch (InvalidTerminalIDException e) {
-      throw new RuntimeException(e);
+      throw new UnknownTerminalKeyException(e.getID());
     }
   }
 }

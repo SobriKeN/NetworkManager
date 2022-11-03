@@ -22,7 +22,7 @@ class DoTurnOffTerminal extends TerminalCommand {
     }
     else
       _receiver.turnOff();
-      }
   }
+}
 
 
