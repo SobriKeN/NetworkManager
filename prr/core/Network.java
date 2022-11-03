@@ -132,8 +132,8 @@ public class Network implements Serializable {
     if(sender.getTerminalModeEnum().equals(TerminalMode.ON)){
       if (!sender.getTentaramNotificar().isEmpty()) {
         for (Terminal t : sender.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2I, t);
-          sender.getClientTerminal().getNotificacoesClient().add(n);
+          Notification n = new Notification(NotificationType.B2I, sender);
+          t.getClientTerminal().getNotificacoesClient().add(n);
         }
         sender.getTentaramNotificar().clear();
       }
@@ -142,8 +142,8 @@ public class Network implements Serializable {
     if(receiver.getTerminalModeEnum().equals(TerminalMode.ON)){
       if (!receiver.getTentaramNotificar().isEmpty()) {
         for (Terminal t : receiver.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2I, t);
-          receiver.getClientTerminal().getNotificacoesClient().add(n);
+          Notification n = new Notification(NotificationType.B2I, receiver);
+          t.getClientTerminal().getNotificacoesClient().add(n);
         }
         receiver.getTentaramNotificar().clear();
       }
@@ -152,8 +152,8 @@ public class Network implements Serializable {
     if(sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)){
       if (!sender.getTentaramNotificar().isEmpty()) {
         for (Terminal t : sender.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2S, t);
-          sender.getClientTerminal().getNotificacoesClient().add(n);
+          Notification n = new Notification(NotificationType.B2S, sender);
+          t.getClientTerminal().getNotificacoesClient().add(n);
         }
         sender.getTentaramNotificar().clear();
       }
@@ -192,8 +192,8 @@ public class Network implements Serializable {
     if(sender.getTerminalModeEnum().equals(TerminalMode.ON)){
       if (!sender.getTentaramNotificar().isEmpty()) {
         for (Terminal t : sender.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2I, t);
-          sender.getClientTerminal().getNotificacoesClient().add(n);
+          Notification n = new Notification(NotificationType.B2I, sender);
+          t.getClientTerminal().getNotificacoesClient().add(n);
         }
         sender.getTentaramNotificar().clear();
       }
@@ -202,8 +202,8 @@ public class Network implements Serializable {
     if(receiver.getTerminalModeEnum().equals(TerminalMode.ON)){
       if (!receiver.getTentaramNotificar().isEmpty()) {
         for (Terminal t : receiver.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2I, t);
-          receiver.getClientTerminal().getNotificacoesClient().add(n);
+          Notification n = new Notification(NotificationType.B2I, receiver);
+          t.getClientTerminal().getNotificacoesClient().add(n);
         }
         receiver.getTentaramNotificar().clear();
       }
@@ -212,8 +212,8 @@ public class Network implements Serializable {
     if(sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)){
       if (!sender.getTentaramNotificar().isEmpty()) {
         for (Terminal t : sender.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2S, t);
-          sender.getClientTerminal().getNotificacoesClient().add(n);
+          Notification n = new Notification(NotificationType.B2S, sender);
+          t.getClientTerminal().getNotificacoesClient().add(n);
         }
         sender.getTentaramNotificar().clear();
       }

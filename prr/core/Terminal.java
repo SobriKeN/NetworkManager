@@ -183,15 +183,15 @@ public class Terminal implements Serializable {
       if (_terminalmode.toString().equals("OFF") || _terminalmode.toString().equals("SILENCE")) {
         if (_terminalmode.toString().equals("OFF") && !this.getTentaramNotificar().isEmpty()) {
           for (Terminal t : this.getTentaramNotificar()) {
-            Notification n = new Notification(NotificationType.O2I, t);
-            this.getClientTerminal().getNotificacoesClient().add(n);
+            Notification n = new Notification(NotificationType.O2I, this);
+            t.getClientTerminal().getNotificacoesClient().add(n);
           }
           this.getTentaramNotificar().clear();
         }
         if (_terminalmode.toString().equals("SILENCE") && !this.getTentaramNotificar().isEmpty()) {
           for (Terminal t : this.getTentaramNotificar()) {
-            Notification n = new Notification(NotificationType.S2I, t);
-            this.getClientTerminal().getNotificacoesClient().add(n);
+            Notification n = new Notification(NotificationType.S2I, this);
+            t.getClientTerminal().getNotificacoesClient().add(n);
           }
           this.getTentaramNotificar().clear();
         }
@@ -208,8 +208,8 @@ public class Terminal implements Serializable {
       if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("OFF") ){
         if (_terminalmode.toString().equals("OFF") && !this.getTentaramNotificar().isEmpty()) {
           for (Terminal t : this.getTentaramNotificar()) {
-            Notification n = new Notification(NotificationType.O2S, t);
-            this.getClientTerminal().getNotificacoesClient().add(n);
+            Notification n = new Notification(NotificationType.O2S, this);
+            t.getClientTerminal().getNotificacoesClient().add(n);
           }
           this.getTentaramNotificar().clear();
         }
