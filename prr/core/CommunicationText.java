@@ -24,8 +24,8 @@ public class CommunicationText extends Communication implements Serializable {
      *
      * @param message
      */
-    public CommunicationText(String message, Terminal sender, Terminal receiver) {
-        super(sender, receiver);
+    public CommunicationText(String message, Terminal sender, Terminal receiver, int id) {
+        super(sender, receiver, id);
         this._message = message;
         this._type = "TEXT";
     }

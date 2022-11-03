@@ -13,8 +13,8 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
     /**
      * Main Construtor
      */
-    public CommunicationVoice(Terminal sender, Terminal receiver) {
-        super(sender, receiver);
+    public CommunicationVoice(Terminal sender, Terminal receiver, int id) {
+        super(sender, receiver, id);
         this._type = "VOICE";
     }
 

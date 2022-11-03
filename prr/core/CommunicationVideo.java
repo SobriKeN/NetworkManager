@@ -12,8 +12,8 @@ public class CommunicationVideo extends CommunicationInteractive implements Seri
     /**
      * Main Construtor
      */
-    public CommunicationVideo(Terminal sender, Terminal receiver) {
-        super(sender, receiver);
+    public CommunicationVideo(Terminal sender, Terminal receiver, int id) {
+        super(sender, receiver, id);
         this._type = "VIDEO";
     }
 

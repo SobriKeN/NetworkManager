@@ -17,8 +17,8 @@ public abstract class CommunicationInteractive extends Communication implements 
      * Main Construtor
      * Same parameters as communication
      */
-    public CommunicationInteractive(Terminal sender, Terminal receiver){
-        super(sender, receiver);
+    public CommunicationInteractive(Terminal sender, Terminal receiver, int id){
+        super(sender, receiver, id);
         this._duration = 0;
         this._isOnGoing = true;
     }

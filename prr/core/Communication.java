@@ -11,7 +11,7 @@ public abstract class Communication implements Serializable {
     private static final long serialVersionUID = -809010677570144248L;
 
     /** Communication's id, the first comm starts with 1 */
-    private static int _id = 0;
+    private int _id;
 
     /** To check if the communication has been paid */
     private boolean _isPaid;
@@ -29,8 +29,8 @@ public abstract class Communication implements Serializable {
     /**
      * Main Construtor
      */
-    public Communication(Terminal sender, Terminal receiver) {
-        _id++;
+    public Communication(Terminal sender, Terminal receiver, int id) {
+        this._id = id;
         this._isPaid = false;
         this._cost = 0;
         this._receiver = receiver;

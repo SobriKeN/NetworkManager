@@ -278,31 +278,6 @@ public class Terminal implements Serializable {
     }
   }
 
-
-  /** Funções sobre Comms por fazer: **/
-
-  public void makeSMS(Terminal t, String msg){
-    CommunicationText c = new CommunicationText(msg, this, t);
-  }
-
-  protected void acceptSMS(Terminal t){
-
-  }
-
-  public void makeVoiceCall(Terminal t){
-    CommunicationVoice c = new CommunicationVoice(this, t);
-  }
-
-  protected void acceptVoiceCall(Terminal t){
-  }
-
-  public void makeVideoCall(Terminal t){
-    CommunicationVideo c = new CommunicationVideo(this, t);
-  }
-
-  protected void acceptVideoCall(Terminal t){
-  }
-
   /**
    -> * Checks if this terminal can end the current interactive communication.
    *
