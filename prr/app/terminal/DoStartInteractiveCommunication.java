@@ -55,9 +55,9 @@ import java.util.Objects;
 
              else {
                  if (Objects.equals(commType, "VIDEO"))
-                     _network.makeVideoCall(_network.getTerminal(terminalDestino), _receiver);
+                     _network.makeVideoCall(_receiver, _network.getTerminal(terminalDestino));
                  else
-                     _network.makeVoiceCall(_network.getTerminal(terminalDestino), _receiver);
+                     _network.makeVoiceCall(_receiver, _network.getTerminal(terminalDestino));
                  }
          } catch (InvalidTerminalIDException e){
              throw new UnknownTerminalKeyException(e.getID());

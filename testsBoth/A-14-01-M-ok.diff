@@ -1,5 +1,5 @@
 *** testsBoth/A-14-01-M-ok.out	2022-11-03 11:42:49.953159519 +0000
---- testsBoth/A-14-01-M-ok.outhyp	2022-11-03 13:55:10.036665238 +0000
+--- testsBoth/A-14-01-M-ok.outhyp	2022-11-03 13:57:39.885820873 +0000
 ***************
 *** 56,62 ****
   11 - Mostrar comunicação em curso
@@ -13,7 +13,7 @@
   11 - Mostrar comunicação em curso
   0 - Sair
   Escolha uma opção: 11
-! VOICE|1|969007|969001|0|0|ONGOING
+! VOICE|1|969001|969007|0|0|ONGOING
   OPERAÇÕES DO TERMINAL
   1 - Ligar
   2 - Colocar no silêncio
@@ -30,7 +30,7 @@
   11 - Mostrar comunicação em curso
   0 - Sair
   Escolha uma opção: 11
-! VOICE|1|969007|969001|0|0|ONGOING
+! VOICE|1|969001|969007|0|0|ONGOING
   OPERAÇÕES DO TERMINAL
   1 - Ligar
   2 - Colocar no silêncio

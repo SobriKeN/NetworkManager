@@ -1,5 +1,5 @@
 *** testsBoth/A-15-05-M-ok.out	2022-11-03 11:42:49.953159519 +0000
---- testsBoth/A-15-05-M-ok.outhyp	2022-11-03 13:55:10.684670236 +0000
+--- testsBoth/A-15-05-M-ok.outhyp	2022-11-03 13:57:40.533825870 +0000
 ***************
 *** 42,48 ****
   0 - Sair
@@ -30,7 +30,7 @@
   7 - Mostrar terminais com saldo positivo
   0 - Sair
   Escolha uma opção: 1
-! VIDEO|1|969014|969011|30|0|FINISHED
+! VIDEO|1|969011|969014|30|0|FINISHED
   CONSULTAS
   1 - Mostrar todas as comunicações
   2 - Mostrar comunicações feitas por um cliente
