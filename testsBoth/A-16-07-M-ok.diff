@@ -1,0 +1,91 @@
+*** testsBoth/A-16-07-M-ok.out	2022-10-30 22:57:55.000000000 +0000
+--- testsBoth/A-16-07-M-ok.outhyp	2022-11-03 11:23:45.648351370 +0000
+***************
+*** 22,27 ****
+--- 22,29 ----
+  5 - Retirar amigo
+  6 - Pagamento
+  7 - Consultar saldo
++ 8 - Enviar comunicação de texto
++ 9 - Iniciar comunicação
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 4
+***************
+*** 34,39 ****
+--- 36,43 ----
+  5 - Retirar amigo
+  6 - Pagamento
+  7 - Consultar saldo
++ 8 - Enviar comunicação de texto
++ 9 - Iniciar comunicação
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 0
+***************
+*** 44,50 ****
+  0 - Sair
+  Escolha uma opção: 1
+  BASIC|969001|cli001|IDLE|0|0
+! BASIC|969003|cli001|OFF|0|0
+  BASIC|969006|cli002|IDLE|0|0
+  BASIC|969007|cli003|IDLE|0|0
+  BASIC|969008|cli003|SILENCE|0|0
+--- 48,54 ----
+  0 - Sair
+  Escolha uma opção: 1
+  BASIC|969001|cli001|IDLE|0|0
+! BASIC|969003|cli001|OFF|0|0|969003
+  BASIC|969006|cli002|IDLE|0|0
+  BASIC|969007|cli003|IDLE|0|0
+  BASIC|969008|cli003|SILENCE|0|0
+***************
+*** 82,87 ****
+--- 86,93 ----
+  5 - Retirar amigo
+  6 - Pagamento
+  7 - Consultar saldo
++ 8 - Enviar comunicação de texto
++ 9 - Iniciar comunicação
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 4
+***************
+*** 94,99 ****
+--- 100,107 ----
+  5 - Retirar amigo
+  6 - Pagamento
+  7 - Consultar saldo
++ 8 - Enviar comunicação de texto
++ 9 - Iniciar comunicação
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 4
+***************
+*** 106,111 ****
+--- 114,121 ----
+  5 - Retirar amigo
+  6 - Pagamento
+  7 - Consultar saldo
++ 8 - Enviar comunicação de texto
++ 9 - Iniciar comunicação
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 0
+***************
+*** 116,122 ****
+  0 - Sair
+  Escolha uma opção: 1
+  BASIC|969001|cli001|IDLE|0|0
+! BASIC|969003|cli001|OFF|0|0|969001
+  BASIC|969006|cli002|IDLE|0|0
+  BASIC|969007|cli003|IDLE|0|0
+  BASIC|969008|cli003|SILENCE|0|0
+--- 126,132 ----
+  0 - Sair
+  Escolha uma opção: 1
+  BASIC|969001|cli001|IDLE|0|0
+! BASIC|969003|cli001|OFF|0|0|969001, 969003
+  BASIC|969006|cli002|IDLE|0|0
+  BASIC|969007|cli003|IDLE|0|0
+  BASIC|969008|cli003|SILENCE|0|0

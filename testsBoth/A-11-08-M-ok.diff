@@ -1,0 +1,13 @@
+*** testsBoth/A-11-08-M-ok.out	2022-10-30 22:57:52.000000000 +0000
+--- testsBoth/A-11-08-M-ok.outhyp	2022-11-03 11:23:41.511790582 +0000
+***************
+*** 22,27 ****
+--- 22,29 ----
+  5 - Retirar amigo
+  6 - Pagamento
+  7 - Consultar saldo
++ 8 - Enviar comunicação de texto
++ 9 - Iniciar comunicação
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 0

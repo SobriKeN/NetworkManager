@@ -1,0 +1,24 @@
+*** testsBoth/A-16-04-M-ok.out	2022-10-30 22:57:55.000000000 +0000
+--- testsBoth/A-16-04-M-ok.outhyp	2022-11-03 11:23:45.368313542 +0000
+***************
+*** 84,89 ****
+--- 84,91 ----
+  5 - Retirar amigo
+  6 - Pagamento
+  7 - Consultar saldo
++ 8 - Enviar comunicação de texto
++ 9 - Iniciar comunicação
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 4
+***************
+*** 96,101 ****
+--- 98,105 ----
+  5 - Retirar amigo
+  6 - Pagamento
+  7 - Consultar saldo
++ 8 - Enviar comunicação de texto
++ 9 - Iniciar comunicação
+  11 - Mostrar comunicação em curso
+  0 - Sair
+  Escolha uma opção: 0
