@@ -1,5 +1,5 @@
-*** testsBoth/A-15-01-M-ok.out	2022-10-30 22:57:54.000000000 +0000
---- testsBoth/A-15-01-M-ok.outhyp	2022-11-03 14:28:00.536379096 +0000
+*** testsBoth/A-15-01-M-ok.out	2022-11-03 11:42:49.953159519 +0000
+--- testsBoth/A-15-01-M-ok.outhyp	2022-11-03 15:29:09.602133209 +0000
 ***************
 *** 147,153 ****
   7 - Mostrar terminais com saldo positivo

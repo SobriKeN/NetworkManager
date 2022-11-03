@@ -2,6 +2,7 @@ package prr.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.TreeSet;
 
 /**
@@ -309,9 +310,15 @@ public class Terminal implements Serializable {
    *          it was the originator of this communication.
   **/
   public boolean canEndCurrentCommunication() {
-    if (this.getTerminalModeEnum() != TerminalMode.BUSY)
-      return !_busy;
-    return _busy;
+    if (_busy) {
+      if ((this.getCurrentComm().getReceiver().equals(this)))
+        return !_busy;
+      else {
+        return _busy;
+      }
+    }
+    else
+      return false;
   }
 
   /**
