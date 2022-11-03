@@ -117,10 +117,9 @@ public class Network implements Serializable {
     comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
 
-    if (sender.getTerminalAmigos().contains(receiver.getTerminalId()))
-      custo = (_plano.computeCost(c,comm)/2);
-    else
-      custo = _plano.computeCost(c,comm);
+    if (sender.getTerminalAmigos().contains(receiver.getTerminalId())) {
+      custo = (_plano.computeCost(c, comm) / 2);
+    } else { custo = _plano.computeCost(c,comm); }
 
     comm.setCost(custo);
     comm.acabaCall();
@@ -129,42 +128,35 @@ public class Network implements Serializable {
     receiver.setCommToNull();
     receiver.setBusy(false);
 
-    if(sender.getTerminalModeEnum().equals(TerminalMode.ON)){
-      if (!sender.getTentaramNotificar().isEmpty()) {
+    if (sender.getTerminalModeEnum().equals(TerminalMode.ON)
+            && !sender.getTentaramNotificar().isEmpty()) {
         for (Terminal t : sender.getTentaramNotificar()) {
           Notification n = new Notification(NotificationType.B2I, sender);
           t.getClientTerminal().getNotificacoesClient().add(n);
         }
         sender.getTentaramNotificar().clear();
-      }
     }
 
-    if(receiver.getTerminalModeEnum().equals(TerminalMode.ON)){
-      if (!receiver.getTentaramNotificar().isEmpty()) {
+    if (receiver.getTerminalModeEnum().equals(TerminalMode.ON)
+            && !receiver.getTentaramNotificar().isEmpty()) {
         for (Terminal t : receiver.getTentaramNotificar()) {
           Notification n = new Notification(NotificationType.B2I, receiver);
           t.getClientTerminal().getNotificacoesClient().add(n);
         }
         receiver.getTentaramNotificar().clear();
-      }
     }
 
-    if(sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)){
-      if (!sender.getTentaramNotificar().isEmpty()) {
+    if (sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)
+            && !sender.getTentaramNotificar().isEmpty()) {
         for (Terminal t : sender.getTentaramNotificar()) {
           Notification n = new Notification(NotificationType.B2S, sender);
           t.getClientTerminal().getNotificacoesClient().add(n);
         }
         sender.getTentaramNotificar().clear();
-      }
     }
 
-    if ((c.getLevel() == ClientLevel.GOLD)){
-      c.downgradeGoldToNormal();
-    }
-    if ((c.getLevel() == ClientLevel.PLATINUM)){
-      c.downgradePlatinumToNormal();
-    }
+    if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
+    if ((c.getLevel() == ClientLevel.PLATINUM)){ c.downgradePlatinumToNormal(); }
     this.deactivateSaveFlag();
     return comm.getCost();
   }
@@ -177,10 +169,9 @@ public class Network implements Serializable {
     comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
 
-    if (sender.getTerminalAmigos().contains(receiver.getTerminalId()))
-      custo = (_plano.computeCost(c,comm)/2);
-    else
-      custo = _plano.computeCost(c,comm);
+    if (sender.getTerminalAmigos().contains(receiver.getTerminalId())) {
+      custo = (_plano.computeCost(c, comm) / 2);
+    } else { custo = _plano.computeCost(c,comm); }
 
     comm.setCost(custo);
     comm.acabaCall();
@@ -189,45 +180,36 @@ public class Network implements Serializable {
     receiver.setCommToNull();
     receiver.setBusy(false);
 
-    if(sender.getTerminalModeEnum().equals(TerminalMode.ON)){
-      if (!sender.getTentaramNotificar().isEmpty()) {
+    if (sender.getTerminalModeEnum().equals(TerminalMode.ON)
+            && !sender.getTentaramNotificar().isEmpty()) {
         for (Terminal t : sender.getTentaramNotificar()) {
           Notification n = new Notification(NotificationType.B2I, sender);
           t.getClientTerminal().getNotificacoesClient().add(n);
         }
         sender.getTentaramNotificar().clear();
-      }
     }
 
-    if(receiver.getTerminalModeEnum().equals(TerminalMode.ON)){
-      if (!receiver.getTentaramNotificar().isEmpty()) {
+    if (receiver.getTerminalModeEnum().equals(TerminalMode.ON)
+            && !receiver.getTentaramNotificar().isEmpty()) {
         for (Terminal t : receiver.getTentaramNotificar()) {
           Notification n = new Notification(NotificationType.B2I, receiver);
           t.getClientTerminal().getNotificacoesClient().add(n);
         }
         receiver.getTentaramNotificar().clear();
-      }
     }
 
-    if(sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)){
-      if (!sender.getTentaramNotificar().isEmpty()) {
+    if (sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)
+            && !sender.getTentaramNotificar().isEmpty()) {
         for (Terminal t : sender.getTentaramNotificar()) {
           Notification n = new Notification(NotificationType.B2S, sender);
           t.getClientTerminal().getNotificacoesClient().add(n);
         }
         sender.getTentaramNotificar().clear();
       }
-    }
 
-    if ((c.getLevel() == ClientLevel.GOLD)){
-      c.downgradeGoldToNormal();
-    }
-    if ((c.getLevel() == ClientLevel.PLATINUM)){
-      c.downgradePlatinumToNormal();
-    }
-    if ((c.getLevel()) == ClientLevel.GOLD){
-      c.upgradeGoldToPlatinum(getCommsByClientId(c.getKey()));
-    }
+    if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
+    if ((c.getLevel() == ClientLevel.PLATINUM)) { c.downgradePlatinumToNormal(); }
+    if ((c.getLevel()) == ClientLevel.GOLD) { c.upgradeGoldToPlatinum(getCommsByClientId(c.getKey())); }
     this.deactivateSaveFlag();
     return comm.getCost();
   }
@@ -673,7 +655,7 @@ public class Network implements Serializable {
       cliente.downgradePlatinumToGold(getCommsByClientId(cliente.getKey()));
     }
     this.deactivateSaveFlag();
-    }
+  }
 
     public void performPayment(int id){
       Communication c = _allComms.get(id);
