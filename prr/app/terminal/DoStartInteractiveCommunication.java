@@ -41,14 +41,14 @@ import java.util.Objects;
              else if (_network.getTerminal(terminalDestino).getTerminalModeEnum() == TerminalMode.SILENCE){
                  _display.popup(Message.destinationIsSilent(terminalDestino));
                  if (_receiver.getClientTerminal().isRecieveNotifications()
-                     && !t.verificaTerminalNotificar(_receiver)) {
+                     && !t.verificarClienteIDExistente(_receiver.getClientTerminal())) {
                      t.getTentaramNotificar().add(_receiver);
                  }
              }
              else if (!_network.getTerminal(terminalDestino).canStartCommunication()){
                  _display.popup(Message.destinationIsBusy(terminalDestino));
                  if (_receiver.getClientTerminal().isRecieveNotifications()
-                         && !t.verificaTerminalNotificar(_receiver)) {
+                         && !t.verificarClienteIDExistente(_receiver.getClientTerminal())) {
                      t.getTentaramNotificar().add(_receiver);
                  }
              }
