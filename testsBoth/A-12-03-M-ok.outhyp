@@ -50,7 +50,6 @@ OPERAÇÕES DO TERMINAL
 Escolha uma opção: 9
 Número do terminal: 969001
 Tipo de comunicação a iniciar (VOICE, VIDEO): VOICE
-O terminal '969004' não pode iniciar comunicações BASIC
 OPERAÇÕES DO TERMINAL
 1 - Ligar
 2 - Colocar no silêncio
@@ -59,12 +58,11 @@ OPERAÇÕES DO TERMINAL
 5 - Retirar amigo
 6 - Pagamento
 7 - Consultar saldo
-8 - Enviar comunicação de texto
-9 - Iniciar comunicação
+10 - Terminar comunicação activa
 11 - Mostrar comunicação em curso
 0 - Sair
 Escolha uma opção: 11
-Não existe nenhuma comunicação em curso.
+VOICE|1|969001|969004|0|0|ONGOING
 OPERAÇÕES DO TERMINAL
 1 - Ligar
 2 - Colocar no silêncio
@@ -73,8 +71,7 @@ OPERAÇÕES DO TERMINAL
 5 - Retirar amigo
 6 - Pagamento
 7 - Consultar saldo
-8 - Enviar comunicação de texto
-9 - Iniciar comunicação
+10 - Terminar comunicação activa
 11 - Mostrar comunicação em curso
 0 - Sair
 Escolha uma opção: 0

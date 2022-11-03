@@ -27,9 +27,9 @@ import java.util.Objects;
          String commType = optionField("commType");
          try {
              Terminal t = _network.getTerminal(terminalDestino);
-             if (Objects.equals(_receiver.getTerminalType(), "BASIC"))
+             if (Objects.equals(_receiver.getTerminalType(), "BASIC") && commType.equals("VIDEO"))
                  _display.popup(Message.unsupportedAtOrigin(_receiver.getTerminalId(), "BASIC"));
-             else if (Objects.equals(t.getTerminalType(), "BASIC"))
+             else if (Objects.equals(t.getTerminalType(), "BASIC") && commType.equals("VIDEO"))
                  _display.popup(Message.unsupportedAtDestination(_receiver.getTerminalId(), "BASIC"));
              else if (t.getTerminalModeEnum() == TerminalMode.OFF) {
                  _display.popup(Message.destinationIsOff(terminalDestino));

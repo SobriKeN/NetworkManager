@@ -29,7 +29,7 @@ OPERAÇÕES DO TERMINAL
 Escolha uma opção: 9
 Número do terminal: 969013
 Tipo de comunicação a iniciar (VOICE, VIDEO): VOICE
-O terminal '969007' não pode iniciar comunicações BASIC
+O terminal de destino ('969013') está desligado.
 OPERAÇÕES DO TERMINAL
 1 - Ligar
 2 - Colocar no silêncio
