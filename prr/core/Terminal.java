@@ -114,8 +114,14 @@ public class Terminal implements Serializable {
     this._virgem = false;
   }
 
-  public void setBusy(boolean b){
+  public void setBusy(boolean b) {
     this._busy = b;
+    if (b) {
+      this._terminalmode = TerminalMode.ON;
+    }
+    else {
+      this._terminalmode = TerminalMode.BUSY;
+    }
   }
 
   public void adicionaDebts(long cost){

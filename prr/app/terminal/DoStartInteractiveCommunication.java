@@ -45,8 +45,13 @@ import java.util.Objects;
                      t.getTentaramNotificar().add(_receiver);
                  }
              }
-             else if (!_network.getTerminal(terminalDestino).canStartCommunication())
-                     _display.popup(Message.destinationIsBusy(terminalDestino));
+             else if (!_network.getTerminal(terminalDestino).canStartCommunication()){
+                 _display.popup(Message.destinationIsBusy(terminalDestino));
+                 if (_receiver.getClientTerminal().isRecieveNotifications()
+                         && !t.getTentaramNotificar().contains(_receiver)) {
+                     t.getTentaramNotificar().add(_receiver);
+                 }
+             }
 
              else {
                  if (Objects.equals(commType, "VIDEO"))

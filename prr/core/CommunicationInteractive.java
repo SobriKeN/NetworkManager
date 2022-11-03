@@ -37,5 +37,7 @@ public abstract class CommunicationInteractive extends Communication implements 
 
     public boolean isOnGoing(){ return _isOnGoing; }
 
+    public void acabaCall(){this._isOnGoing = false;}
+
     public void setOnGoing(boolean b){ this._isOnGoing = b; }
 }

@@ -81,6 +81,7 @@ public class Network implements Serializable {
       sender.setBusy(true);
       sender.setUsed();
       _allComms.put(comm.getId(), comm);
+      this.deactivateSaveFlag();
     }
     else
       throw new InvalidTerminalIDException(receiver.getTerminalId());
@@ -97,6 +98,7 @@ public class Network implements Serializable {
       sender.setBusy(true);
       sender.setUsed();
       _allComms.put(comm.getId(), comm);
+      this.deactivateSaveFlag();
     }
     else
       throw new InvalidTerminalIDException(receiver.getTerminalId());
@@ -116,10 +118,27 @@ public class Network implements Serializable {
       custo = _plano.computeCost(c,comm);
 
     comm.setCost(custo);
+    comm.acabaCall();
     sender.setCommToNull();
     sender.setBusy(false);
     receiver.setCommToNull();
     receiver.setBusy(false);
+
+    if (!receiver.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : receiver.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2I, t);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      receiver.getTentaramNotificar().clear();
+    }
+
+    if (!sender.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : sender.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2I, t);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      sender.getTentaramNotificar().clear();
+    }
 
     if ((c.getLevel() == ClientLevel.GOLD)){
       c.downgradeGoldToNormal();
@@ -127,6 +146,7 @@ public class Network implements Serializable {
     if ((c.getLevel() == ClientLevel.PLATINUM)){
       c.downgradePlatinumToNormal();
     }
+    this.deactivateSaveFlag();
     return comm.getCost();
   }
 
@@ -144,10 +164,27 @@ public class Network implements Serializable {
       custo = _plano.computeCost(c,comm);
 
     comm.setCost(custo);
+    comm.acabaCall();
     sender.setCommToNull();
     sender.setBusy(false);
     receiver.setCommToNull();
     receiver.setBusy(false);
+
+    if (!receiver.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : receiver.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2I, t);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      receiver.getTentaramNotificar().clear();
+    }
+
+    if (!sender.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : sender.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2I, t);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      sender.getTentaramNotificar().clear();
+    }
 
     if ((c.getLevel() == ClientLevel.GOLD)){
       c.downgradeGoldToNormal();
@@ -158,6 +195,7 @@ public class Network implements Serializable {
     if ((c.getLevel()) == ClientLevel.GOLD){
       c.upgradeGoldToPlatinum(getCommsByClientId(c.getKey()));
     }
+    this.deactivateSaveFlag();
     return comm.getCost();
   }
 
