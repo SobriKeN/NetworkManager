@@ -5,6 +5,14 @@ import prr.core.exception.ImportFileException;
 import pt.tecnico.uilib.Dialog;
 
 /**
+ ---> Projeto Final de PO:
+ Turno de Lab nº5, grupo 28
+
+ - Fábio Sobrinho nº103473
+ - Tomás Taborda nº103641
+ **/
+
+/**
  * Application entry-point.
  */
 public class App {
