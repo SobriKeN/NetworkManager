@@ -35,9 +35,9 @@ public abstract class Communication implements Serializable {
     public Communication(Terminal sender, Terminal receiver, int id) {
         this._id = id;
         this._isPaid = false;
-        this._cost = 0;
         this._receiver = receiver;
         this._sender = sender;
+        this._cost = 0;
     }
 
     /** @return Communication's id **/
@@ -56,12 +56,13 @@ public abstract class Communication implements Serializable {
         return _isPaid;
     }
 
-    public void pagarComm(){this._isPaid = true;}
-
     /** @return comm's cost */
     public long getCost() {
         return _cost;
     }
+
+    /** method that makes the communication be paid */
+    public void pagarComm(){this._isPaid = true;}
 
     /**
      * Void method that sets the _cost attribute to the value of the argument

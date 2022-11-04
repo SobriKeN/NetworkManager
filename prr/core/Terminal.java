@@ -45,9 +45,6 @@ public class Terminal implements Serializable {
   /** Current communication in the terminal */
   private Communication _currentComm;
 
-  /** Boolean that says if the client needs to be notified */
-  private boolean _aNotificar;
-
   /** ArrayList that contais the terminals that tried to make a Communication **/
   private ArrayList<Terminal> _tentaramNotificar;
 
@@ -69,7 +66,6 @@ public class Terminal implements Serializable {
     _virgem = true;
     _busy = false;
     _currentComm = null;
-    _aNotificar = false;
     _tentaramNotificar = new ArrayList<>();
   }
 
@@ -78,18 +74,15 @@ public class Terminal implements Serializable {
     return this._id;
   }
 
-  /** @return terminal's type **/
-  public String getTerminalType(){
-    return this._tipo;
-  }
-
   /** @return terminal's mode **/
   public TerminalMode getTerminalModeEnum(){
     return this._terminalmode;
   }
 
-  /** @return previous state **/
-  public TerminalMode getBeforeState() {return _beforeState;}
+  /** @return terminal's type **/
+  public String getTerminalType(){
+    return this._tipo;
+  }
 
   /** @return terminal's debt **/
   public long getTerminalDebts(){
@@ -101,22 +94,42 @@ public class Terminal implements Serializable {
     return this._payments;
   }
 
-  /** @return boolean that says if the terminal has made any type of Comm or not **/
-  public boolean usedOrNot(){ return this._virgem;}
-
   /** @return terminal's Friends ArrayList **/
   public TreeSet<String> getTerminalAmigos(){return (TreeSet<String>) this._amigos;}
 
   /** @return terminal's asscociated Client **/
-  public Client getClientTerminal(){
-    return _clientTerminal;
-  }
+  public Client getClientTerminal(){return _clientTerminal;}
+
+  /** @return boolean that says if the terminal has made any type of Comm or not **/
+  public boolean usedOrNot(){ return this._virgem;}
 
   /** @return terminal's asscociated Client **/
   public Communication getCurrentComm(){ return _currentComm; }
 
+  /**
+   @return an ArrayLIst that contains the terminals
+   that tried to make a communication
+   **/
+  public ArrayList<Terminal> getTentaramNotificar() { return _tentaramNotificar; }
+
   /** Void method that sets the "never used" attribute to false **/
   public void setUsed(){ this._virgem = false; }
+
+  /**
+   * Void method that sets the Client's association with the terminal
+   * @param _clientTerminal
+   **/
+  public void setClientTerminal(Client _clientTerminal) {
+    this._clientTerminal = _clientTerminal;
+  }
+
+  /**
+   * Void method that sets the communication that is going to be made
+   * @param _currentComm
+   * **/
+  public void setComm(Communication _currentComm) {
+    this._currentComm = _currentComm;
+  }
 
   /**
    Void method that changes the _busy attribute
@@ -159,49 +172,6 @@ public class Terminal implements Serializable {
   public void setCommToNull(){ this._currentComm = null; }
 
   /**
-   * Void method that sets the Client's association with the terminal
-   * @param _clientTerminal
-   **/
-  public void setClientTerminal(Client _clientTerminal) {
-    this._clientTerminal = _clientTerminal;
-  }
-
-  /**
-   * Void method that sets the communication that is going to be made
-   * @param _currentComm
-   * **/
-  public void setComm(Communication _currentComm) {
-    this._currentComm = _currentComm;
-  }
-
-  //??
-  public boolean isNotificar() {
-    return _aNotificar;
-  }
-
-  //??
-  public void setNotificar(boolean _aNotificar) {
-    this._aNotificar = _aNotificar;
-  }
-
-  /**
-   @return an ArrayLIst that contains the terminals
-   that tried to make a communication
-   **/
-  public ArrayList<Terminal> getTentaramNotificar() { return _tentaramNotificar; }
-
-  //???
-  public boolean verificaTerminalNotificar(Terminal t1){
-     ArrayList<String> getTentaramNotificarString = new ArrayList<String>();
-
-     for(Terminal t2 : this._tentaramNotificar){
-       getTentaramNotificarString.add(t2.getTerminalId());
-     }
-
-    return getTentaramNotificarString.contains(t1.getTerminalId());
-  }
-
-  /**
    Boolean method that returns true if the Client C in the argument is one
    of the associated Clients in the ArrayList that contains the terminals
    that tried to make a communication
@@ -216,6 +186,12 @@ public class Terminal implements Serializable {
 
     return clientIDs.contains(c.getKey());
   }
+
+  /** ##########################
+   *  METHODS USED DIRECTLY/TO HELP IN APP FUNCTIONALITIES
+   * ##########################
+   */
+
   /**
    Void method that verifies if the requirements are met, and sets the terminal's mode to ON/IDLE
    while creating the right notification

@@ -58,6 +58,23 @@ public class Network implements Serializable {
   }
 
   /**
+   * Read text input file and create corresponding domain entities.
+   *
+   * @param filename name of the text input file
+   * @throws UnrecognizedEntryException if some entry is not correct
+   * @throws IOException if there is an IO error while processing the text file
+   */
+  void importFile(String filename) throws UnrecognizedEntryException, IOException  {
+    Parser parser = new Parser(this);
+    parser.parseFile(filename);
+  }
+
+  /** ##########################
+   *   AUXILIARY METHODS
+   * ##########################
+   */
+
+  /**
    * @return if the program has had any alterations after the last call
    */
   public boolean getSaveFlag() {
@@ -89,10 +106,15 @@ public class Network implements Serializable {
 
     for (int key : _allComms.keySet()) {
       if (_allComms.get(key).getSender().getClientTerminal().getKey().equals(clientID))
-          commClient.add(_allComms.get(key));
+        commClient.add(_allComms.get(key));
     }
     return commClient;
   }
+
+  /** ##########################
+   *   MAIN METHODS - all the other methods are already implemented in NetworkManager or already done beforehand
+   * ##########################
+   */
 
   /** @return the global network payments **/
   public long getGlobalClientPayments(){
@@ -113,6 +135,99 @@ public class Network implements Serializable {
     }
     return Math.round(clientDebts);
   }
+
+  /** ##########################
+   *   CLIENT METHODS - some methods can be implemented on the client
+   * ##########################
+   */
+
+  /**
+   @return a Client that the user is searching for,
+   with the given argument it will know if there is such client,
+   and if it doesn't exist, an exception is thrown
+   @throws InvalidClientIDException
+   **/
+
+  public Client getClient(String key) throws InvalidClientIDException {
+    if (_clients.containsKey(key)) {
+      return _clients.get(key);
+    }
+    throw new InvalidClientIDException(key);
+  }
+
+  /**
+   @return the Client's parameters as a String by searching it with its key and then
+   using the method clientStringed from the Class Client
+    * @param key
+   * @throws InvalidClientIDException
+   **/
+  public String getClientString(String key) throws InvalidClientIDException {
+    return getClient(key).clientStringed();
+  }
+
+  /**
+   @return a list of the notifications in String for later purposes and methods, with
+   the given key, it searches the respective client, "reads" and clears the Client's
+   notifications, and then it saves the notifications that were turned to Strings in an ArrayList
+    * @param key
+   * @throws InvalidClientIDException
+   */
+  public List<String> readClientNotifications(String key) throws InvalidClientIDException {
+    Client client = getClient(key);
+    List<String> notificationInString = new ArrayList<>();
+    for(Notification n: client.getNotificacoesClient()){
+      notificationInString.add(n.notificationStringed());
+    }
+    client.clearNotifications();
+    return notificationInString;
+  }
+
+  /**
+   @return an ArrayList with all the Clients in the system, if
+   there is an error on the Client's key, the program will try to
+   catch the exception about that error, which is
+   InvalidClientIDException
+   */
+  public ArrayList<String> getAllClients() {
+    ArrayList<String> stringClients = new ArrayList<>();
+
+    for (String client : _clients.keySet()) {
+      try {
+        stringClients.add(getClientString(client));
+      } catch (InvalidClientIDException e) {
+        // probably will never happen
+        e.printStackTrace();
+      }
+    }
+    return stringClients;
+  }
+
+  /**
+   Void method that regists a Client with the arguments given;
+   if there already exists a Client with the key given by the user,
+   an exception will be thrown; if not it will simply create a Client
+   and add it to the system
+   * @param key
+   * @param name
+   * @param taxNumber
+   * @throws ClientKeyAlreadyUsedException
+   */
+  public void registerClient(String key, String name, int taxNumber) throws ClientKeyAlreadyUsedException {
+    String keyLowerCase = key.toLowerCase();
+    for (String mapKey : _clients.keySet()) {
+      if (mapKey.toLowerCase().equals(keyLowerCase)) {
+        throw new ClientKeyAlreadyUsedException(key);
+      }
+    }
+    Client client = new Client(key, name, taxNumber);
+    _clients.put(client.getKey(), client);
+    this.deactivateSaveFlag();
+  }
+
+  /** ##########################
+   *   LOOKUP METHODS
+   * ##########################
+   */
 
   /**
    @return a Comm that the user is searching for,
@@ -210,50 +325,6 @@ public class Network implements Serializable {
   }
 
   /**
-  @return a Client that the user is searching for,
-  with the given argument it will know if there is such client,
-  and if it doesn't exist, an exception is thrown
-  @throws InvalidClientIDException
-  **/
-
-  public Client getClient(String key) throws InvalidClientIDException {
-      if (_clients.containsKey(key)) {
-        return _clients.get(key);
-      }
-    throw new InvalidClientIDException(key);
-  }
-
-  /**
-   @return the Client's parameters as a String by searching it with its key and then
-   using the method clientStringed from the Class Client
-   * @param key
-   * @throws InvalidClientIDException
-  **/
-  public String getClientString(String key) throws InvalidClientIDException {
-    return getClient(key).clientStringed();
-  }
-
-  /**
-    @return an ArrayList with all the Clients in the system, if
-    there is an error on the Client's key, the program will try to
-    catch the exception about that error, which is
-    InvalidClientIDException
-   */
-  public ArrayList<String> getAllClients() {
-    ArrayList<String> stringClients = new ArrayList<>();
-
-    for (String client : _clients.keySet()) {
-      try {
-        stringClients.add(getClientString(client));
-      } catch (InvalidClientIDException e) {
-        // probably will never happen
-        e.printStackTrace();
-      }
-    }
-    return stringClients;
-  }
-
-  /**
     @return an Array List with all the clients without any debts in the system,
     if there is an error on the Client's key, the program will try to
     catch the exception about that error, which is InvalidClientIDException
@@ -301,26 +372,53 @@ public class Network implements Serializable {
   }
 
   /**
-   Void method that regists a Client with the arguments given;
-   if there already exists a Client with the key given by the user,
-   an exception will be thrown; if not it will simply create a Client
-   and add it to the system
-   * @param key
-   * @param name
-   * @param taxNumber
-   * @throws ClientKeyAlreadyUsedException
+   @return the ArrayList that contains all the terminals of the
+   system that have a positive balance (payments > debts). If there
+   is an error on the Terminal's key, the program will try to
+   catch the exception about that error, which is
+   InvalidTerminalIDException
    */
-  public void registerClient(String key, String name, int taxNumber) throws ClientKeyAlreadyUsedException {
-    String keyLowerCase = key.toLowerCase();
-    for (String mapKey : _clients.keySet()) {
-      if (mapKey.toLowerCase().equals(keyLowerCase)) {
-        throw new ClientKeyAlreadyUsedException(key);
+  public ArrayList<String> getTerminalsPositiveBalance() {
+    ArrayList<String> stringTerminals = new ArrayList<>();
+
+    for (String terminal : _terminals.keySet()){
+      try{
+        if (getTerminal(terminal).getTerminalPayments() > getTerminal(terminal).getTerminalDebts())
+          stringTerminals.add(getTerminalString(terminal));
+      } catch (InvalidTerminalIDException e){
+        //probably is never going to happen
+        e.printStackTrace();
       }
     }
-    Client client = new Client(key, name, taxNumber);
-    _clients.put(client.getKey(), client);
-    this.deactivateSaveFlag();
+    return stringTerminals;
   }
+
+  /**
+   @return the ArrayList that contains all the terminals of the
+   system that were never used once. if there is an error on the
+   Terminal's key, the program will try to
+   catch the exception about that error, which is
+   InvalidTerminalIDException
+   */
+  public ArrayList<String> getAllVirginTerminals() {
+    ArrayList<String> stringTerminals = new ArrayList<>();
+
+    for (String terminal : _terminals.keySet()){
+      try{
+        if (getTerminal(terminal).usedOrNot())
+          stringTerminals.add(getTerminalString(terminal));
+      } catch (InvalidTerminalIDException e){
+        //probably is never going to happen
+        e.printStackTrace();
+      }
+    }
+    return stringTerminals;
+  }
+
+  /** ##########################
+   *  GENERAL TERMINAL METHODS
+   * ##########################
+   */
 
   /**
    @return the terminal which is being looked for,
@@ -367,51 +465,6 @@ public class Network implements Serializable {
   }
 
   /**
-   @return the ArrayList that contains all the terminals of the
-   system that were never used once. if there is an error on the
-   Terminal's key, the program will try to
-   catch the exception about that error, which is
-   InvalidTerminalIDException
-   */
-  public ArrayList<String> getAllVirginTerminals() {
-    ArrayList<String> stringTerminals = new ArrayList<>();
-
-    for (String terminal : _terminals.keySet()){
-      try{
-        if (getTerminal(terminal).usedOrNot())
-          stringTerminals.add(getTerminalString(terminal));
-      } catch (InvalidTerminalIDException e){
-        //probably is never going to happen
-        e.printStackTrace();
-      }
-    }
-    return stringTerminals;
-  }
-
-  /**
-   @return the ArrayList that contains all the terminals of the
-   system that have a positive balance (payments > debts). If there
-   is an error on the Terminal's key, the program will try to
-   catch the exception about that error, which is
-   InvalidTerminalIDException
-   */
-  public ArrayList<String> getTerminalsPositiveBalance() {
-    ArrayList<String> stringTerminals = new ArrayList<>();
-
-    for (String terminal : _terminals.keySet()){
-      try{
-        if (getTerminal(terminal).getTerminalPayments() > getTerminal(terminal).getTerminalDebts())
-          stringTerminals.add(getTerminalString(terminal));
-      } catch (InvalidTerminalIDException e){
-        //probably is never going to happen
-        e.printStackTrace();
-      }
-    }
-    return stringTerminals;
-  }
-
-
-  /**
    @return a terminal that is created and registed with the given arguments,
    if the terminal's key length is bigger than 6, it has an error;
    if the terminal's key already exists, it has an error;
@@ -442,6 +495,11 @@ public class Network implements Serializable {
     this.deactivateSaveFlag();
     return terminal;
   }
+
+  /** ##########################
+   *  SPECIFIC TERMINAL METHODS - some methods are directly implemented on the terminal
+   * ##########################
+   */
 
   /**
    Void method that verifies and adds a Friend of the type
@@ -486,23 +544,6 @@ public class Network implements Serializable {
       throw new InvalidTerminalIDException(friend);
   }
 
-  /**
-   @return a list of the notifications in String for later purposes and methods, with
-   the given key, it searches the respective client, "reads" and clears the Client's
-   notifications, and then it saves the notifications that were turned to Strings in an ArrayList
-   * @param key
-   * @throws InvalidClientIDException
-   */
-  public List<String> readClientNotifications(String key) throws InvalidClientIDException {
-    Client client = getClient(key);
-    List<String> notificationInString = new ArrayList<>();
-    for(Notification n: client.getNotificacoesClient()){
-      notificationInString.add(n.notificationStringed());
-    }
-    client.clearNotifications();
-    return notificationInString;
-  }
-
   /** The following 5 methods are about Communications **/
 
   /**
@@ -519,6 +560,8 @@ public class Network implements Serializable {
     Terminal t2 = _terminals.get(idReceiver);
     Client cliente = t1.getClientTerminal();
     CommunicationText c = new CommunicationText(msg, t1, t2, ++commId);
+    t1.setUsed();
+    t2.setUsed();
     if (t1.getTerminalAmigos().contains(t2.getTerminalId()))
       l = (_plano.computeCost(cliente,c)/2);
     else
@@ -537,6 +580,12 @@ public class Network implements Serializable {
     }
     this.deactivateSaveFlag();
   }
+
+  /** ##########################
+   *   The next two methods make up the DoStartInteractiveCommunication functionality
+   * ##########################
+   */
+
 
   /**
    * Void method that creates a Voice Communication to a given Terminal
@@ -588,6 +637,11 @@ public class Network implements Serializable {
       throw new InvalidTerminalIDException(receiver.getTerminalId());
   }
 
+  /** ##########################
+   *   The next two methods make up the DoEndInteractiveCommunication functionality
+   * ##########################
+   */
+
   /**
    * Method that stops the Voice Communication given with the given duration and
    * sets the Communication to FINISHED, sets the Comms duration and its cost, sets
@@ -606,10 +660,12 @@ public class Network implements Serializable {
     comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
 
+    // 1- Compute cost
     if (sender.getTerminalAmigos().contains(receiver.getTerminalId())) {
       custo = (_plano.computeCost(c, comm) / 2);
     } else { custo = _plano.computeCost(c,comm); }
 
+    // 2- End the communication
     comm.setCost(custo);
     comm.acabaCall();
     sender.setCommToNull();
@@ -617,6 +673,7 @@ public class Network implements Serializable {
     receiver.setCommToNull();
     receiver.setBusy(false);
 
+    // 3- Send notifications (if they exist)
     if (sender.getTerminalModeEnum().equals(TerminalMode.ON)
             && !sender.getTentaramNotificar().isEmpty()) {
       for (Terminal t : sender.getTentaramNotificar()) {
@@ -644,6 +701,7 @@ public class Network implements Serializable {
       sender.getTentaramNotificar().clear();
     }
 
+    // 4- Upgrade client level (if possible)
     if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
     if ((c.getLevel() == ClientLevel.PLATINUM)){ c.downgradePlatinumToNormal(); }
     this.deactivateSaveFlag();
@@ -668,10 +726,12 @@ public class Network implements Serializable {
     comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
 
+    // 1- Compute cost
     if (sender.getTerminalAmigos().contains(receiver.getTerminalId())) {
       custo = (_plano.computeCost(c, comm) / 2);
     } else { custo = _plano.computeCost(c,comm); }
 
+    // 2- End the communication
     comm.setCost(custo);
     comm.acabaCall();
     sender.setCommToNull();
@@ -679,6 +739,7 @@ public class Network implements Serializable {
     receiver.setCommToNull();
     receiver.setBusy(false);
 
+    // 3- Send notifications(if they exist)
     if (sender.getTerminalModeEnum().equals(TerminalMode.ON)
             && !sender.getTentaramNotificar().isEmpty()) {
       for (Terminal t : sender.getTentaramNotificar()) {
@@ -706,6 +767,7 @@ public class Network implements Serializable {
       sender.getTentaramNotificar().clear();
     }
 
+    // 4- Upgrade client level (if possible)
     if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
     if ((c.getLevel() == ClientLevel.PLATINUM)) { c.downgradePlatinumToNormal(); }
     if ((c.getLevel()) == ClientLevel.GOLD) { c.upgradeGoldToPlatinum(getCommsByClientId(c.getKey())); }
@@ -730,18 +792,5 @@ public class Network implements Serializable {
       this.deactivateSaveFlag();
     }
   }
-
-  /**
-   * Read text input file and create corresponding domain entities.
-   * 
-   * @param filename name of the text input file
-   * @throws UnrecognizedEntryException if some entry is not correct
-   * @throws IOException if there is an IO error while processing the text file
-   */
-  void importFile(String filename) throws UnrecognizedEntryException, IOException  {
-    Parser parser = new Parser(this);
-    parser.parseFile(filename);
-  }
-
 }
 
