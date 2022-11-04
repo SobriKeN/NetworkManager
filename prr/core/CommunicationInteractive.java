@@ -41,9 +41,6 @@ public abstract class CommunicationInteractive extends Communication implements 
      */
     protected void setSizeDuration(int size){ this._duration = size; }
 
-    /** Void method that sets the boolean attribute _isOnGoing with the given boolean argument **/
-    public void setOnGoing(boolean b){ this._isOnGoing = b; }
-
     /** Void method that sets the communication state to finished **/
     public void acabaCall(){this._isOnGoing = false;}
 

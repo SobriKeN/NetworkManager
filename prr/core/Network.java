@@ -656,7 +656,6 @@ public class Network implements Serializable {
     Terminal sender = comm.getSender();
     Terminal receiver = comm.getReceiver();
     Client c = sender.getClientTerminal();
-    comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
 
     // 1- Compute cost
@@ -665,8 +664,8 @@ public class Network implements Serializable {
     } else { custo = _plano.computeCost(c,comm); }
 
     // 2- End the communication
-    comm.setCost(custo);
     comm.acabaCall();
+    comm.setCost(custo);
     sender.setCommToNull();
     sender.setBusy(false);
     receiver.setCommToNull();
@@ -721,7 +720,6 @@ public class Network implements Serializable {
     Terminal sender = comm.getSender();
     Terminal receiver = comm.getReceiver();
     Client c = sender.getClientTerminal();
-    comm.setOnGoing(false);
     comm.setSizeDuration(duracao);
 
     // 1- Compute cost
@@ -730,8 +728,8 @@ public class Network implements Serializable {
     } else { custo = _plano.computeCost(c,comm); }
 
     // 2- End the communication
-    comm.setCost(custo);
     comm.acabaCall();
+    comm.setCost(custo);
     sender.setCommToNull();
     sender.setBusy(false);
     receiver.setCommToNull();
