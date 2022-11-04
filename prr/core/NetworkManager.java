@@ -16,7 +16,8 @@ public class NetworkManager {
 
   /** The network itself. */
   private Network _network = new Network();
-  
+
+  /** @return the network of the system **/
   public Network getNetwork() {
     return _network;
   }

@@ -11,10 +11,19 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoShowTerminalBalance extends TerminalCommand {
 
+  /**
+   * Constructor that just uses the super() with the parameters
+   * @param context
+   * @param terminal
+   */
   DoShowTerminalBalance(Network context, Terminal terminal) {
     super(Label.SHOW_BALANCE, context, terminal);
   }
-  
+
+  /**
+   * Execute method that shows a message with the terminal's
+   * debts and payments
+   **/
   @Override
   protected final void execute() throws CommandException {
     _display.popup(

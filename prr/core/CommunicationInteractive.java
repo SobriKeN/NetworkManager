@@ -32,12 +32,18 @@ public abstract class CommunicationInteractive extends Communication implements 
         return _duration;
     }
 
-    @Override
+    /**
+     * Void method that sets the duration of
+     * the Communication with the given argument
+     */
     protected void setSizeDuration(int size){ this._duration = size; }
 
+    /** @return the boolean attribute that shows if the comm is finished or not **/
     public boolean isOnGoing(){ return _isOnGoing; }
 
+    /** Void method that sets the communication state to finished **/
     public void acabaCall(){this._isOnGoing = false;}
 
+    /** Void method that sets the boolean attribute _isOnGoing with the given boolean argument **/
     public void setOnGoing(boolean b){ this._isOnGoing = b; }
 }

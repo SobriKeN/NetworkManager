@@ -72,148 +72,16 @@ public class Network implements Serializable {
     saveFlag = true;
   }
 
+  /** @return the treemap that storages all Communications in the system **/
   public TreeMap<Integer, Communication> getComms() {
     return _allComms;
   }
-  public void makeVoiceCall(Terminal sender, Terminal receiver) throws InvalidTerminalIDException {
-    if (_terminals.containsKey(sender.getTerminalId()) &&
-            _terminals.containsKey(receiver.getTerminalId())) {
-      CommunicationVoice comm = new CommunicationVoice(sender, receiver, ++commId);
-      receiver.setComm(comm);
-      receiver.setBusy(true);
-      receiver.setUsed();
-      sender.setComm(comm);
-      sender.setBusy(true);
-      sender.setUsed();
-      _allComms.put(comm.getId(), comm);
-      this.deactivateSaveFlag();
-    }
-    else
-      throw new InvalidTerminalIDException(receiver.getTerminalId());
-  }
 
-  public void makeVideoCall(Terminal sender, Terminal receiver) throws InvalidTerminalIDException {
-    if (_terminals.containsKey(sender.getTerminalId()) &&
-               _terminals.containsKey(receiver.getTerminalId())){
-      CommunicationVideo comm = new CommunicationVideo(sender, receiver, ++commId);
-      receiver.setComm(comm);
-      receiver.setBusy(true);
-      receiver.setUsed();
-      sender.setComm(comm);
-      sender.setBusy(true);
-      sender.setUsed();
-      _allComms.put(comm.getId(), comm);
-      this.deactivateSaveFlag();
-    }
-    else
-      throw new InvalidTerminalIDException(receiver.getTerminalId());
-  }
-
-  public long stopVoiceCall(CommunicationVoice comm, int duracao){
-    long custo;
-    Terminal sender = comm.getSender();
-    Terminal receiver = comm.getReceiver();
-    Client c = sender.getClientTerminal();
-    comm.setOnGoing(false);
-    comm.setSizeDuration(duracao);
-
-    if (sender.getTerminalAmigos().contains(receiver.getTerminalId())) {
-      custo = (_plano.computeCost(c, comm) / 2);
-    } else { custo = _plano.computeCost(c,comm); }
-
-    comm.setCost(custo);
-    comm.acabaCall();
-    sender.setCommToNull();
-    sender.setBusy(false);
-    receiver.setCommToNull();
-    receiver.setBusy(false);
-
-    if (sender.getTerminalModeEnum().equals(TerminalMode.ON)
-            && !sender.getTentaramNotificar().isEmpty()) {
-        for (Terminal t : sender.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2I, sender);
-          t.getClientTerminal().getNotificacoesClient().add(n);
-        }
-        sender.getTentaramNotificar().clear();
-    }
-
-    if (receiver.getTerminalModeEnum().equals(TerminalMode.ON)
-            && !receiver.getTentaramNotificar().isEmpty()) {
-        for (Terminal t : receiver.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2I, receiver);
-          t.getClientTerminal().getNotificacoesClient().add(n);
-        }
-        receiver.getTentaramNotificar().clear();
-    }
-
-    if (sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)
-            && !sender.getTentaramNotificar().isEmpty()) {
-        for (Terminal t : sender.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2S, sender);
-          t.getClientTerminal().getNotificacoesClient().add(n);
-        }
-        sender.getTentaramNotificar().clear();
-    }
-
-    if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
-    if ((c.getLevel() == ClientLevel.PLATINUM)){ c.downgradePlatinumToNormal(); }
-    this.deactivateSaveFlag();
-    return comm.getCost();
-  }
-
-  public long stopVideoCall(CommunicationVideo comm, int duracao){
-    long custo;
-    Terminal sender = comm.getSender();
-    Terminal receiver = comm.getReceiver();
-    Client c = sender.getClientTerminal();
-    comm.setOnGoing(false);
-    comm.setSizeDuration(duracao);
-
-    if (sender.getTerminalAmigos().contains(receiver.getTerminalId())) {
-      custo = (_plano.computeCost(c, comm) / 2);
-    } else { custo = _plano.computeCost(c,comm); }
-
-    comm.setCost(custo);
-    comm.acabaCall();
-    sender.setCommToNull();
-    sender.setBusy(false);
-    receiver.setCommToNull();
-    receiver.setBusy(false);
-
-    if (sender.getTerminalModeEnum().equals(TerminalMode.ON)
-            && !sender.getTentaramNotificar().isEmpty()) {
-        for (Terminal t : sender.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2I, sender);
-          t.getClientTerminal().getNotificacoesClient().add(n);
-        }
-        sender.getTentaramNotificar().clear();
-    }
-
-    if (receiver.getTerminalModeEnum().equals(TerminalMode.ON)
-            && !receiver.getTentaramNotificar().isEmpty()) {
-        for (Terminal t : receiver.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2I, receiver);
-          t.getClientTerminal().getNotificacoesClient().add(n);
-        }
-        receiver.getTentaramNotificar().clear();
-    }
-
-    if (sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)
-            && !sender.getTentaramNotificar().isEmpty()) {
-        for (Terminal t : sender.getTentaramNotificar()) {
-          Notification n = new Notification(NotificationType.B2S, sender);
-          t.getClientTerminal().getNotificacoesClient().add(n);
-        }
-        sender.getTentaramNotificar().clear();
-      }
-
-    if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
-    if ((c.getLevel() == ClientLevel.PLATINUM)) { c.downgradePlatinumToNormal(); }
-    if ((c.getLevel()) == ClientLevel.GOLD) { c.upgradeGoldToPlatinum(getCommsByClientId(c.getKey())); }
-    this.deactivateSaveFlag();
-    return comm.getCost();
-  }
-
+  /**
+   * @return an Arraylist that contains the Communications made by
+   * the given client
+   * @param clientID
+   **/
   public ArrayList<Communication> getCommsByClientId(String clientID){
     ArrayList<Communication> commClient = new ArrayList<>();
 
@@ -615,6 +483,7 @@ public class Network implements Serializable {
     } else
       throw new InvalidTerminalIDException(friend);
   }
+
   /**
    @return a list of the notifications in String for later purposes and methods, with
    the given key, it searches the respective client, "reads" and clears the Client's
@@ -632,6 +501,16 @@ public class Network implements Serializable {
     return notificationInString;
   }
 
+  /** The following 5 methods are about Communications **/
+
+  /**
+   * Void method that creates and sends a Text Communication to a given Terminal
+   * using the parameters, while setting its cost and checking if the client
+   * associated to the Sender Terminal upgrades or downgrades level
+   * @param idSender
+   * @param idReceiver
+   * @param msg
+   */
   public void DoSendTextCommunication(String idSender, String idReceiver, String msg){
     long l;
     Terminal t1 = _terminals.get(idSender);
@@ -645,24 +524,202 @@ public class Network implements Serializable {
     c.setCost(l);
     _allComms.put(c.getId(),c);
 
-    if ((cliente.getLevel() == ClientLevel.GOLD)){ // downgrade de Gold para Normal após
-      cliente.downgradeGoldToNormal();             // realizar uma comm e se tem saldo negativo
+    if ((cliente.getLevel() == ClientLevel.GOLD)){
+      cliente.downgradeGoldToNormal();
     }
-    if ((cliente.getLevel() == ClientLevel.PLATINUM)){ // downgrade de Platinum para Normal após
-      cliente.downgradePlatinumToNormal();             // 2 comms de texto seguidas e nao ter saldo negativo
+    if ((cliente.getLevel() == ClientLevel.PLATINUM)){
+      cliente.downgradePlatinumToNormal();
     }
-    if ((cliente.getLevel() == ClientLevel.PLATINUM)){      // downgrade de Platinum para Normal após
+    if ((cliente.getLevel() == ClientLevel.PLATINUM)){
       cliente.downgradePlatinumToGold(getCommsByClientId(cliente.getKey()));
     }
     this.deactivateSaveFlag();
   }
 
-    public void performPayment(int id){
-      Communication c = _allComms.get(id);
-      Terminal t = c.getSender();
-      if(c.isPaid()){
-        return;
+  /**
+   * Void method that creates a Voice Communication to a given Terminal
+   * using the parameters, while setting its cost, setting the _busy attributes of the terminals
+   * to true and setting the terminals current communication to the one that is being created
+   * @param sender
+   * @param receiver
+   * @throws InvalidTerminalIDException
+   */
+  public void makeVoiceCall(Terminal sender, Terminal receiver) throws InvalidTerminalIDException {
+    if (_terminals.containsKey(sender.getTerminalId()) &&
+            _terminals.containsKey(receiver.getTerminalId())) {
+      CommunicationVoice comm = new CommunicationVoice(sender, receiver, ++commId);
+      receiver.setComm(comm);
+      receiver.setBusy(true);
+      receiver.setUsed();
+      sender.setComm(comm);
+      sender.setBusy(true);
+      sender.setUsed();
+      _allComms.put(comm.getId(), comm);
+      this.deactivateSaveFlag();
+    }
+    else
+      throw new InvalidTerminalIDException(receiver.getTerminalId());
+  }
+
+  /**
+   * Void method that creates a Video Communication to a given Terminal
+   * using the parameters, while setting its cost, setting the _busy attributes of the terminals
+   * to true and setting the terminals current communication to the one that is being created
+   * @param sender
+   * @param receiver
+   * @throws InvalidTerminalIDException
+   */
+  public void makeVideoCall(Terminal sender, Terminal receiver) throws InvalidTerminalIDException {
+    if (_terminals.containsKey(sender.getTerminalId()) &&
+            _terminals.containsKey(receiver.getTerminalId())){
+      CommunicationVideo comm = new CommunicationVideo(sender, receiver, ++commId);
+      receiver.setComm(comm);
+      receiver.setBusy(true);
+      receiver.setUsed();
+      sender.setComm(comm);
+      sender.setBusy(true);
+      sender.setUsed();
+      _allComms.put(comm.getId(), comm);
+      this.deactivateSaveFlag();
+    }
+    else
+      throw new InvalidTerminalIDException(receiver.getTerminalId());
+  }
+
+  /**
+   * Method that stops the Voice Communication given with the given duration and
+   * sets the Communication to FINISHED, sets the Comms duration and its cost, sets
+   * the terminals _busy attribute to false and sets the current comm on the terminals to null;
+   * while making the right notifications and checking if the client downgrades or upgrades level.
+   * @return comm.getCost()
+   * @param comm
+   * @param duracao
+   * @return
+   */
+  public long stopVoiceCall(CommunicationVoice comm, int duracao){
+    long custo;
+    Terminal sender = comm.getSender();
+    Terminal receiver = comm.getReceiver();
+    Client c = sender.getClientTerminal();
+    comm.setOnGoing(false);
+    comm.setSizeDuration(duracao);
+
+    if (sender.getTerminalAmigos().contains(receiver.getTerminalId())) {
+      custo = (_plano.computeCost(c, comm) / 2);
+    } else { custo = _plano.computeCost(c,comm); }
+
+    comm.setCost(custo);
+    comm.acabaCall();
+    sender.setCommToNull();
+    sender.setBusy(false);
+    receiver.setCommToNull();
+    receiver.setBusy(false);
+
+    if (sender.getTerminalModeEnum().equals(TerminalMode.ON)
+            && !sender.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : sender.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2I, sender);
+        t.getClientTerminal().getNotificacoesClient().add(n);
       }
+      sender.getTentaramNotificar().clear();
+    }
+
+    if (receiver.getTerminalModeEnum().equals(TerminalMode.ON)
+            && !receiver.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : receiver.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2I, receiver);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      receiver.getTentaramNotificar().clear();
+    }
+
+    if (sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)
+            && !sender.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : sender.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2S, sender);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      sender.getTentaramNotificar().clear();
+    }
+
+    if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
+    if ((c.getLevel() == ClientLevel.PLATINUM)){ c.downgradePlatinumToNormal(); }
+    this.deactivateSaveFlag();
+    return comm.getCost();
+  }
+
+  /**
+   * Method that stops the Video Communication given with the given duration and
+   * sets the Communication to FINISHED, sets the Comms duration and its cost, sets
+   * the terminals _busy attribute to false and sets the current comm on the terminals to null;
+   * while making the right notifications and checking if the client downgrades or upgrades level
+   * @return comm.getCost()
+   * @param comm
+   * @param duracao
+   * @return
+   */
+  public long stopVideoCall(CommunicationVideo comm, int duracao){
+    long custo;
+    Terminal sender = comm.getSender();
+    Terminal receiver = comm.getReceiver();
+    Client c = sender.getClientTerminal();
+    comm.setOnGoing(false);
+    comm.setSizeDuration(duracao);
+
+    if (sender.getTerminalAmigos().contains(receiver.getTerminalId())) {
+      custo = (_plano.computeCost(c, comm) / 2);
+    } else { custo = _plano.computeCost(c,comm); }
+
+    comm.setCost(custo);
+    comm.acabaCall();
+    sender.setCommToNull();
+    sender.setBusy(false);
+    receiver.setCommToNull();
+    receiver.setBusy(false);
+
+    if (sender.getTerminalModeEnum().equals(TerminalMode.ON)
+            && !sender.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : sender.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2I, sender);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      sender.getTentaramNotificar().clear();
+    }
+
+    if (receiver.getTerminalModeEnum().equals(TerminalMode.ON)
+            && !receiver.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : receiver.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2I, receiver);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      receiver.getTentaramNotificar().clear();
+    }
+
+    if (sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)
+            && !sender.getTentaramNotificar().isEmpty()) {
+      for (Terminal t : sender.getTentaramNotificar()) {
+        Notification n = new Notification(NotificationType.B2S, sender);
+        t.getClientTerminal().getNotificacoesClient().add(n);
+      }
+      sender.getTentaramNotificar().clear();
+    }
+
+    if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
+    if ((c.getLevel() == ClientLevel.PLATINUM)) { c.downgradePlatinumToNormal(); }
+    if ((c.getLevel()) == ClientLevel.GOLD) { c.upgradeGoldToPlatinum(getCommsByClientId(c.getKey())); }
+    this.deactivateSaveFlag();
+    return comm.getCost();
+  }
+
+  /**
+   * Void method that performs the payment of the selected Communication,
+   * if it's not already paid
+   * @param id
+   */
+  public void performPayment(int id){
+    Communication c = _allComms.get(id);
+    Terminal t = c.getSender();
+    if (!c.isPaid()) {
       t.paga(c.getCost());
       t.getClientTerminal().paga(c.getCost());
       c.pagarComm();
@@ -670,6 +727,7 @@ public class Network implements Serializable {
         t.getClientTerminal().upgradeNormalToGold();
       this.deactivateSaveFlag();
     }
+  }
 
   /**
    * Read text input file and create corresponding domain entities.

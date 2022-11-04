@@ -94,7 +94,7 @@ public class TariffPlan implements Serializable {
      * @return the Cost of the TariffPlan decided by some conditions and rules set by the
      * Client's status and balance; this method is only for Video Comms
      * @param c
-     * @param t   why are you gay?
+     * @param t
      */
     public long computeCost(Client c, CommunicationVideo t){
         int custo = 0;

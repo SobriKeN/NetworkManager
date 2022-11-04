@@ -60,9 +60,11 @@ public abstract class Communication implements Serializable {
         return _cost;
     }
 
-    public void setCost(long _cost) {this._cost = _cost;}
-
-    protected abstract void setSizeDuration(int duration);
+    /**
+     * Void method that sets the _cost attribute to the value of the argument
+     * @param cost
+     **/
+    public void setCost(long cost) {this._cost = cost;}
 
     /** @return the detais of the communication*/
     public abstract String toCommString();

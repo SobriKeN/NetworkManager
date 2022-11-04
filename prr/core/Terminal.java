@@ -2,7 +2,6 @@ package prr.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.TreeSet;
 
 /**
@@ -49,6 +48,7 @@ public class Terminal implements Serializable {
   /** Boolean that says if the client needs to be notified */
   private boolean _aNotificar;
 
+  /** ArrayList that contais the terminals that tried to make a Communication **/
   private ArrayList<Terminal> _tentaramNotificar;
 
   /**
@@ -113,16 +113,18 @@ public class Terminal implements Serializable {
   }
 
   /** @return terminal's asscociated Client **/
-  public Communication getCurrentComm(){
-    return _currentComm;
-  }
+  public Communication getCurrentComm(){ return _currentComm; }
 
-  public void setUsed(){
-    this._virgem = false;
-  }
+  /** Void method that sets the "never used" attribute to false **/
+  public void setUsed(){ this._virgem = false; }
 
+  /**
+   Void method that changes the _busy attribute
+   and saves the previous Terminal's mode depending on the boolean argument
+   * @param b
+   **/
   public void setBusy(boolean b) {
-    if(b){
+    if (b){
       this._beforeState = this._terminalmode;
       this._busy = b;
       this._terminalmode = TerminalMode.BUSY;
@@ -134,18 +136,28 @@ public class Terminal implements Serializable {
     }
   }
 
+  /**
+   Void method that receives the communication's cost and adds the
+   * Terminal's debt by adding the current debts with the given cost
+   * @param cost
+   **/
   public void adicionaDebts(long cost){
     this._debt += cost;
   }
 
+  /**
+   * Void method that receives the communication's cost and 'pays' the
+   * debts by decreasing the Terminal's debts and increasing the Terminal's payments
+   * @param cost
+   **/
   public void paga(long cost){
     this._debt -= cost;
     this._payments += cost;
   }
 
-  public void setCommToNull(){
-    this._currentComm = null;
-  }
+  /** Void method that sets the current Comm of the terminal to null **/
+  public void setCommToNull(){ this._currentComm = null; }
+
   /**
    * Void method that sets the Client's association with the terminal
    * @param _clientTerminal
@@ -157,23 +169,28 @@ public class Terminal implements Serializable {
   /**
    * Void method that sets the communication that is going to be made
    * @param _currentComm
-   **/
-   public void setComm(Communication _currentComm) {
+   * **/
+  public void setComm(Communication _currentComm) {
     this._currentComm = _currentComm;
   }
 
+  //??
   public boolean isNotificar() {
     return _aNotificar;
   }
 
+  //??
   public void setNotificar(boolean _aNotificar) {
     this._aNotificar = _aNotificar;
   }
 
-  public ArrayList<Terminal> getTentaramNotificar() {
-    return _tentaramNotificar;
-  }
+  /**
+   @return an ArrayLIst that contains the terminals
+   that tried to make a communication
+   **/
+  public ArrayList<Terminal> getTentaramNotificar() { return _tentaramNotificar; }
 
+  //???
   public boolean verificaTerminalNotificar(Terminal t1){
      ArrayList<String> getTentaramNotificarString = new ArrayList<String>();
 
@@ -184,6 +201,12 @@ public class Terminal implements Serializable {
     return getTentaramNotificarString.contains(t1.getTerminalId());
   }
 
+  /**
+   Boolean method that returns true if the Client C in the argument is one
+   of the associated Clients in the ArrayList that contains the terminals
+   that tried to make a communication
+   * @param c
+   */
   public boolean verificarClienteIDExistente(Client c){
     ArrayList<String> clientIDs = new ArrayList<String>();
 
@@ -194,9 +217,8 @@ public class Terminal implements Serializable {
     return clientIDs.contains(c.getKey());
   }
   /**
-   Void method that returns true if the requirements necessary
-   to set the terminal's mode on ON/Idle are correct,
-   and then it sets the mode to ON/Idle while creating the right notification
+   Void method that verifies if the requirements are met, and sets the terminal's mode to ON/IDLE
+   while creating the right notification
    **/
    public void setONIdle() {
       if (_terminalmode.toString().equals("OFF") || _terminalmode.toString().equals("SILENCE")) {
@@ -219,9 +241,8 @@ public class Terminal implements Serializable {
     }
 
   /**
-   Void method that returns true if the requirements necessary
-   to set the terminal's mode on SILENCE are correct,
-   and then it sets the mode to SILENCE while creating the right notification
+   Void method that verifies if the requirements are met, and sets the terminal's mode to SILENCE
+   while creating the right notification
    **/
   public void setOnSilent() {
       if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("OFF") ){
@@ -237,11 +258,8 @@ public class Terminal implements Serializable {
     }
 
   /**
-   Void method that returns true if the requirements
-   necessary to set the terminal's mode on OFF are correct,
-   and then it sets the mode to OFF
+   Void method that verifies if the requirements are met, and sets the terminal's mode to OFF
    **/
-
   public void turnOff() {
     if (_terminalmode.toString().equals("ON") || _terminalmode.toString().equals("SILENCE")) {
       _terminalmode = TerminalMode.OFF;

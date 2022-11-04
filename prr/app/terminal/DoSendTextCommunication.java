@@ -14,12 +14,22 @@ import pt.tecnico.uilib.menus.CommandException;
  **/
  class DoSendTextCommunication extends TerminalCommand {
 
+    /**
+     * addStringField that represents the Terminal's key
+     * addStringField that represents the text message itself
+     **/
     DoSendTextCommunication(Network context, Terminal terminal) {
       super(Label.SEND_TEXT_COMMUNICATION, context, terminal, receiver -> receiver.canStartCommunication());
       addStringField("terminalReceiver", Message.terminalKey());
       addStringField("message", Message.textMessage());
     }
 
+    /**
+     * Execute method that creates and sens a Text Communication if
+     * all the requirements are met, if not a setup will be made
+     * for the notifications to be used later
+     * @throws CommandException
+     */
     @Override
     protected final void execute() throws CommandException {
       try{

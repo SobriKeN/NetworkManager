@@ -10,12 +10,18 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoSilenceTerminal extends TerminalCommand {
 
+  /**
+   * Constructor that just uses the super() with the parameters
+   * @param context
+   * @param terminal
+   */
   DoSilenceTerminal(Network context, Terminal terminal) {
     super(Label.MUTE_TERMINAL, context, terminal);
   }
 
   /**
-   * execute that silences the terminal,if the terminal's already silent, message will be sent
+   * Execute that silences the terminal, if the terminal's
+   * already silent, a message will be sent
    **/
   @Override
   protected final void execute() throws CommandException {

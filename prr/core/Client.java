@@ -67,13 +67,6 @@ public class Client implements Serializable {
     /** @return client's Debts */
     public long getDebts() {return _debts; }
 
-    public void adicionaDebts(long cost){this._debts += cost;}
-
-    public void paga(long cost){
-        this._debts -= cost;
-        this._pagamentos += cost;
-    }
-
     /** @return client's Payments */
     public long getPagamentos() {return _pagamentos; }
 
@@ -95,6 +88,23 @@ public class Client implements Serializable {
         return _recieveNotifications;
     }
 
+    /**
+     * Void method that receives the communication's cost and adds the
+     * Client's debt by adding the current debts with the given cost
+     * @param cost
+     */
+    public void adicionaDebts(long cost){this._debts += cost;}
+
+    /**
+     * Void method that receives the communication's cost and 'pays' the
+     * debts by decreasing the Client's debts and increasing the Client's payments
+     * @param cost
+     **/
+    public void paga(long cost){
+        this._debts -= cost;
+        this._pagamentos += cost;
+    }
+
     /** increments the number of the terminals associated with the client **/
     public void atualizaNumeroTerminaisAssoc(){
         this._numeroTerminaisAssociados++;
@@ -112,7 +122,6 @@ public class Client implements Serializable {
 
     /** @return terminal's Notifications LinkedList **/
     public ArrayList<Notification> getNotificacoesClient(){ return _notificacoes;}
-
 
     /**
      Method that changes the client's level if the requirements to the upgrade from Normal to Gold are met,
@@ -168,7 +177,6 @@ public class Client implements Serializable {
      Method that changes the client's level if the requirements to the downgrade from Platinum to Normal are met,
      and downgrades the Client's level
      **/
-
      public void downgradePlatinumToNormal(){
          if (((_pagamentos - _debts) < 0)) { //dps de realizar uma comm
              this._level = ClientLevel.NORMAL;

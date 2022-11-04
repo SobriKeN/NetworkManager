@@ -11,17 +11,20 @@ public class CommunicationVoice extends CommunicationInteractive implements Seri
     private String _type;
 
     /**
-     * Main Construtor
+     * Main Constructor
+     * @param sender
+     * @param receiver
+     * @param id
      */
     public CommunicationVoice(Terminal sender, Terminal receiver, int id) {
         super(sender, receiver, id);
         this._type = "VOICE";
     }
 
-    private String getType(){
-        return _type;
-    }
+    /** @return the Communication's type **/
+    private String getType(){ return _type; }
 
+    /** @return a String that represents the Communication **/
     @Override
     public String toCommString(){
         String status;

@@ -9,18 +9,22 @@ public class CommunicationVideo extends CommunicationInteractive implements Seri
 
     /** The type of comm (in this case is video)  */
     private String _type;
+
     /**
      * Main Construtor
+     * @param sender
+     * @param receiver
+     * @param id
      */
     public CommunicationVideo(Terminal sender, Terminal receiver, int id) {
         super(sender, receiver, id);
         this._type = "VIDEO";
     }
 
-    public String getType(){
-        return this._type;
-    }
+    /** @return the Communication's type **/
+    public String getType(){ return this._type; }
 
+    /** @return a String that represents the Communication **/
     @Override
     public String toCommString(){
         String status;

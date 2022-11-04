@@ -8,12 +8,18 @@ import pt.tecnico.uilib.menus.CommandException;
  */
 class DoTurnOnTerminal extends TerminalCommand {
 
+  /**
+   * Constructor that just uses the super() with the parameters
+   * @param context
+   * @param terminal
+   */
   DoTurnOnTerminal(Network context, Terminal terminal) {
     super(Label.POWER_ON, context, terminal);
   }
 
   /**
-   * execute that turns the terminal ON,i f the terminal's already turned on, message will be sent
+   * Execute that turns the terminal ON, if the terminal's
+   * already turned on, a message will be sent
    **/
   @Override
   protected final void execute() throws CommandException {

@@ -9,20 +9,18 @@ public class CommunicationText extends Communication implements Serializable {
      */
     private static final long serialVersionUID = 4157849120928096413L;
 
-    /**
-     * The text message
-     */
+    /** The text message **/
     private String _message;
 
-    /**
-     * The type of comm (in this case is text)
-     */
+    /** The type of comm (in this case is text) **/
     private String _type;
 
     /**
      * Main Construtor
-     *
      * @param message
+     * @param sender
+     * @param receiver
+     * @param id
      */
     public CommunicationText(String message, Terminal sender, Terminal receiver, int id) {
         super(sender, receiver, id);
@@ -30,21 +28,14 @@ public class CommunicationText extends Communication implements Serializable {
         this._type = "TEXT";
     }
 
-    public String getType() {
-        return _type;
-    }
+    /** @return the Communication's type **/
+    public String getType() { return _type; }
 
-    /**
-     * @return the length of the message
-     */
+    /** @return the length of the message **/
     @Override
     protected int getSize() {
         return _message.length();
     }
-
-    /** Never going to be used **/
-    @Override
-    protected void setSizeDuration(int duration){}
 
     @Override
     public String toCommString() {

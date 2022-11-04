@@ -14,6 +14,12 @@ import java.util.Objects;
  * Command for starting communication.
  * **/
  class DoStartInteractiveCommunication extends TerminalCommand {
+
+     /**
+      * addStringField that represents the Terminal's key
+      * addOptionField that represents the Communication's
+      * types with the list that contains the options
+     **/
      DoStartInteractiveCommunication(Network context, Terminal terminal) {
       super(Label.START_INTERACTIVE_COMMUNICATION, context, terminal, receiver -> receiver.canStartCommunication());
       String[] options = {"VIDEO","VOICE"};
@@ -21,6 +27,14 @@ import java.util.Objects;
       addOptionField("commType", Message.commType(), options);
      }
 
+    /**
+     * Execute method that tries to start an Interactive Communication with the
+     * stringField and the optionField, and checks the terminal's mode
+     * and the Communication's type to verify if it is possible
+     * to start a communication, if not a message will show and
+     * the program will set up the right notifications to be shown later
+     * @throws CommandException
+     */
      @Override
      protected final void execute() throws CommandException {
          String terminalDestino = stringField("terminalKey");
