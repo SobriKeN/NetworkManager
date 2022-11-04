@@ -650,7 +650,6 @@ public class Network implements Serializable {
    * @return comm.getCost()
    * @param comm
    * @param duracao
-   * @return
    */
   public long stopVoiceCall(CommunicationVoice comm, int duracao){
     long custo;
@@ -716,7 +715,6 @@ public class Network implements Serializable {
    * @return comm.getCost()
    * @param comm
    * @param duracao
-   * @return
    */
   public long stopVideoCall(CommunicationVideo comm, int duracao){
     long custo;

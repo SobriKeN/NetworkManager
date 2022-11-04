@@ -59,7 +59,8 @@ import java.util.Objects;
                      t.getTentaramNotificar().add(_receiver);
                  }
              }
-             else if (!_network.getTerminal(terminalDestino).canStartCommunication()){
+             else if (!_network.getTerminal(terminalDestino).canStartCommunication() ||
+                     terminalDestino.equals(_receiver.getTerminalId())){
                  _display.popup(Message.destinationIsBusy(terminalDestino));
                  if (_receiver.getClientTerminal().isRecieveNotifications()
                          && !t.verificarClienteIDExistente(_receiver.getClientTerminal())) {
