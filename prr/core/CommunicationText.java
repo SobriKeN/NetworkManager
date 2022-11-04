@@ -16,7 +16,7 @@ public class CommunicationText extends Communication implements Serializable {
     private String _type;
 
     /**
-     * Main Construtor
+     * Main Constructor
      * @param message
      * @param sender
      * @param receiver

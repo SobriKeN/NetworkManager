@@ -43,10 +43,12 @@ public abstract class Communication implements Serializable {
     /** @return Communication's id **/
     public int getId() { return _id; }
 
+    /** @return the Communication's receiver **/
     public Terminal getReceiver() {
         return _receiver;
     }
 
+    /** @return the Communication's sender **/
     public Terminal getSender() {
         return _sender;
     }

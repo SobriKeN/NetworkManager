@@ -11,7 +11,7 @@ public class CommunicationVideo extends CommunicationInteractive implements Seri
     private String _type;
 
     /**
-     * Main Construtor
+     * Main Constructor
      * @param sender
      * @param receiver
      * @param id

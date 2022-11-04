@@ -14,7 +14,7 @@ public abstract class CommunicationInteractive extends Communication implements 
     private boolean _isOnGoing;
 
     /**
-     * Main Construtor
+     * Main Constructor
      * Same parameters as communication
      */
     public CommunicationInteractive(Terminal sender, Terminal receiver, int id){
