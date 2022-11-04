@@ -139,16 +139,17 @@ public class Client implements Serializable {
      **/
     public void upgradeGoldToPlatinum(ArrayList<Communication> commsClient){
         int numeroCommVideoConsecutivas = 0;
+        if (!(commsClient.size() < 5 )) {
+            for (int i = commsClient.size() - 1; i != commsClient.size() - 6 ; i-- ) {
+                if (commsClient.get(i) instanceof CommunicationVideo)
+                    numeroCommVideoConsecutivas++;
+                else
+                    break;
 
-        for (Communication comm : commsClient){
-            if (comm instanceof CommunicationVideo)
-                numeroCommVideoConsecutivas++;
-            else
-                numeroCommVideoConsecutivas = 0;
-
-            if (((this._pagamentos - this._debts) >= 0)  && (numeroCommVideoConsecutivas >= 5)) {
-                this._level = ClientLevel.PLATINUM;
-                break;
+                if (((this._pagamentos - this._debts) >= 0) && (numeroCommVideoConsecutivas == 5)) {
+                    this._level = ClientLevel.PLATINUM;
+                    break;
+                }
             }
         }
     }
@@ -160,15 +161,17 @@ public class Client implements Serializable {
     public void downgradePlatinumToGold(ArrayList<Communication> commsClient){
         int numeroCommTextoConsecutivas = 0;
 
-        for (Communication comm : commsClient) {
-            if (comm instanceof CommunicationText)
-                numeroCommTextoConsecutivas++;
-            else
-                numeroCommTextoConsecutivas = 0;
+        if (!(commsClient.size() < 2)) {
+            for (int i = commsClient.size() - 1; i != commsClient.size() - 3; i--) {
+                if (commsClient.get(i) instanceof CommunicationText)
+                    numeroCommTextoConsecutivas++;
+                else
+                    break;
 
-            if ((this._pagamentos - this._debts) >= 0 && (numeroCommTextoConsecutivas >= 2)) {
-                this._level = ClientLevel.GOLD;
-                break;
+                if ((this._pagamentos - this._debts) >= 0 && (numeroCommTextoConsecutivas == 2)) {
+                    this._level = ClientLevel.GOLD;
+                    break;
+                }
             }
         }
     }
