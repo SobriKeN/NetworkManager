@@ -28,6 +28,9 @@ public abstract class Communication implements Serializable {
 
     /**
      * Main Construtor
+     * @param sender
+     * @param receiver
+     * @param id
      */
     public Communication(Terminal sender, Terminal receiver, int id) {
         this._id = id;
