@@ -11,7 +11,7 @@ public class DebtsDescendingOrder implements Comparator<Client>, Serializable {
     /**
      * This class helps with the sorting of treemaps
      * with the Override Method that compares both client's debts
-     * and returns a integer
+     * and returns an integer
      */
     @Override
     public int compare(Client c1, Client c2){

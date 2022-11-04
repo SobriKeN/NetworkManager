@@ -64,10 +64,12 @@ public class Network implements Serializable {
     return saveFlag;
   }
 
+  /** Void method that sets the Save Flag to false **/
   public void deactivateSaveFlag() {
     saveFlag = false;
   }
 
+  /** Void method that sets the Save Flag to true **/
   public void activateSaveFlag() {
     saveFlag = true;
   }
