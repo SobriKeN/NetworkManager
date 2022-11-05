@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import com.sun.jdi.ObjectReference;
 import prr.core.exception.*;
 
 /** Class Network that represents the network of the system**/
