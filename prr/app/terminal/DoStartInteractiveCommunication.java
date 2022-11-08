@@ -42,9 +42,9 @@ import java.util.Objects;
          try {
              Terminal t = _network.getTerminal(terminalDestino);
              if (Objects.equals(_receiver.getTerminalType(), "BASIC") && commType.equals("VIDEO"))
-                 _display.popup(Message.unsupportedAtOrigin(_receiver.getTerminalId(), "BASIC"));
+                 _display.popup(Message.unsupportedAtOrigin(_receiver.getTerminalId(), "VIDEO"));
              else if (Objects.equals(t.getTerminalType(), "BASIC") && commType.equals("VIDEO"))
-                 _display.popup(Message.unsupportedAtDestination(_receiver.getTerminalId(), "BASIC"));
+                 _display.popup(Message.unsupportedAtDestination(t.getTerminalId(), "VIDEO"));
              else if (t.getTerminalModeEnum() == TerminalMode.OFF) {
                  _display.popup(Message.destinationIsOff(terminalDestino));
                  if (_receiver.getClientTerminal().isRecieveNotifications()

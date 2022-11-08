@@ -1,8 +1,6 @@
 package prr.app.terminal;
 
-import prr.core.Communication;
-import prr.core.Network;
-import prr.core.Terminal;
+import prr.core.*;
 import prr.core.exception.InvalidCommIDException;
 import pt.tecnico.uilib.menus.CommandException;
 
@@ -24,10 +22,12 @@ class DoPerformPayment extends TerminalCommand {
    **/
   @Override
   protected final void execute() throws CommandException {
-    if (!_network.getComms().containsKey(integerField("commKey")) ||
-            !_network.getComms().get(integerField("commKey")).getSender().getTerminalId().equals(_receiver.getTerminalId()))
-      _display.popup(Message.invalidCommunication());
-    else
-      _network.performPayment(integerField("commKey"));
+      if (!_network.getComms().containsKey(integerField("commKey")) ||
+              !_network.getComms().get(integerField("commKey")).getSender().getTerminalId().equals(_receiver.getTerminalId()) ||
+              _network.getComms().get(integerField("commKey")).isPaid())
+        _display.popup(Message.invalidCommunication());
+      else
+        _network.performPayment(integerField("commKey"));
+    }
   }
-}
+

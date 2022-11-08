@@ -3,6 +3,7 @@ package prr.core;
 import java.io.Serializable;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -90,6 +91,8 @@ public class Network implements Serializable {
   public void activateSaveFlag() {
     saveFlag = true;
   }
+
+  public TreeMap<String, Terminal> getTerminals() {return _terminals;}
 
   /** @return the treemap that storages all Communications in the system **/
   public TreeMap<Integer, Communication> getComms() {
@@ -562,10 +565,7 @@ public class Network implements Serializable {
     CommunicationText c = new CommunicationText(msg, t1, t2, ++_commId);
     t1.setUsed();
     t2.setUsed();
-    if (t1.getTerminalAmigos().contains(t2.getTerminalId()))
-      l = (_plano.computeCost(cliente,c)/2);
-    else
-      l = _plano.computeCost(cliente,c);
+    l = _plano.computeCost(cliente,c);
     c.setCost(l);
     _allComms.put(c.getId(),c);
 
@@ -690,15 +690,6 @@ public class Network implements Serializable {
       receiver.getTentaramNotificar().clear();
     }
 
-    if (sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)
-            && !sender.getTentaramNotificar().isEmpty()) {
-      for (Terminal t : sender.getTentaramNotificar()) {
-        Notification n = new Notification(NotificationType.B2S, sender);
-        t.getClientTerminal().getNotificacoesClient().add(n);
-      }
-      sender.getTentaramNotificar().clear();
-    }
-
     // 4- Upgrade client level (if possible)
     if ((c.getLevel() == ClientLevel.GOLD)) { c.downgradeGoldToNormal(); }
     if ((c.getLevel() == ClientLevel.PLATINUM)){ c.downgradePlatinumToNormal(); }
@@ -752,15 +743,6 @@ public class Network implements Serializable {
         t.getClientTerminal().getNotificacoesClient().add(n);
       }
       receiver.getTentaramNotificar().clear();
-    }
-
-    if (sender.getTerminalModeEnum().equals(TerminalMode.SILENCE)
-            && !sender.getTentaramNotificar().isEmpty()) {
-      for (Terminal t : sender.getTentaramNotificar()) {
-        Notification n = new Notification(NotificationType.B2S, sender);
-        t.getClientTerminal().getNotificacoesClient().add(n);
-      }
-      sender.getTentaramNotificar().clear();
     }
 
     // 4- Upgrade client level (if possible)

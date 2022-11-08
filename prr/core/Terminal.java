@@ -115,6 +115,9 @@ public class Terminal implements Serializable {
   /** Void method that sets the "never used" attribute to false **/
   public void setUsed(){ this._virgem = false; }
 
+  /** To see if the terminal is busy or not **/
+  public boolean isBusy() {return _busy;}
+
   /**
    * Void method that sets the Client's association with the terminal
    * @param _clientTerminal
